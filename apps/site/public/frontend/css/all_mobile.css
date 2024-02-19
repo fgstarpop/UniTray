@@ -1,0 +1,301 @@
+@charset "UTF-8";
+
+@media only screen and (min-width:600px) and (max-width:1024px) {
+	section .recent {
+		width: 31%
+	}
+
+	.types .stories {
+		margin: 0 14px 70px 0
+	}
+
+    .user-info {
+        top: 0 !important;
+        right: 0 !important;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    body.mobile .reader-book{
+        margin-bottom: 0 !important;
+    }
+    body.mobile:has(.book-container),
+    body.mobile:has(.reader-book),
+    body.mobile:has(.search-section),
+    #tm-p-search-top,
+    .story-search,
+    .reader-book {
+        background: #FFFFFF;
+    }
+    #tm-p-search-top,
+    .story-search {
+        box-shadow: unset;
+    }
+    .btn-redirect {
+        background-color: #C9B708 !important;
+        color: #ffffff !important;
+    }
+    .group-origin .btn-origin{
+        border: 1px solid #E7E7E7;
+        background: #E7E7E7;
+        color: #333333;
+    }
+    .group-origin .btn-origin:focus {
+        box-shadow: 0 0 0 0.25rem #C9B708;
+    }
+    .menu-modal .modal-content{
+        background-color: #FFFDE8 !important;
+    }
+    .reader-book {
+        box-shadow: unset;
+    }
+    header .header-mobile{
+        position: relative;
+        padding-top: 14px;
+    }
+    .header-mobile .logins{
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .header-mobile .count{
+        position: absolute;
+        right: 0;
+        font-size: 16px;
+        top: -10px;
+        color: #FFF;
+        font-weight: 500;
+    }
+    .header-mobile .back-gr-mobile{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 0;
+    }
+    .header-mobile .back-gr-mobile img{
+        width: 100%;
+    }
+    .logo-header{
+        z-index: 1;
+    }
+    .header-mobile .f-right{
+        width: auto;
+    }
+    body.mobile .list-book-block .book{
+        padding-top: 20px;
+        border-top: 0.5px dashed rgba(0, 0, 0, 0.4) ;
+        margin-bottom: 30px;
+    }
+    body.mobile .book-info p{
+        margin-bottom: 0;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 25px;
+    }
+    body.mobile .book-info{
+        margin-bottom: 10px;
+    }
+    body.mobile .list-status ul {
+        margin-bottom: 20px;
+    }
+    body.mobile .list-status li{
+        margin-right: 5px;
+        color: #535353;
+        font-size: 15px;
+        line-height: 19px;
+        font-weight: 400;
+        background: #FFF;
+        padding: 10px 15px;
+        min-width: 120px;
+    }
+    body.mobile .list-status li.active{
+        background: #C9B708;
+    }
+    body.mobile .list-status li.active a{
+        color: #FFF;
+    }
+    body.mobile .btn-read{
+        background: #C9B708;
+    }
+    body.mobile .btn-delete{
+        background: #EE7E7E;
+    }
+    body.mobile .text-pagination{
+        font-weight: bold;
+        font-size: 16px;
+        margin: 70px 0 57px;
+    }
+    .footer-mobile .foot-text{
+        color: #8D0A0A;
+        font-size: 14px;
+        position: relative;
+    }
+    .footer-mobile{
+        background: #fdebbd;
+        position: relative;
+        z-index: 1;
+        margin-top: 0;
+    }
+    .footer-mobile .bg-footer{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+        height: 100%;
+        overflow: hidden;
+    }
+    .footer-mobile .bg-footer img{
+        width: 100%;
+    }
+    .footer-mobile .logo-footer{
+        position: relative;
+    }
+    .mobile .search-modal .modal-dialog{
+        margin: 0;
+    }
+    .mobile .search-modal .modal-header{
+        position: relative;
+        border: none;
+        padding:2.5rem 1rem;
+        width: 100%;
+        background:url('/frontend/images/mobile/bg-popup-search.svg') no-repeat;
+        background-size: 100%;
+        background-position: left top;
+
+    }
+    .mobile .search-modal .bg-popup{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .mobile .search-modal .bg-popup img{
+        width: 100%;
+    }
+    .mobile .search-modal .btn-close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-weight: bold;
+        display: flex;
+        padding: 10px 14px;
+        margin: 0;
+        opacity: unset;
+        width: auto;
+        height: auto;
+        background-image: none;
+        align-items: center;
+        font-size: 14px;
+    }
+    .mobile .search-modal .modal-body{
+        background: #FFFFFF;
+    }
+    .mobile .search-modal .modal-footer{
+        display: none;
+    }
+    .mobile .search-modal .name-item{
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 15px;
+        color: #DD3300;
+        margin-top: 11px;
+        position: relative;
+    }
+    .mobile .search-modal .name-item.active:after{
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #FF0000;
+        position: absolute;
+        right: -5px;
+        top: 0;
+    }
+    .related-stories{
+        margin-top: 44px;
+    }
+    .related-stories .title{
+        margin-bottom: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+    }
+    .related-stories span{
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 15px;
+    }
+    .related-stories .book-item{
+        width: 100px;
+        margin-right: 15px;
+        overflow: hidden;
+    }
+    .related-stories img{
+        width: 100%;
+        height: 136px;
+    }
+    .related-stories .all-book-related{
+        overflow: scroll;
+    }
+    .related-stories .group-book{
+        width: max-content;
+    }
+    .list-chap-mobi .listss .text-vip {
+        color: #D06400 !important;
+    }
+    .list-chap-mobi .modal-body{
+        padding: 0;
+    }
+    .list-chap-mobi .listss{
+        padding: 13px 9px;
+        height: auto;
+        width: 100%;
+    }
+    .list-chap-mobi .listss a{
+        overflow: hidden;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+    .list-chap-mobi .chapreading a{
+        color: #b0b0b0 !important;
+        background: #E1E1E1;
+        padding: 4px 7px;
+        border-radius: 5px;
+    }
+    .list-chap-mobi .chapreaded a{
+        color: #b0b0b0 !important;
+    }
+    .list-chap-mobi .chaplastreaded a{
+        color: #b0b0b0 !important;
+    }
+    .btn-gt {
+        background-color: #C9B708 !important;
+        color: #EEEEEE !important;
+    }
+    .mobile .btn-light {
+        background-color: #E7E7E7;
+        border-color: #E7E7E7;
+    }
+    .mobile .blk-arr {
+        background-color: transparent;
+    }
+    .mobile .blk-arr::before {
+        content: unset;
+    }
+}
+
+@media only screen and (max-width:330px) {
+	.content .home-section .home-header {
+		display: flex
+	}
+
+	.content .home-section .home-header span {
+		width: 75%
+	}
+}
+

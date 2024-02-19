@@ -1,0 +1,143 @@
+        *{
+            padding: 0;
+            margin: 0;
+        outline: none;
+        }
+        .fs-20{font-size: 20px;}
+        .fs-18{font-size: 18px;}
+        .fs-15{font-size: 15px;}
+        .fs-14{font-size: 14px;}
+        .fs-12{font-size: 12px;}
+        .fs-10{font-size: 10px;}
+        .theme{
+            padding: 4px 8px;
+            background: white;
+            border: 1px solid #eeeeee;
+            position: absolute;
+            z-index: 1;
+            white-space: nowrap;
+            left: 0;
+            top: 127%;
+            width: auto;
+        }
+        .theme input {
+            padding: 0 6px;
+            width: 70px;
+            display: inline-block;
+            height: 100%;
+            font-size: 14px;
+            border: 1px solid #fefefe;
+            background: #f9f9f9;
+        }
+        .bg-light-gray{
+            background-color: #eee;
+        }
+        #rightbar{
+            font-size: 18px;
+            background-color: #eee;
+            padding: 5px;
+        }
+        #rightbar button{
+            height: 27px;
+            width: 27px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #rightbar .fa-chevron-down{
+            font-size: 10px;
+        }
+        .create input{width: 100%;}
+        .create textarea{width: 100%;height: 80px;}
+        .section-mobile{
+            height: 100%;
+        }
+        .editor {
+            padding-bottom: 180px;
+            height: calc(100vh - 50px );
+            width: 100%;
+            overflow-y: auto;
+            background-color: #ddd;
+        }
+        .leftbar, .rightbar {
+            width: 100%;
+            box-shadow: 0 0 3px grey;
+            position: fixed;
+            top: 100%;
+            left: 0;
+            transition: top .3s;
+            height: 70%;
+        }
+        .fasttext{
+            width: 100%;
+            border: none;
+            height: 100px;
+            resize: none;
+        }
+        div.bookitem {
+            padding: 6px;
+            background: #bec9ff;
+            position: relative;
+        }
+        .clistdiv {
+            display: none;
+            background: #fefefe;
+            margin: 0 -6px -6px -6px;
+            overflow: hidden;
+            position: absolute;
+            top: 40px;
+            width: 100%;
+        }
+        .clistdiv > .addnewchap {
+            width: 100%;
+            background: white;
+            padding: 6px;
+            border: 1px solid #c4c3c1;
+            height: 30px;
+        }
+        .chapitem {
+            padding: 16px 4px;
+        }
+        .chapitem:hover {
+            background: #eee;
+        }
+        .chapitem > .chapname {
+            display: inline-block;
+            width: calc(100% - 40px);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+.mobile{display: none;}
+.mobile{
+    font-size: 12px;
+}
+@media only screen and (max-width: 600px) {
+    .mobile{
+        display: block;
+    }
+    .computer{
+        display: none;
+    }
+}
+@media only screen and (max-width: 330px) {
+    .content .home-section .home-content .bookthumb {
+        height: 124px;
+    }
+    .content .home-section .home-header{
+        display: flex;
+    }
+    .content .home-section .home-header span{
+        width: 79%
+    };
+
+}
+@media only screen and (max-width: 300px) {
+    .content .home-section .home-content .bookthumb {
+        height: 124px;
+    }
+    .content .home-section .home-header span{
+        width: 75%
+    };
+}
