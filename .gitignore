@@ -16,3 +16,4 @@ docker/mysql/data
 docker/mysql/logs
 
 .DS_Store
+apps/site/.env

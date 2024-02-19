@@ -1,0 +1,36 @@
+
+<head>
+	<title>Translator</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<script src="/qtOnline.js?ver=3027" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		window.addEventListener('beforeunload', function(event) {
+        	store.setItem("trans-win", "false");
+     	});
+		store.setItem("trans-win","true");
+		var childEngine=window;
+		loadVietphraseOffline();
+		setInterval(function(){
+			if(window.opener==null){
+				window.close();
+			}
+			if(window.opener.attachedvp==false){
+				window.opener.phrasetree.data=phrasetree.data;
+				window.opener.childEngine=window;
+				window.opener.phrasetree.save=function(){
+					setTimeout(function(){
+						phrasetree.data=window.opener.phrasetree.data;
+						childEngine.ngdb.set("vietphrasedata",phrasetree.data);
+					}, 10);
+				}
+				window.opener.attachedvp=true;
+				window.opener.excute();
+			}
+		},500);
+	</script>
+	Đây là phần mềm dịch thuật, dùng để tăng tốc, vui lòng không tắt cửa sổ này khi đọc truyện, khi bị tắt sẽ tự động mở lại khi đọc tiếp.<br><br>
+	<center style=""><button style="background-color: white;padding: 6px 12px;" onclick="store.setItem('useofflinevietphrase','false');window.close()">Tắt vietphrase cá nhân</button></center>
+</body>
