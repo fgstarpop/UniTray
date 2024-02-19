@@ -1,0 +1,42 @@
+.swal-button:focus{
+    box-shadow:none;
+}
+
+.swal-title{
+    font-size: 15px;
+    font-weight: bold;
+    padding: 9px 16px;
+    opacity: 1;
+    color: #191919;
+}
+
+.swal-text{
+    font-size: 13px;
+}
+
+.swal-footer{
+    padding: 3px 10px;
+    border-top: 1px solid #eaeaeaa8;
+}
+
+.swal-button{
+    padding: 6px 22px;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.swal-title:first-child {
+    margin-top: 10px;
+}
+
+.swal-icon:first-child {
+    margin-top: 15px;
+}
+
+.swal-icon{
+    margin: 5px auto;
+}
+
+.swal-button--cancel {
+    color: #191919;
+}

@@ -1,0 +1,30 @@
+<div class="btn-grid-3">
+	<a href="javascript:supernamewindow()">Name Siêu Cấp</a>
+	<a href="javascript:khonamewindow()">Kho Name</a>
+	<a href="javascript:namepackwindow()">Gói Name</a>
+</div>
+<div class="btn-grid-3">
+	<a href="javascript:opensettingwindow()">Cài đặt</a>
+</div>
+<script type="text/javascript">
+	function supernamewindow() {
+		var wd=ui.win.createBox("Name Siêu Cấp","namedb");
+		wd.minimizable();
+		wd.show();
+	}
+	function khonamewindow() {
+		var wd=ui.win.createBox("Kho Name","khoname");
+		wd.minimizable();
+		wd.show();
+	}
+	function namepackwindow() {
+		var wd=ui.win.createBox("Gói Name Đặc Biệt","goiname");
+		wd.show();
+	}
+	function opensettingwindow() {
+		var wd=ui.win.createFrame("Cài đặt hệ thống","/html/setting.html");
+		//ui.win.fullscreen(wd);
+		wd.show();
+	}
+
+</script>

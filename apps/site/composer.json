@@ -1,0 +1,101 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.4",
+        "astrotomic/laravel-translatable": "^11.8",
+        "barryvdh/laravel-translation-manager": "^0.5.10",
+        "bensampo/laravel-enum": "^3",
+        "cknow/laravel-money": "6.0.0",
+        "cviebrock/eloquent-sluggable": "^8.0",
+        "davejamesmiller/laravel-breadcrumbs": "^5.3",
+        "doctrine/dbal": "2.*",
+        "fabpot/goutte": "^4.0",
+        "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^1.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.7",
+        "jenssegers/agent": "^2.6",
+        "laravel/framework": "^8.0",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.0",
+        "livewire/livewire": "^2.10",
+        "mews/purifier": "^3.3",
+        "predis/predis": "^2.1",
+        "proengsoft/laravel-jsvalidation": "^4.4",
+        "spatie/data-transfer-object": "^1.13",
+        "spatie/laravel-activitylog": "^3.17",
+        "spatie/laravel-analytics": "^3.10",
+        "spatie/laravel-flash": "^1.6",
+        "spatie/laravel-medialibrary": "^8.0.0",
+        "spatie/laravel-permission": "^3.11",
+        "spatie/laravel-sitemap": "5.8.0",
+        "spatie/once": "^2.2",
+        "spatie/schema-org": "^3.3",
+        "staudenmeir/laravel-adjacency-list": "^1.4",
+        "stichoza/google-translate-php": "^4.1",
+        "yajra/laravel-datatables-buttons": "^4.9",
+        "yajra/laravel-datatables-html": "^4.24",
+        "yajra/laravel-datatables-oracle": "^9.9"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
+        "facade/ignition": "^2.3.6",
+        "fzaninotto/faker": "^1.9.1",
+        "laravel-shift/blueprint": "^1.8",
+        "matt-allan/laravel-code-style": "^0.6.0",
+        "mockery/mockery": "^1.3.1",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.0",
+        "spatie/laravel-stubs": "^2.3.1"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "files" : [
+            "app/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "check-style": "php-cs-fixer fix --dry-run --diff",
+        "fix-style": "php-cs-fixer fix"
+    }
+}

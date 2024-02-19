@@ -1,0 +1,67 @@
+@media only screen and (min-width: 600px) and (max-width: 1024px){
+    section .recent{
+        width: 31%;
+    }
+
+    .types .stories{
+        margin: 0 14px 70px 0;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .types .stories{
+        width: 100px;
+        height: 155px;
+    }
+
+
+    .sidebar{
+        position: fixed;
+        top: 10px;
+        left: 5px;
+        width: 100vw;
+        height: 100vh;
+    }
+    .sidebar .card-header{
+        background-color: #fff;
+    }
+    .form-comment{
+        max-height: 580px !important;
+    }
+    .w-83 {
+        width: 100%;
+    }
+
+    section .recent{
+        width: 100%;
+        margin-right: 0;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+    .translate{
+        display: none;
+    }
+    .content .home-section .home-header{
+        padding: 10px 0;
+    }
+    .home-section .float-right{
+        line-height: 2;
+    }
+    .body-section .update-section,.body-section .chat-section{
+        width: 100%;
+    }
+    
+    .tt-img{
+        margin-top: 10px;
+    }
+}
+@media only screen and (max-width: 330px) {
+
+    .content .home-section .home-header{
+        display: flex;
+    }
+    .content .home-section .home-header span{
+        width: 75%
+    };
+
+} 

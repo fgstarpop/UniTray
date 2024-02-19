@@ -1,0 +1,161 @@
+<div id="tabber" class="roww">
+	<div class="tabberdiv active">Gói công cộng</div>
+	<div class="tabberdiv">Gói của tôi</div>
+</div>
+<div>
+	<div id="tabdiv">
+		<div class="w-100">
+			<div class="roww">
+				<input type="text" placeholder="Tìm kiếm" onkeyup="searchnamepack(this.value)">
+			</div>
+			<style type="text/css">
+				.namepack{
+					white-space: normal;
+					height: 60px;
+					font-size: 12px;
+				}
+				.namepack .name{
+					color: gray;
+					font-size: 14px;
+					font-weight: 600;
+				}
+				.namepack .author{
+					float: right;
+				}
+				.tabberdiv.active{
+					border-bottom: 2px solid green;
+				}
+				.tabberdiv{
+					width: 50%;padding: 2px;font-weight: 600;
+					text-align: center;
+				}
+			</style>
+			<script type="text/javascript">
+				function searchnamepack(keyw) {
+					ajax("ajax=searchnamepack&keyw="+encodeURIComponent(keyw),function(down) {
+						g("namepackbox").innerHTML=down;
+					});
+				}
+				function mynamepack() {
+					ajax("ajax=mynamepack",function(down) {
+						g("namepackbox2").innerHTML=down;
+					});
+				}
+				searchnamepack("");
+				mynamepack();
+				function downthisname(packid){
+					try {
+						parseid();
+					} catch(e) {
+					 	return alert("Bạn không đang đọc truyện, không thể tải.");
+					}
+					ajax("ajax=downcustomname&packid="+packid,function(down){
+						if(down=="error"){
+							return alert("Lỗi không xác định");
+						}
+						namew.value=down+"\n"+namew.value;
+						saveNS();
+						excute();
+						alert("Đã tải");
+					});
+					
+				}
+			</script>
+			<div id="namepackbox"></div>
+		</div>
+		<div class="w-100">
+			<div class="roww">
+				<div class="padder"></div>
+				<button right onclick="makenewpack()">Thêm gói mới</button>
+			</div>
+			<div id="namepackbox2"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	ui.stab(g("tabber"),g("tabdiv"));
+	function makenewpack(){
+		var wd=ui.win.create("Thêm gói name mới.");
+		var rw=wd.body.row();
+		rw.addText("Tên gói: &nbsp;&nbsp;");
+		rw.addInput("ip-packname","Tên gói");
+		var rw=wd.body.row();
+		rw.addText("Giới thiệu: ");
+		rw.addInput("ip-packdesc","Giới thiệu");
+		var rw=wd.body.row();
+		rw.addText("Nhãn dán: ");
+		rw.addInput("ip-packtag","Nhãn dán, cách nhau dấu phẩy.");
+		var rw=wd.body.row();
+		rw.innerHTML="<textarea id='ip-packdata' placeholder='Nội dung name'></textarea>";
+		var rw=wd.body.row();
+		rw.addButton("Nhập từ khung name","getnamefromnamewd()","blue",true);
+		wd.body.sec("");
+		var rw=wd.body.row();
+		var btn = rw.addButton("Tạo gói","makenewpacked(this)","blue w-100");
+
+		wd.show();
+	}
+	function getnamefromnamewd(){
+		setval("packdata",namew.value);
+	}
+	function makenewpacked(btn){
+		btn.disabled=true;
+		var ob = {
+			name:val("packname"),desc:val("packdesc"),tag:val("packtag"),data:val("packdata")
+		}
+		var obt = encodeURIComponent(JSON.stringify(ob));
+		ajax("ajax=makenewnamepack&data="+obt,function(down){
+			if(down=="success"){
+				alert("Thành công tạo gói name.");
+				return ui.win.getWindow(btn).hide();
+			}
+			alert(down);
+			btn.disabled=false;
+		});
+	}
+	function editthisname(packid){
+		ajax("ajax=editnamepack&packid="+packid,function(down){
+			var x=JSON.parse(down);
+			if(x.code!=0){
+			 	return alert(x.err);
+			}else{
+				var wd=ui.win.create("Sửa gói name.");
+				var rw=wd.body.row();
+				rw.addText("Tên gói: &nbsp;&nbsp;");
+				rw.addInput("ip-epackname","Tên gói").value = x.name;
+				var pidip = rw.addInput("ip-epackid","");
+				pidip.style.display="none";
+				pidip.value=packid;
+				var rw=wd.body.row();
+				rw.addText("Giới thiệu: ");
+				rw.addInput("ip-epackdesc","Giới thiệu").value = x.desc;
+				var rw=wd.body.row();
+				rw.addText("Nhãn dán: ");
+				rw.addInput("ip-epacktag","Nhãn dán, cách nhau dấu phẩy.").value = x.tag;
+				var rw=wd.body.row();
+				rw.innerHTML="<textarea id='ip-epackdata' placeholder='Nội dung name'>"+x.data+"</textarea>";
+				var rw=wd.body.row();
+				rw.addButton("Nhập từ khung name","getnamefromnamewd()","blue",true);
+				wd.body.sec("");
+				var rw=wd.body.row();
+				var btn = rw.addButton("Sửa gói","editnamepacked(this)","blue w-100");
+				wd.show();
+			}
+		});
+	}
+	function editnamepacked(btn){
+		btn.disabled=true;
+		var ob = {
+			packid:val("epackid"),name:val("epackname"),desc:val("epackdesc"),tag:val("epacktag"),data:val("epackdata")
+		}
+		var obt = encodeURIComponent(JSON.stringify(ob));
+		ajax("ajax=editnamepacked&data="+obt,function(down){
+			if(down=="success"){
+				alert("Đã sửa gói name.");
+				return ui.win.getWindow(btn).hide();
+			}
+			alert(down);
+			btn.disabled=false;
+		});
+	}
+</script>
