@@ -1,0 +1,79 @@
+version: '3.9'
+name: giangthe
+services:
+###----WEB
+  # BACKEND PROJECT
+  site:
+    build:
+      context: .
+      dockerfile: ./docker/site/app/Dockerfile
+    container_name: giangthe_site
+    volumes:
+      - ./apps/site:/work
+      - giangthe_site_vendor:/work/vendor
+    depends_on:
+      - mysql
+###----NGINX
+  nginx:
+    image: 'nginx:1.21-alpine'
+    container_name: giangthe_nginx
+    ports:
+     - ${NGINX_HOST_PORT}:80
+    volumes:
+      - ./apps/frontend:/frontend
+      - "./docker/nginx/.htpasswd:/etc/nginx/.htpasswd"
+      - "./docker/nginx/nginx.${APP_ENV}.conf:/etc/nginx/nginx.conf"
+      - "./apps/site:/work"
+    depends_on: ["site", "worker"]
+
+###----WORKER
+  worker:
+    init: true
+    build:
+      context: .
+      dockerfile: ./docker/site/worker/Dockerfile
+    container_name: giangthe_worker
+    depends_on: ["mysql", "redis"]
+    volumes:
+      - "./apps/site:/work"
+###----MYSQL
+  mysql:
+    image: 'mysql:8.0'
+    container_name: giangthe_mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --explicit_defaults_for_timestamp --max-allowed-packet=524288000
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - ${MYSQL_HOST_PORT}:3306
+    volumes:
+      - ./docker/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/logs:/var/log/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+# Add phpMyAdmin service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: giangthe_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 100M
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    depends_on:
+      - mysql
+###----REDIS
+  redis:
+    container_name: giangthe_redis
+    image: redis:7.2.3-alpine
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - giangthe_redis-store:/data
+    command: ["redis-server", "--save", "", "--maxmemory", "200mb", "--maxmemory-policy", "allkeys-lru"]
+
+volumes:
+  giangthe_mysql:
+  giangthe_site_vendor:
+  giangthe_redis-store:
+
