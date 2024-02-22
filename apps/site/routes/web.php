@@ -31,7 +31,7 @@ use App\Http\Controllers\ControllerPK\PKController;
 | contains the "web" middleware group. Now create something great!
 |
 */
- SitemapGenerator::create(config('app.url')->writeToFile(public_path('sitemap.xml')));
+//  SitemapGenerator::create(config('app.url')->writeToFile(public_path('sitemap.xml')));
 
 Route::any('thueapis/momo', [PackageController::class, 'thueapimomo'])->name('thueapimomo');
 Route::any('thueapis/mbbank', [PackageController::class, 'thueapimb'])->name('thueapimb');
