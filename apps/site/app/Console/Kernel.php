@@ -20,6 +20,8 @@ use App\Console\Commands\ResetNominationStory;
 use App\Console\Commands\UpdateViewWeekStory;
 use App\Console\Commands\ResetOverCount;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Spatie\Sitemap\SitemapGenerator;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -73,6 +75,10 @@ class Kernel extends ConsoleKernel
         $schedule->command(AutoLeechFanqienovel::class)->everyTenMinutes()->withoutOverlapping()->runInBackground();
         // $schedule->command(AutoLeechXinyushuwu::class)->everyTenMinutes()->withoutOverlapping()->runInBackground();
 		// $schedule->command('inspire')->hourly();
+
+        $schedule->call(function () {
+            SitemapGenerator::create(config('app.url')->writeToFile(public_path('sitemap.xml')));
+        })->daily();
 
 		$schedule->call(function () {
             $now = Carbon::now();
