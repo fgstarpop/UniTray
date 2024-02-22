@@ -46,11 +46,11 @@
                 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -69,11 +69,11 @@
     @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -476,13 +476,13 @@
         @endif    
 
         @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -514,13 +514,13 @@
         @endif
 
         @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -551,13 +551,13 @@
 @endif
 
 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -606,13 +606,13 @@
 @endif --}}
 
 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -650,11 +650,11 @@
 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -860,13 +860,13 @@
         </div>
     @endforeach
     @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
-<!-- 13.02 -->
+<!-- 21.02 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="2278240982"
+     data-ad-slot="8011043264"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>

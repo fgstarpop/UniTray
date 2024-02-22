@@ -438,40 +438,40 @@
                 <div class="cus-view-it-header">
                     <div class="cus-view-it-item">
                     <input type="checkbox" class="custom-checkbox" name="source[]" id="source_faloo" value="faloo" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('faloo', request('source'))) checked @endif/>
-                        <label class="checkbox-label" for="source_faloo" style="font-size: 14px; margin-left: 3px">Faloo</label>
+                        <label class="checkbox-label" for="source_faloo" style="font-size: 15px; margin-left: 3px">Faloo</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_fanqie" value="fanqie" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('fanqie', request('source'))) checked @endif/>
-                        <label for="source_fanqie" class="checkbox-label" style="font-size: 14px; margin-left: 3px">Fanqie</label>
+                        <label for="source_fanqie" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Fanqie</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_qimao" value="qimao" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('qimao', request('source'))) checked @endif/>
-                        <label for="source_qimao" class="checkbox-label" style="font-size: 14px; margin-left: 3px">Qimao</label>
+                        <label for="source_qimao" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Qimao</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_uukanshu" value="uukansu" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('uukansu', request('source'))) checked @endif/>
-                        <label for="source_uukanshu" class="checkbox-label" style="font-size: 14px; margin-left: 3px">Uukansu</label>
+                        <label for="source_uukanshu" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Uukansu</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_69shu" value="69shu" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('69shu', request('source'))) checked @endif/>
-                        <label for="source_69shu" class="checkbox-label" style="font-size: 14px; margin-left: 3px">69shu</label>
+                        <label for="source_69shu" class="checkbox-label" style="font-size: 15px; margin-left: 3px">69shu</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_qidian" value="qidian" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('qidian', request('source'))) checked @endif/>
-                        <label for="source_qidian" class="checkbox-label" style="font-size: 14px; margin-left: 3px">Qidian</label>
+                        <label for="source_qidian" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Qidian</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_trxs" value="trxs" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('trxs', request('source'))) checked @endif/>
-                        <label for="source_trxs" class="checkbox-label" style="font-size: 14px; margin-left: 3px">Trxs</label>
+                        <label for="source_trxs" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Trxs</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_tadu" value="tadu" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('tadu', request('source'))) checked @endif/>
-                        <label for="source_tadu" class="checkbox-label" style="font-size: 14px; margin-left: 3px">Tadu</label>
+                        <label for="source_tadu" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Tadu</label>
                     </div>
                     <div style="clear: both"></div>
                 </div>
                 <div class="cus-view-it-footer">
-                    <div id="find-sou">Lọc</div>
+                    <div id="find-sou">Chọn</div>
                     <div id="find-all-sou">Chọn tất cả</div>
                     <div id="close-sou">Huỷ</div>
                 </div>

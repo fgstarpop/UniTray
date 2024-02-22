@@ -71,6 +71,15 @@
             height: initial;
             max-height: initial;
         }
+
+        .tt-chapter {
+            /* max-height: 60px !important; */
+            height: auto !important;
+        }
+
+        /* .text-success {
+            color: rgb(193, 186, 186) !important;
+        } */
     </style>
 @endpush
 @section('content')
@@ -132,6 +141,7 @@
                             <center><img class="img-story-new-mobile"
                                     src="{{ $story->avatar ?? $story->getFirstMediaUrl('default') }}"></center>
                         </div>
+                        
                         <div class="col-8 p-0">
                             <span id="book_name2" class="cap new-story-name-mobile "> {{ ucfirst($story->name) }} </span>
                             <br>
@@ -383,7 +393,8 @@
                 @endif
             </div>
             @if (strpos(url()->current(), 'truyenvipfaloo'))
-                <div class="p-1 bt">Nguồn truyện: <a class="text-success"
+                <div class="p-1 bt">Nguồn truyện: <a class="text-success" 
+                        style="white-space: normal"
                         href="{{ $story->origin ?? '#' }}">{{ $story->origin ?? 'Sáng tác' }}</a>
                 </div>
             @endif
@@ -717,7 +728,7 @@
                                                         value="{{ $dataChapters }}"
                                                         class="order-many checkbox-round">
                                                     <label
-                                                        style="white-space: nowrap;
+                                                        style="white-space: normal;
                                         width: 240px;
                                         overflow: hidden;
                                         text-overflow: ellipsis;"
@@ -914,7 +925,7 @@
     @endif
     <div>
         <div class="pt-2 pb-2 tt-box-list-chapter">
-            <div class="row tt-box-chapter"
+            <div class="tt-box-chapter"
                 @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="border-top: dashed 2px #ebe7e7; border-bottom: dashed 2px #ebe7e7;" @endif>
                 <?php $readed = true; ?>
                 @php
@@ -967,17 +978,17 @@
                                                 ])->first() ||  --}}
 
                                     @if ($userOders->firstWhere('chapter_id', $chapter['id']) || $check || currentUser()->user_vip == 1)
-                                        <div class="col-md-4">
-                                            <div class="tt-chapter {{ @$link }}"
-                                                @if (@$link == 'chaplastreaded') id="last_readed" @endif>
+                                        <div class="col-md-4" style="width: 100% !important">
+                                            <div class="tt-chapter {{ @$link }}"                                          @if (@$link == 'chaplastreaded') id="last_readed" @endif>
                                                 <a href="{{ $linkStory }}" class="text-success"
+                                                    style="white-space: normal"
                                                     title="{{ $chapter['name'] }}">
                                                     <i class="fal fa-check"></i> {{ @$chapter['name'] }}
                                                 </a>
                                             </div>
                                         </div>
                                     @else
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" style="width: 100% !important">
                                             <div class="tt-chapter {{ @$link }}"
                                                 @if (@$link == 'chaplastreaded') id="last_readed" @endif>
                                                 <a href="javascript:;" data-url="{{ $linkStory }}"
@@ -986,18 +997,21 @@
                                                     data-chapter-name="{{ @$chapter['name'] }}"
                                                     data-author="{{ $story->mod_id }}"
                                                     data-price="{{ number_format(@$chapter['price']) }}"
-                                                    class="text-success order"
-                                                    title="{{ $chapter['name'] }}">
-                                                    <i class="fa fa-lock"></i> {{ $chapter['name'] }}
+                                                    class="text-success order white-space: normal"
+                                                    title="{{ $chapter['name'] }}"
+                                                    style="color: red !important"
+                                                    >
+                                                    <i class="fa fa-lock"></i> {{ $chapter['name'] }} 12312123123123
                                                 </a>
                                             </div>
                                         </div>
                                     @endif
                                 @else
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="width: 100% !important">
                                         <div class="tt-chapter {{ @$link }}"
                                             @if (@$link == 'chaplastreaded') id="last_readed" @endif>
                                             <a href="{{ $linkStory }}" class="text-success"
+                                                style="white-space: normal"
                                                 title="{{ $chapter['name'] }}"> {{ @$chapter['name'] }}
                                             </a>
                                         </div>
@@ -1005,20 +1019,24 @@
                                 @endif
                             @else
                                 @if (@$chapter['is_vip'] != 1)
-                                    <div class="col-md-4">
-                                        <div class="tt-chapter {{ @$link }}"
+                                    <div class="col-md-4" style="width: 100% !important">
+                                        <div class="tt-chapter {{ @$link }} "
                                             @if (@$link == 'chaplastreaded') id="last_readed" @endif>
-                                            <a href="{{ $linkStory }}" class="text-success "
-                                                title="{{ $chapter['name'] }}">
+                                            <a href="{{ $linkStory }}" class="text-success"
+                                                style="white-space: normal"
+                                                title="{{ $chapter['name'] }}"
+                                                >
                                                 {{ $chapter['name'] }}
                                             </a>
                                         </div>
                                     </div>
                                 @else
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="width: 100% !important">
                                         <div class="tt-chapter">
-                                            <a href="{{ @$linkStory }}" class="text-success"
-                                                title="{{ $chapter['name'] }}">
+                                            <a href="{{ @$linkStory }}"
+                                                title="{{ $chapter['name'] }}"
+                                                style="color: red !important"
+                                                >
                                                 <i class="fa fa-lock"></i> {{ $chapter['name'] }}
                                             </a>
                                         </div>

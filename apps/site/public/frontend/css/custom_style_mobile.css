@@ -36,7 +36,7 @@
     }
 
     .chaplastreaded a {
-        color: rgb(0, 0, 0) !important;
+        color: rgb(193, 186, 186);
         font-size: 15px;
         font-weight: 600;
         margin-left: 8px;
@@ -47,7 +47,7 @@
     }
 
     .text-success {
-        color: #000000 !important;
+        color: #1A8653 !important;
         white-space: nowrap;
         font-size: 15px;
         width: 98%;
