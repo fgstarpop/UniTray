@@ -1,5 +1,5 @@
 @if((new \Jenssegers\Agent\Agent())->isDesktop())
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-3" style="margin-bottom: 50px">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-3" style="margin-top: 25px; margin-bottom: 25px">
         <div class="cap bookthumb">
             <a href="{{ route('story.show', $story->id) }}" class="box-card-story">
             <div style="display:flex">
@@ -63,7 +63,7 @@
         </a>
     </div> -->
 
-    <div class="cap bookthumb" style="margin-top: 20px">
+    <div class="cap bookthumb" style="margin-top: 10px; margin-bottom: 10px">
             <a href="{{ route('story.show', $story->id) }}" class="box-card-story">
             <div style="display:flex">
                 <div class="position-relative d-inline-block position-relative">
@@ -72,10 +72,10 @@
 
                 </div>
                 <div style="margin-left: 13px">
-                    <span style="display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 2; font-size: 14.5px; font-weight: 650; height: 40px">
+                    <span style="display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 2; font-size: 16px; font-weight: 550; height: 50px">
                         {{ ucfirst( $story->name) }} 
                     </span>
-                    <div style="margin-top: 14px; font-size: 14px ; font-weight: 500">
+                    <div style="margin-top: 10px; font-size: 15px ; font-weight: 550">
                         @foreach($story['categories'] as $cate)
                             <span style="color: #0C9A00; margin-right: 3px"># {{ $cate->name}}</span>
                         @endforeach
@@ -87,7 +87,7 @@
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
                             </svg>
-                            <span style="margin-left: 5px; font-size: 14px ; font-weight: 500">
+                            <span style="margin-left: 5px; font-size: 15px ; font-weight: 550">
                             <!-- {{ $story->view }} -->
                             @if ($story->view > 999 && $story->view <= 999999)
                         {{ round(($story->view / 1000) ,2) }}K

@@ -124,7 +124,7 @@ body {
     margin: 0;
     font-family: var(--bs-font-sans-serif);
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 450;
     line-height: 1.5;
     color: #212529;
     background-color: #fff;
@@ -12748,7 +12748,7 @@ header .navigation a {
 }
 
 body {
-    font-size: 13px;
+    font-size: 14.3px;
 }
 
 .fa,
@@ -12847,7 +12847,7 @@ a {
 }
 
 .chapreaded .text-success {
-    color: #000 !important;
+    color: rgb(193, 186, 186) !important;
 }
 
 a:hover {
@@ -13760,7 +13760,7 @@ body {
 .tt-chapter {
     border-bottom: 1px dashed #eee;
     padding: 7px 0;
-    height: 37px;
+    height: 42px;
     overflow: hidden;
 }
 

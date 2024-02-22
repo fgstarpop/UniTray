@@ -72,8 +72,34 @@ class StoryController extends Controller
         $storySources = Story::where('author',$story->author)->where('name_chines',$story->name_chines)->orderBy('created_at', 'DESC')->get();
         $chapterLastReaded = $chapLastReaded ? $chapLastReaded->order : '';
         $listStoryRank = Story::orderBy('nomination', 'desc')->limit(100)->get();
+        $story->description = $this->addBrAfterSpecialChars($story->description);
         return view('shop.story.show', compact('story', 'listStoryRank', 'storySources','comment', 'wallet', 'donate', 'chapLastReaded', 'chapterLastReaded'));
     }
+
+    public function addBrAfterSpecialChars($text) {
+        $specialChars = array("】", "》", ".");
+        $result = '';
+    
+        $textLength = mb_strlen($text, 'UTF-8');
+    
+        for ($i = 0; $i < $textLength; $i++) {
+            $char = mb_substr($text, $i, 1, 'UTF-8');
+            $result .= $char;
+    
+            if (in_array($char, $specialChars) && $i > 0) {
+                $prevChar = mb_substr($text, $i - 1, 1, 'UTF-8');
+                $nextChar = mb_substr($text, $i + 1, 1, 'UTF-8');
+    
+                if (!in_array($prevChar, $specialChars) || !in_array($nextChar, $specialChars)) {
+                    $result .= "<br><br>";
+                }
+            }
+        }
+    
+        return $result;
+    }
+    
+    
 
     public function follow($story)
     {
