@@ -12,7 +12,7 @@
         "astrotomic/laravel-translatable": "^11.8",
         "barryvdh/laravel-translation-manager": "^0.5.10",
         "bensampo/laravel-enum": "^3",
-        "cknow/laravel-money": "6.0.0",
+        "cknow/laravel-money": "^7.2",
         "cviebrock/eloquent-sluggable": "^8.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "doctrine/dbal": "2.*",
