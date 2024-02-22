@@ -58,6 +58,7 @@ class ChapterController
 //            if('https://wap.faloo.com/1012883_4.html' == $embed_link){
 //                dd($chapter);
 //            }
+
             if (!$chapter) {
                 $chapter = $chapters[$search_link];
                 $url = filter_var($embed_link, FILTER_VALIDATE_URL);
@@ -88,14 +89,14 @@ class ChapterController
                                 'status' => $chapter['status'],
                                 'order' => $chapter['order'],
                                 'embed_link' => $url,
-                                'is_vip' => (currentUser() && currentUser()->is_vip == 1) ? ($is_vip ?? 0) : 0,
+                                'is_vip' => (currentUser() && currentUser()->is_vip == 1) ? ($request->is_vip ?? 0) : 0,
                                 'mod_id' => (currentUser() && currentUser()->is_vip == 1) ? (currentUser()->id) : null,
                                 'host' => $datahosts['host'],
                                 'idhost' => $datahosts['bookid'],
                                 'idchap' => $datahosts['chapid'],
                             ];
                             $chapter = Chapter::create($new_chap);
-                            // dd($chapter);
+
                             $chapters[$search_link] = $chapter->toArray();
                             $story->update(['chapters_json' => json_encode($chapters)]);
                             $chapter = embedChapter($url, $base_url, currentUser(), $chapter, $request->is_vip ?? 0) ?? $chapter;
@@ -105,8 +106,6 @@ class ChapterController
                         catch (\Exception $e) {
                             dd('Không nhúng được');
                         }
-
-
                     } else {
                         dd('Không nhúng được');
                     }
@@ -116,14 +115,24 @@ class ChapterController
                 $parse = parse_url($url);
                 if ($parse) {
                     $base_url = $parse['scheme'] . '://' . $parse['host'];
-                    $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
-                    if(isset($datahosts)&&isset($datahosts['bookid'])&&isset($datahosts['chapid'])){
-                        $chapter = UpdateContentChapter($url, $base_url, $chapter) ?? $chapter;
+                    // FALOO VIP
+                    if (str_contains($parse['host'], 'faloo.com')) {
+                        $data = getChapterFaloo($url);
+                        if ($data['status'] == 'success' && $data['data']) {
+                            $chapter->update([
+                                'content' => $data['data']
+                            ]);
+                        }
+                    } else {
+                        $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+                        if (isset($datahosts) && isset($datahosts['bookid']) && isset($datahosts['chapid'])){
+                            $chapter = UpdateContentChapter($url, $base_url, $chapter) ?? $chapter;
+                        }
                     }
                 }
             }
 
-        
+
 
         } else { // query chapter
             $chapter = Chapter::findOrFail($id);
@@ -207,7 +216,7 @@ class ChapterController
                     'chapter' => $chapter
                 ]
             ]);
-    
+
             $chapter->update([
                 'content' => NULL
             ]);
@@ -220,7 +229,7 @@ class ChapterController
                 $dataFromTele = $this->getRemoteData($chapterbase['telegram_id'], $chapterbase['story_id'], $chapterbase["id"]);
                 $chapter['content'] = $dataFromTele;
         }
-    
+
         return view('shop.chapter.show', [
             'comment' => $comment,
             'story' => $story,
@@ -238,17 +247,17 @@ class ChapterController
         $url = "http://103.116.104.183/chapter/file-by-id/{$telegram_id}/storyId/{$storyId}/chapterId/${id}";
         $client = new Client();
         $response = $client->get($url);
-    
+
         $content = $response->getBody()->getContents();
         return $content;
     }
 
     public function getRemoteVipData($storyId, $id) {
         $url = "http://103.116.104.183/chapter/vip/storyId/{$storyId}/id/{$id}";
-        
+
         $client = new Client();
         $response = $client->get($url);
-        
+
         if ($response->getStatusCode() == 200) {
             $content = $response->getBody()->getContents();
             return $content;
@@ -258,7 +267,7 @@ class ChapterController
     }
 
 
-    
+
     public function extractNumbersFromURL($url) {
         if (preg_match('/(\d+)_(\d+)\.html/', $url, $matches)) {
             $firstNumber = $matches[1];
@@ -268,5 +277,5 @@ class ChapterController
             return false;
         }
     }
-    
+
 }

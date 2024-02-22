@@ -664,10 +664,20 @@ function checkExistStory($story_name, $url, $user)
 
 function embedChapter($url, $base_url, $user, $chapter, $is_vip)
 {
-    $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
-    $content = $data['content'];
-    $content = strip_tags($content, array('<i>', '<br>', '<p>'));
+    $content = '';
+    $data = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
 
+    if (str_contains($url, 'faloo.com')) {
+        // FALOO VIP
+        $getFalooData = getChapterFaloo($url);
+        if ($getFalooData['status'] == 'success' && $getFalooData['data']) {
+            $content = $getFalooData['data'];
+        }
+    } else {
+        $chapterData = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+        $content = $chapterData['content'];
+        $content = strip_tags($content, array('<i>', '<br>', '<p>'));
+    }
 
     if ($content) {
         $chapter->update([
@@ -683,7 +693,7 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
             'idhost' => $data['bookid'],
             'idchap' => $data['chapid'],
         ]);
-       
+
         return $chapter;
     }
 
@@ -829,5 +839,29 @@ if (!function_exists('setting_custom')) {
         } else {
             return $data[$key] ?? $default;
         }
+    }
+}
+
+
+/**
+ * Getting chapter of b.faloo
+ *
+ */
+if (!function_exists('getChapterFaloo')) {
+    function getChapterFaloo($url) {
+        // Define URL and body for the API request
+        $apiUrl = 'https://api.giangthe.com/chapter';
+        $body = [
+            "url" => $url,
+            "sign" => md5($url . 'isjdojfe9())@38724)41') // Calculating sign
+        ];
+
+        // Send POST request to the API endpoint with provided body and headers
+        $response = Http::withHeaders([
+            'token' => 'giangthe.com'
+        ])->post($apiUrl, $body);
+
+        // Return the response from the API
+        return $response->json();
     }
 }
