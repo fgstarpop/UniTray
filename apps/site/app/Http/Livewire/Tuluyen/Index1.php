@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Domain\Admin\Models\WalletTransaction;
 
-class Index extends Component
+class IndexBk extends Component
 {
 	public $players_user;
 	public $players;
