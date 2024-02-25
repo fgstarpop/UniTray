@@ -244,11 +244,17 @@ class ChapterController
     }
 
     public function getRemoteData($telegram_id, $storyId, $id) {
-        $url = "http://103.116.104.183:3002/chapter/file-by-id/{$telegram_id}/storyId/{$storyId}/chapterId/${id}";
-        $client = new Client();
-        $response = $client->get($url);
+        $content = '';
+        try {
+            $url = "http://103.116.104.183:3002/chapter/file-by-id/{$telegram_id}/storyId/{$storyId}/chapterId/${id}";
+            $client = new Client();
+            $response = $client->get($url);
 
-        $content = $response->getBody()->getContents();
+            $content = $response->getBody()->getContents();
+        } catch (\Throwable $th) {
+            return redirect()->to(url()->current());
+        }
+
         return $content;
     }
 
