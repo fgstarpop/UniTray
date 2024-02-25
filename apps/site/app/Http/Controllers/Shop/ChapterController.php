@@ -116,19 +116,19 @@ class ChapterController
                 if ($parse) {
                     $base_url = $parse['scheme'] . '://' . $parse['host'];
                     // FALOO VIP
-                    if (str_contains($parse['host'], 'faloo.com')) {
-                        $data = getChapterFaloo($url);
-                        if ($data['status'] == 'success' && $data['data']) {
-                            $chapter->update([
-                                'content' => $data['data']
-                            ]);
-                        }
-                    } else {
+                    // if (str_contains($parse['host'], 'faloo.com')) {
+                    //     $data = getChapterFaloo($url);
+                    //     if ($data['status'] == 'success' && $data['data']) {
+                    //         $chapter->update([
+                    //             'content' => $data['data']
+                    //         ]);
+                    //     }
+                    // } else {
                         $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
                         if (isset($datahosts) && isset($datahosts['bookid']) && isset($datahosts['chapid'])){
                             $chapter = UpdateContentChapter($url, $base_url, $chapter) ?? $chapter;
                         }
-                    }
+                    // }
                 }
             }
 
