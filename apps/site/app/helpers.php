@@ -667,17 +667,17 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
     $content = '';
     $data = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
 
-    if (str_contains($url, 'faloo.com')) {
-        // FALOO VIP
-        $getFalooData = getChapterFaloo($url);
-        if ($getFalooData['status'] == 'success' && $getFalooData['data']) {
-            $content = $getFalooData['data'];
-        }
-    } else {
+    // if (str_contains($url, 'faloo.com')) {
+    //     // FALOO VIP
+    //     $getFalooData = getChapterFaloo($url);
+    //     if ($getFalooData['status'] == 'success' && $getFalooData['data']) {
+    //         $content = $getFalooData['data'];
+    //     }
+    // } else {
         $chapterData = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
         $content = $chapterData['content'];
         $content = strip_tags($content, array('<i>', '<br>', '<p>'));
-    }
+    // }
 
     if ($content) {
         $chapter->update([
