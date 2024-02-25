@@ -252,7 +252,7 @@ class ChapterController
 
             $content = $response->getBody()->getContents();
         } catch (\Throwable $th) {
-            return redirect()->to(url()->current());
+            return redirect()->to(url()->full());
         }
 
         return $content;
