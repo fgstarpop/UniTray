@@ -229,7 +229,7 @@ class ChapterController
                 $dataFromTele = $this->getRemoteData($chapterbase['telegram_id'], $chapterbase['story_id'], $chapterbase["id"]);
                 $chapter['content'] = $dataFromTele;
                 if (!$chapter['content']) {
-                    $chapter = Chapter::where('embed_link', $embed_link)->first();
+                    return redirect()->to(url()->current() . "?link=". $embed_link);
                 }
         }
 
