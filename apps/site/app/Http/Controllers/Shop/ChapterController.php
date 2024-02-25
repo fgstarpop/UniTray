@@ -228,6 +228,9 @@ class ChapterController
         if($chapter['content'] == null) {
                 $dataFromTele = $this->getRemoteData($chapterbase['telegram_id'], $chapterbase['story_id'], $chapterbase["id"]);
                 $chapter['content'] = $dataFromTele;
+                if (!$chapter['content']) {
+                    $chapter = Chapter::where('embed_link', $embed_link)->first();
+                }
         }
 
         return view('shop.chapter.show', [
@@ -252,7 +255,7 @@ class ChapterController
 
             $content = $response->getBody()->getContents();
         } catch (\Throwable $th) {
-            return redirect()->to(url()->full());
+
         }
 
         return $content;
