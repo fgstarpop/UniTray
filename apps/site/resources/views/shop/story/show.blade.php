@@ -86,20 +86,6 @@
     <section class=" fs-6 bg-story pb-5">
         <div class="container px-md-4 px-sm-0 px-0 bg-main-story">
             @if ((new \Jenssegers\Agent\Agent())->isDesktop())
-            @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- GT16.11 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="7000158669"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
                 <div style="position: relative">
                     <div
                         style="background: url({{ $story->avatar ?? $story->getFirstMediaUrl('default') }});background-size: cover;height: 450px;filter: blur(8px);position: absolute;width: 100%">
@@ -141,7 +127,7 @@
                             <center><img class="img-story-new-mobile"
                                     src="{{ $story->avatar ?? $story->getFirstMediaUrl('default') }}"></center>
                         </div>
-                        
+
                         <div class="col-8 p-0">
                             <span id="book_name2" class="cap new-story-name-mobile "> {{ ucfirst($story->name) }} </span>
                             <br>
@@ -311,7 +297,7 @@
                 {!! $story->description !!}
             </div>
         </div>
-        
+
 
     @endif
     @if ((new \Jenssegers\Agent\Agent())->isMobile())
@@ -379,7 +365,7 @@
         </div>
     @endif
     @if ((new \Jenssegers\Agent\Agent())->isDesktop())
-   
+
         <div class="bg-white mt-2" style="font-size: 14px;">
             <div class="p-1 bt"><i class="fa fa-info-circle"></i> Thông tin</div>
             <div class="p-1 bt">Tên gốc: <span id="oriname">{{ $story->name_chines }}</span></div>
@@ -393,7 +379,7 @@
                 @endif
             </div>
             @if (strpos(url()->current(), 'truyenvipfaloo'))
-                <div class="p-1 bt">Nguồn truyện: <a class="text-success" 
+                <div class="p-1 bt">Nguồn truyện: <a class="text-success"
                         style="white-space: normal"
                         href="{{ $story->origin ?? '#' }}">{{ $story->origin ?? 'Sáng tác' }}</a>
                 </div>
@@ -1055,7 +1041,7 @@
                             $story->complete_free == \App\Domain\Story\Models\Story::COMPLETE_FREE_INACTIVE)
                         <div class="col-6">
                             <div style="background-color:#f2f2f2; cursor: pointer;"
-                                class="pt-2 pb-2 mt-1 updateEmbedStory">Cập nhật chương mới 
+                                class="pt-2 pb-2 mt-1 updateEmbedStory">Cập nhật chương mới
                             </div>
                         </div>
                     @endif
@@ -1068,7 +1054,7 @@
                 </div>
                 <span>Chương mới
                         :{{ \Carbon\Carbon::parse($story->chapter_updated)->diffForHumans(\Carbon\Carbon::now()) }}</span>
-               
+
             </div>
         </div>
     </div>

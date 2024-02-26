@@ -22,7 +22,7 @@
     <meta property="og:type" content="article">
     <meta property="og:image" content="{{ $story->avatar }}"/>
     <meta property="og:site_name" content="giangthe.com">
-@stop   
+@stop
 @push('styles')
     <style>
         /*.main-list {*/
@@ -180,7 +180,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    
+
                                     <div class="modal-body"
                                         style="max-height:80vh;overflow:auto;font-size:15px;line-height:26px">
                                         <?php $readed = true; ?>
@@ -252,20 +252,7 @@
                         </div>
                     </div>
                 </div>
-                @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- GT16.11 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="7000158669"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
+
                 <div id="content-container" class="container" style="min-height: 300px;padding: 0px;">
                     <div class="contentbox"
                         style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
@@ -358,7 +345,7 @@
                         @endif
                     </div>
                 </div>
-                
+
                 {{--        <div style="width: 100%;" class="container mt-3"> --}}
                 {{--            <button id="originbutton" class="btn bg-light"><i class="fas fa-external-link-alt"></i> Xem trang gốc</button> --}}
                 {{--            <select class="btn bg-light"> --}}
@@ -424,7 +411,7 @@
             <strong>  --------- Quảng cáo --------- </strong>
             @include('shop.layouts.partials.ads')
         </div>
-        <hr style="height: 16px; background: #eae4d3; margin-top: 0px;"> 
+        <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
         @endif
 
                 @php
@@ -745,7 +732,7 @@
                 {{--        <br> --}}
                 {{--       @include('shop.layouts.comment',['type' => "App/Domain/Chapter/Models/Chapter",'id' => $chapter->id ]) --}}
             </div>
-   
+
             <div class="related-stories">
                 <h4 class="title">
                     Có thể bạn sẽ thích
