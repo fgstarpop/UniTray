@@ -43,20 +43,6 @@
         <div class="row">
             <div class="col-12">
                 @if((new \Jenssegers\Agent\Agent())->isDesktop())
-                @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
                     <div class="noti-block p-3 mt-3 border-danger border-3" style="border-style: solid; background-color: #FFFDE8;">
                         <h5 class="text-success font-weight-bold">Thông báo</h5>
                         {!! setting('noti_webpc') !!}
@@ -158,7 +144,7 @@
                     <span class="name-item mt-2">Chatbox</span>
                     <br>
                 </a>
-                
+
                 <a href="{{ route('post.index') }}" class="d-flex flex-column align-items-center text-danger">
                     <img src="{{ asset('frontend/images/mobile/guide.svg') }}" alt="Hướng dẫn"
                          style="width: fit-content">
@@ -260,7 +246,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                        
+
                         <div class="update-section">
                             <div class="update-header">
                                 <span class="fs-4">Truyện mới</span>
@@ -473,7 +459,7 @@
                     </div>
                 </div>
             </div>
-        @endif    
+        @endif
 
         @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
@@ -503,7 +489,7 @@
                     </div>
                     <div class="row px-2">
                         @foreach ($storyNew as $storyWritten)
-        
+
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 col-4">
                                 @include('shop.story._card_home', ['story' => $storyWritten])
                             </div>
@@ -641,10 +627,10 @@
             </div>
         @endif
 
-        
+
     </section>
 @endif
-       
+
 
 @if((new \Jenssegers\Agent\Agent())->isMobile())
 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
@@ -765,7 +751,7 @@
             @endforeach
         </div>
     </div>
-    
+
 
     <div class="chat-section">
                         <div class="chat-header" style= "text-align: center;" >
@@ -780,7 +766,7 @@
 
                         </div>
                     </div>
-    
+
 
     @foreach($rankingModal as $modal)
         <div class="modal fade ranking" id="{{ $modal['target'] }}" tabindex="-1" aria-labelledby="{{ $modal['target'] }}"
