@@ -157,15 +157,7 @@
                                 <input id="keyword" name="keyword" value="{{ request('keyword') ?? request('search') }}"
                                        placeholder="Nhập từ khóa tên truyện cần tìm...." class="input-search-mob form-control">
                             </div>
-                            @if((new \Jenssegers\Agent\Agent())->isDesktop())
-                            <div class="" style="font-weight: 500; color: #515151">
-                                Tìm tóm tắt
-                            </div>
-                            @endif
-                            <input id="find" name="description" value="{{ request('description') ?? request('search') }}"
-                                       placeholder="Tìm trong phần tm tắt của truyện...." class="input-search-mob form-control">
-                            </div>
-                             {{--  @if((new \Jenssegers\Agent\Agent())->isDesktop())
+                             @if((new \Jenssegers\Agent\Agent())->isDesktop())
                             <div class="input-group mb-3 mt-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text select-title">Tìm tóm tắt: </span>
@@ -174,14 +166,14 @@
                                        placeholder=" Tìm trong phần tóm tắt của truyện" class="form-control"
                                 >
                             </div>
-                            @endif  --}}
-                            {{--  @if((new \Jenssegers\Agent\Agent())->isMobile())
+                            @endif
+                            @if((new \Jenssegers\Agent\Agent())->isMobile())
                                 <div class="input-group p-0">
                                     <textarea name="description" id="find" cols="30" rows="5"
                                               class="form-control"
                                               placeholder=" Tìm trong phần tóm tắt của truyện"></textarea>
                                 </div>
-                            @endif  --}}
+                            @endif
 
                             @if((new \Jenssegers\Agent\Agent())->isDesktop())
                             <div class="input-group mb-3 mt-3 align-items-center">
