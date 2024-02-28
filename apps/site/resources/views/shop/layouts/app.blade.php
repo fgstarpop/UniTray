@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
      crossorigin="anonymous"></script>
      <meta name="monetag" content="d44727ca10cf950ce3e6fe8077ab3427">
@@ -19,19 +19,19 @@
 </script>
 
 
-     
+
 
     <link rel="icon" href="{{ setting('store_favicon') ? \Storage::url(setting('store_favicon')) : '' }}" type="image/gif" sizes="16x16">
 
     <link rel="stylesheet" href="{{ asset('frontend/external/select2/select2.min.css') }}">
-  
+
     <link rel="stylesheet" href="{{ asset('frontend/external/fontawesome/css/all.css') }}" type="text/css">
-    
-    
+
+
 
     <link rel="stylesheet" href="{{ asset('frontend/css/custom_style.css') }}">
     <link rel="stylesheet" href="{{ asset('common/toastr/toastr.min.css') }}">
-    
+
     @if((new \Jenssegers\Agent\Agent())->isMobile())
         <link rel="stylesheet" href="{{ asset('frontend/css/custom_style_mobile.css') }}">
     @endif
@@ -60,25 +60,6 @@
 @if((new \Jenssegers\Agent\Agent())->isMobile())
     @include('shop.layouts.header-mobile')
 @endif
-
-@php
-        if((currentUser() && currentUser()->user_vip == 0) || !currentUser()) {
-            
-        $time = microtime(true);
-        if (Session::has('Adwait')){
-            if ($time - Session::get('Adwait') > 0){
-                echo "<script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('bygliscortor.com',7100979,document.createElement('script'))</script>";
-                Session::put("Adwait",$time + 60);
-            }
-
-        }else{
-
-
-            Session::put("Adwait",$time + 60);
-
-        }
-    }
-@endphp
 
 @yield('content')
 
