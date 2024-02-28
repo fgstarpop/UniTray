@@ -42,7 +42,7 @@
 
     .input-search-mob {
         margin-left: 20px !important;
-        border-radius: 3px !important; 
+        border-radius: 3px !important;
         height: 38px  !important;
     }
 
@@ -95,7 +95,7 @@
         <button style="margin-left: -120px" type="button" class="btn btn-gt btn-mob" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
-        </svg></i> 
+        </svg></i>
         Bộ lọc truyện
         </button>
         <div class="no-mobie"></div>
@@ -131,7 +131,7 @@
                 <input type="hidden" name="status" value="{{ request('status') }}">
                 <div id="tm-p-search-top">
                     <!-- <div class="header-find">
-                        
+
                         @if((new \Jenssegers\Agent\Agent())->isDesktop())
                             <h2>Tìm kiếm truyện</h2>
                         @endif
@@ -149,7 +149,7 @@
                             <div class="d-flex align-items-center">
                             @endif
                                 @if((new \Jenssegers\Agent\Agent())->isDesktop())
-                                
+
                                 <div class="" style="font-weight: 500; color: #515151">
                                     Tìm tên truyện
                                 </div>
@@ -157,7 +157,7 @@
                                 <input id="keyword" name="keyword" value="{{ request('keyword') ?? request('search') }}"
                                        placeholder="Nhập từ khóa tên truyện cần tìm...." class="input-search-mob form-control">
                             </div>
-                            <!-- @if((new \Jenssegers\Agent\Agent())->isDesktop()) 
+                             @if((new \Jenssegers\Agent\Agent())->isDesktop())
                             <div class="input-group mb-3 mt-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text select-title">Tìm tóm tắt: </span>
@@ -165,15 +165,15 @@
                                 <input id="find" value="{{ request('description') }}" name="description"
                                        placeholder=" Tìm trong phần tóm tắt của truyện" class="form-control"
                                 >
-                            </div>-->
+                            </div>
                             @endif
-                            <!-- @if((new \Jenssegers\Agent\Agent())->isMobile()) 
+                            @if((new \Jenssegers\Agent\Agent())->isMobile())
                                 <div class="input-group p-0">
                                     <textarea name="description" id="find" cols="30" rows="5"
                                               class="form-control"
                                               placeholder=" Tìm trong phần tóm tắt của truyện"></textarea>
                                 </div>
-                            @endif -->
+                            @endif
 
                             @if((new \Jenssegers\Agent\Agent())->isDesktop())
                             <div class="input-group mb-3 mt-3 align-items-center">
@@ -182,14 +182,14 @@
                             <div class="d-flex align-items-center source-mb">
                             @endif
                                 @if((new \Jenssegers\Agent\Agent())->isDesktop())
-                                
+
                                 <div class="" style="font-weight: 500; color: #515151">
                                     Nguồn truyện
                                 </div>
                                 @endif
 
                                 @if((new \Jenssegers\Agent\Agent())->isMobile())
-                                
+
                                 <div class="" style="font-weight: 500; color: #515151">
                                     Nguồn truyện
                                 </div>
@@ -198,7 +198,7 @@
                                        placeholder="Nhập từ khóa tên truyện cần tìm...." class="form-control"> -->
                                 @include('shop.modal')
                             </div>
-                            <!-- @if((new \Jenssegers\Agent\Agent())->isDesktop()) 
+                            <!-- @if((new \Jenssegers\Agent\Agent())->isDesktop())
                             <div class="input-group mb-3 mt-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text select-title">Tìm tóm tắt: </span>
@@ -209,8 +209,8 @@
                             </div>-->
                             @endif
 
-                            
-                            
+
+
                             <!-- @if((new \Jenssegers\Agent\Agent())->isDesktop()) -->
                             <div class="">
                                             <span class="select-title" style="font-weight: 500; color: #515151">Sắp xếp</span>
@@ -375,7 +375,7 @@
                                 </span>
                             </div>
                             @endif
-                            <!-- @if((new \Jenssegers\Agent\Agent())->isDesktop()) 
+                            <!-- @if((new \Jenssegers\Agent\Agent())->isDesktop())
                             <div class="" style="margin-top: 10px">
                                             <span class="select-title" style="font-weight: 500; color: #515151">Trạng thái</span>
                                             <span id="status" class="status blk-arr" style="display: block; margin-left: 5px; background: #fff !important">
@@ -512,7 +512,7 @@
     }
     </script>
     </form>
-    
+
 
 
 
@@ -529,7 +529,7 @@
     <section class="mt-4 content search-section" style="margin-bottom: 50px;">
         <div class="mt-4">
             <form id="searchviewdiv" class="" style="max-width: inherit;" method="GET">
-                
+
                 @if($stories->isNotEmpty())
                     <div class="mt-3 mb-3 story-search story-search-mob">
                         @if((new \Jenssegers\Agent\Agent())->isDesktop())
