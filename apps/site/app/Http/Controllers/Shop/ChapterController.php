@@ -228,9 +228,9 @@ class ChapterController
         if($chapter['content'] == null) {
                 $dataFromTele = $this->getRemoteData($chapterbase['telegram_id'], $chapterbase['story_id'], $chapterbase["id"]);
                 $chapter['content'] = $dataFromTele;
-                // if (!$chapter['content']) {
-                //     return redirect()->to(url()->current() . "?link=". $embed_link);
-                // }
+                if (!$chapter['content']) {
+                    return redirect()->to(url()->current() . "?link=". $embed_link);
+                }
         }
 
         return view('shop.chapter.show', [
