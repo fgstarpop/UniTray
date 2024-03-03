@@ -52,20 +52,7 @@
         </div>
     </div>
     @if((new \Jenssegers\Agent\Agent())->isMobile())
-    @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
+
 
         <section class="content container mt-2 search-section" style="min-height: unset">
             <div class="col-12">
@@ -461,20 +448,6 @@
             </div>
         @endif
 
-        @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
 
 @if ($storyNew->isNotEmpty())
 <div class="col-12 mb-2">
@@ -499,21 +472,6 @@
             </div>
         @endif
 
-        @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
-
 @if ($story_not_mod->isNotEmpty())
         <div class="col-12 mb-2">
                 <div class="home-section">
@@ -536,20 +494,6 @@
 </div>
 @endif
 
-@if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
 
 @if (!empty($story_not_mod))
             <div class="col-12 mb-2">
@@ -591,21 +535,6 @@
 </div>
 @endif --}}
 
-@if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
-
 @if ($storyrandomdaerty->isNotEmpty())
             <div class="col-12 mb-2">
                 <div class="home-section">
@@ -633,20 +562,7 @@
 
 
 @if((new \Jenssegers\Agent\Agent())->isMobile())
-@if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
+
 {{--    Ranking--}}
     <style>
         .ranking .modal-dialog .modal-content {
@@ -845,19 +761,5 @@
             </div>
         </div>
     @endforeach
-    @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6402569697449690"
-     crossorigin="anonymous"></script>
-<!-- 21.02 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6402569697449690"
-     data-ad-slot="8011043264"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-@endif
 @endif
 @endsection
