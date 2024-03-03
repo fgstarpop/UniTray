@@ -449,8 +449,8 @@
                         <label for="source_qimao" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Qimao</label>
                     </div>
                     <div class="cus-view-it-item">
-                        <input type="checkbox" class="custom-checkbox" name="source[]" id="source_uukanshu" value="uukansu" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('uukansu', request('source'))) checked @endif/>
-                        <label for="source_uukanshu" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Uukansu</label>
+                        <input type="checkbox" class="custom-checkbox" name="source[]" id="source_uukanshu" value="uukanshu" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('uukanshu', request('source'))) checked @endif/>
+                        <label for="source_uukanshu" class="checkbox-label" style="font-size: 15px; margin-left: 3px">Uukanshu</label>
                     </div>
                     <div class="cus-view-it-item">
                         <input type="checkbox" class="custom-checkbox" name="source[]" id="source_69shu" value="69shu" onchange="handleCheckboxChange(this)" @if(request()->has('source') && in_array('69shu', request('source'))) checked @endif/>
