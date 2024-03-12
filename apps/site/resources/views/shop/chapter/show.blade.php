@@ -786,9 +786,7 @@
     @endif
     {{--  Audio  --}}
       <div id="audio_platform">
-        {{--  <input type="hidden" value="1" id="_storyID" />  --}}
         <input type="hidden" value="{{ !empty($story->id) ? $story->id : 0 }}" id="_storyID" />
-        {{--  <input type="hidden" value="1" id="_chapterID" />  --}}
         <input type="hidden" value="{{ !empty($chapter->id) ? $chapter->id : 0 }}" id="_chapterID" />
       </div>
     {{--  End Audio  --}}
