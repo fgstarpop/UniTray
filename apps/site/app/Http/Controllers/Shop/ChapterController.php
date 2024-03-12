@@ -9,6 +9,7 @@ use App\Domain\Comment\Comment;
 use App\Domain\Activity\Readed;
 use App\Enums\StoryType;
 use App\Events\ChapterViewed;
+use App\Jobs\GenerateAudioJob;
 use App\Scraper\LeechTrxs;
 use App\Scraper\LeechXinyushuwu;
 use Carbon\Carbon;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Bus;
 
 class ChapterController
 {
@@ -233,6 +235,10 @@ class ChapterController
                 // }
         }
 
+        // Dispatch GenerateAudioJob
+        GenerateAudioJob::dispatch($chapter)
+            ->afterResponse()->onQueue('redis');
+
         return view('shop.chapter.show', [
             'comment' => $comment,
             'story' => $story,
@@ -258,11 +264,13 @@ class ChapterController
 
         }
 
+
         return $content;
     }
 
     public function getRemoteVipData($storyId, $id) {
         $url = "http://103.116.104.183:3002/chapter/vip/storyId/{$storyId}/id/{$id}";
+
 
         $client = new Client();
         $response = $client->get($url);
