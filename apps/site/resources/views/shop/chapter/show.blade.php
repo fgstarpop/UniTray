@@ -784,9 +784,18 @@
             @endif
         @endif
     @endif
+    {{--  Audio  --}}
+      <div id="audio_platform">
+        {{--  <input type="hidden" value="1" id="_storyID" />  --}}
+        <input type="hidden" value="{{ !empty($story->id) ? $story->id : 0 }}" id="_storyID" />
+        {{--  <input type="hidden" value="1" id="_chapterID" />  --}}
+        <input type="hidden" value="{{ !empty($chapter->id) ? $chapter->id : 0 }}" id="_chapterID" />
+      </div>
+    {{--  End Audio  --}}
 @endsection
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="http://127.0.0.1:5500/apps/frontend/audio.js"></script>
     <script>
         $.fn.extend({
             disableSelection: function() {
