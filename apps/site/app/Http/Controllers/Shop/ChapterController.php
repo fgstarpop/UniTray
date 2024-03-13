@@ -236,8 +236,8 @@ class ChapterController
         }
 
         // Dispatch GenerateAudioJob
-        GenerateAudioJob::dispatch($chapter)
-            ->afterResponse()->onQueue('redis');
+        // GenerateAudioJob::dispatch($chapter)
+        //     ->afterResponse()->onQueue('redis');
 
         return view('shop.chapter.show', [
             'comment' => $comment,
