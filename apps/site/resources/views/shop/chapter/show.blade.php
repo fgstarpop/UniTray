@@ -793,7 +793,7 @@
 @endsection
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="http://127.0.0.1:5500/apps/frontend/audio.js"></script>
+    <script src="https://api.truyenfox.net/plugins/audio.js"></script>
     <script>
         $.fn.extend({
             disableSelection: function() {
