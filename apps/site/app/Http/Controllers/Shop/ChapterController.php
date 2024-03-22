@@ -13,6 +13,8 @@ use App\Jobs\GenerateAudioJob;
 use App\Scraper\LeechTrxs;
 use App\Scraper\LeechXinyushuwu;
 use Carbon\Carbon;
+use DOMDocument;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -234,10 +236,9 @@ class ChapterController
                 //     return redirect()->to(url()->current() . "?link=". $embed_link);
                 // }
         }
-
         // Dispatch GenerateAudioJob
-        // GenerateAudioJob::dispatch($chapter)
-        //     ->afterResponse()->onQueue('redis');
+        GenerateAudioJob::dispatch($chapter)
+            ->afterResponse()->onQueue('redis');
 
         return view('shop.chapter.show', [
             'comment' => $comment,
