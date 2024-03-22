@@ -7,19 +7,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7237561880153573"
-     crossorigin="anonymous"></script>
-     <meta name="monetag" content="d44727ca10cf950ce3e6fe8077ab3427">
-
-<!-- Google tag (gtag.js) event -->
-<script>
-  gtag('event', 'manual_event_PAGE_VIEW', {
-    // <event_parameters>
-  });
-</script>
-
-
-
 
     <link rel="icon" href="{{ setting('store_favicon') ? \Storage::url(setting('store_favicon')) : '' }}" type="image/gif" sizes="16x16">
 
@@ -151,12 +138,6 @@
         });
     });
 
-    (adsbygoogle = window.adsbygoogle || []).push({});
-
-    $('#earn-fade').click(function() {
-        $(this).hide();
-        $('#btn-earn-gifts').click()
-    })
 </script>
 
 
