@@ -285,7 +285,7 @@
         <div style="font-size: 12px; color: #545454; text-align: center;">
             <h9 class="title">
             <strong>  --------- Quảng cáo --------- </strong>
-            @include('shop.layouts.partials.ads')
+            {{--  @include('shop.layouts.partials.ads')  --}}
         </div>
         <hr style="height: 2px; background: #fff; margin-top: 0px;">
         <hr style="height: 8px; background: #bdbdbd; margin-top: 0px;">

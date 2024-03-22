@@ -29,7 +29,7 @@
 @endpush
 
 @section('content')
-@include('shop.layouts.partials.ads')
+{{--  @include('shop.layouts.partials.ads')  --}}
 
 @php
     $check = 0;
