@@ -236,9 +236,12 @@ class ChapterController
                 //     return redirect()->to(url()->current() . "?link=". $embed_link);
                 // }
         }
-        // Dispatch GenerateAudioJob
-        // GenerateAudioJob::dispatch($chapter)
-        //     ->afterResponse()->onQueue('redis');
+
+        if ($story->id == 66 && $chapter->id == 3124960) {
+            // Dispatch GenerateAudioJob
+            GenerateAudioJob::dispatch($chapter)
+                ->afterResponse()->onQueue('redis');
+        }
 
         return view('shop.chapter.show', [
             'comment' => $comment,
