@@ -33,13 +33,17 @@ class GenerateAudioJob implements ShouldQueue
             $chapterDescription = $this->chapter->content;
             $originalDescription = $this->_collectOriginalText($this->chapter->content);
 
+            $options = array(
+                'ignore_errors' => true,
+            );
+
             $data = [
                 "source" => $source,
                 "story" => [
                     "id" => $storyID,
                     "name" => $storyName,
                     "original_description" => "",
-                    "description" => strip_tags($storyDescription)
+                    "description" => \Soundasleep\Html2Text::convert($storyDescription, $options)
                 ],
                 "chapters" => [
                     [
@@ -47,7 +51,7 @@ class GenerateAudioJob implements ShouldQueue
                         "name" => $chapterName,
                         "is_vip" => $chapterIsVip,
                         "original_description" => $originalDescription,
-                        "description" => strip_tags($chapterDescription)
+                        "description" => \Soundasleep\Html2Text::convert($chapterDescription, $options)
                     ]
                 ]
             ];

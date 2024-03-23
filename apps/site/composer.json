@@ -29,6 +29,7 @@
         "mews/purifier": "^3.3",
         "predis/predis": "^2.1",
         "proengsoft/laravel-jsvalidation": "^4.4",
+        "soundasleep/html2text": "^2.1",
         "spatie/data-transfer-object": "^1.13",
         "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-analytics": "^3.10",

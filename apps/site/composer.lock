@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83010c7a000f922caf14a647dde65e93",
+    "content-hash": "3c6ee91ed622a93dcfc2c55ef5fe2400",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6649,6 +6649,61 @@
                 }
             ],
             "time": "2022-10-12T17:22:51+00:00"
+        },
+        {
+            "name": "soundasleep/html2text",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/soundasleep/html2text.git",
+                "reference": "83502b6f8f1aaef8e2e238897199d64f284b4af3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/soundasleep/html2text/zipball/83502b6f8f1aaef8e2e238897199d64f284b4af3",
+                "reference": "83502b6f8f1aaef8e2e238897199d64f284b4af3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Soundasleep\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jevon Wright",
+                    "homepage": "https://jevon.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP script to convert HTML into a plain text format",
+            "homepage": "https://github.com/soundasleep/html2text",
+            "keywords": [
+                "email",
+                "html",
+                "php",
+                "text"
+            ],
+            "support": {
+                "email": "support@jevon.org",
+                "issues": "https://github.com/soundasleep/html2text/issues",
+                "source": "https://github.com/soundasleep/html2text/tree/2.1.0"
+            },
+            "time": "2023-01-06T09:28:15+00:00"
         },
         {
             "name": "spatie/browsershot",
@@ -14620,7 +14675,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^7.4|^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
