@@ -239,8 +239,8 @@ class ChapterController
 
         // if ($story->id == 66 && $chapter->id == 3124960) {
             // Dispatch GenerateAudioJob
-            GenerateAudioJob::dispatch($chapter)
-                ->afterResponse()->onQueue('redis');
+            // GenerateAudioJob::dispatch($chapter)
+            //     ->afterResponse()->onQueue('redis');
         // }
 
         return view('shop.chapter.show', [
