@@ -794,7 +794,7 @@
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{--  <script src="http://127.0.0.1:5500/apps/frontend/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>  --}}
-    {{--  <script src="https://api.truyenfox.net/plugins/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>  --}}
+    <script src="https://api.truyenfox.net/plugins/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>
     <script>
         $.fn.extend({
             disableSelection: function() {
