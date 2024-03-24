@@ -36,7 +36,7 @@
         "spatie/laravel-flash": "^1.6",
         "spatie/laravel-medialibrary": "^8.0.0",
         "spatie/laravel-permission": "^3.11",
-        "spatie/laravel-sitemap": "5.8.0",
+        "spatie/laravel-sitemap": "^5.8.0",
         "spatie/once": "^2.2",
         "spatie/schema-org": "^3.3",
         "staudenmeir/laravel-adjacency-list": "^1.4",
