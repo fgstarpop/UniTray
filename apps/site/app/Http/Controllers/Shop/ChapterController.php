@@ -237,11 +237,12 @@ class ChapterController
                 // }
         }
 
-        // if ($story->id == 66 && $chapter->id == 3124960) {
+        if (config('constants.GENERATING_AUDIO', false)) {
             // Dispatch GenerateAudioJob
             GenerateAudioJob::dispatch($chapter)
                 ->afterResponse()->onQueue('redis');
-        // }
+        }
+
 
         return view('shop.chapter.show', [
             'comment' => $comment,
