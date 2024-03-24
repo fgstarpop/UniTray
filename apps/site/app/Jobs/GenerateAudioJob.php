@@ -35,8 +35,11 @@ class GenerateAudioJob implements ShouldQueue
 
             $options = array(
                 'ignore_errors' => true,
+                'char_set'  =>  'utf-8'
             );
 
+            $storyDescription = str_replace("\n", "<br/>", $storyDescription);
+            $chapterDescription = str_replace("\n", "<br/>", $chapterDescription);
             $data = [
                 "source" => $source,
                 "story" => [
