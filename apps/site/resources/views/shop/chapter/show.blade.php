@@ -793,7 +793,7 @@
 @endsection
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if (config('constants.GENERATING_AUDIO', false))
+    @if (config('constants.PLAYER_AUDIO', false))
     {{--  <script src="http://127.0.0.1:5500/apps/frontend/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>  --}}
     <script src="https://api.truyenfox.net/plugins/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>
     @endif
