@@ -67,12 +67,12 @@ class Kernel extends ConsoleKernel
 		//$schedule->command('leech:uukanshu')->everyFiveMinutes()->withoutOverlapping();
 		//  $schedule->command('leech:trxs')->everyFiveMinutes()->withoutOverlapping();
 		// $schedule->command('leech:xinyushuwu')->everyFiveMinutes()->withoutOverlapping();
-		#$schedule->command(AutoLeechFaloo::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+		$schedule->command(AutoLeechFaloo::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
         // $schedule->command(AutoLeechUukanshu::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        #$schedule->command(AutoLeechQimao::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        // $schedule->command(AutoLeechTongrenquan::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        #$schedule->command(AutoLeech69shuba::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        #$schedule->command(AutoLeechFanqienovel::class)->everyTenMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command(AutoLeechQimao::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command(AutoLeechTongrenquan::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command(AutoLeech69shuba::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command(AutoLeechFanqienovel::class)->everyTenMinutes()->withoutOverlapping()->runInBackground();
         // $schedule->command(AutoLeechXinyushuwu::class)->everyTenMinutes()->withoutOverlapping()->runInBackground();
 		// $schedule->command('inspire')->hourly();
 
