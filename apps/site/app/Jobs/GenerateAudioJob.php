@@ -38,8 +38,8 @@ class GenerateAudioJob implements ShouldQueue
                 'char_set'  =>  'utf-8'
             );
 
-            $storyDescription = str_replace("\n", "<br/>", $storyDescription);
-            $chapterDescription = str_replace("\n", "<br/>", $chapterDescription);
+            $storyDescription = str_replace(["\n", "</br>"], "<br/>", $storyDescription);
+            $chapterDescription = str_replace(["\n", "</br>"], "<br/>", $chapterDescription);
             $data = [
                 "source" => $source,
                 "story" => [
