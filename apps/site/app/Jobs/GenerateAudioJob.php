@@ -58,13 +58,13 @@ class GenerateAudioJob implements ShouldQueue
                     ]
                 ]
             ];
-
-            $client = new Client();
-            $response = $client->post('https://api.truyenfox.net/api/file/generate', [
-                'json' => $data
-            ]);
-
-            $response->getBody()->getContents();
+            if (!empty($chapterDescription) && strlen($chapterDescription) > 10) {
+                $client = new Client();
+                $response = $client->post('https://api.truyenfox.net/api/file/generate', [
+                    'json' => $data
+                ]);
+                // $response->getBody()->getContents();
+            }
         } catch (\Throwable $th) {
         }
 
