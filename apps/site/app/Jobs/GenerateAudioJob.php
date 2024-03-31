@@ -58,7 +58,7 @@ class GenerateAudioJob implements ShouldQueue
                     ]
                 ]
             ];
-            if (!empty($chapterDescription) && strlen($chapterDescription) > 10) {
+            if (!empty($chapterDescription)) {
                 $client = new Client();
                 $response = $client->post('https://api.truyenfox.net/api/file/generate', [
                     'json' => $data
