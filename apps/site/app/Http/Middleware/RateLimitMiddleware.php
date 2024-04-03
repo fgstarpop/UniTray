@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Cache\RateLimiter;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class RateLimitMiddleware extends Middleware
 {
