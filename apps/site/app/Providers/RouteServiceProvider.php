@@ -104,10 +104,11 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('web', function (Request $request) {
             $by = $request->ip();
+            $limit = !empty($request->header('x-from')) && $request->header('x-from') == 'cas' ? 220 : 10;
             if (!empty($request->user()->id)) {
                 $by = $request->user()->id;
             }
-            return Limit::perMinute(10)->by($by);
+            return Limit::perMinute($limit)->by($by);
         });
     }
 }
