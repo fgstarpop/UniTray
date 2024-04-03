@@ -104,10 +104,18 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('web', function (Request $request) {
             $by = $request->ip();
-            $limit = !empty($request->header('x-from')) && $request->header('x-from') == 'cas' ? 220 : 10;
+            $limit = 10; // Default limit
+
+            // Check if the 'x-from' header exists and has the value 'cas'
+            if (!empty($request->header('x-from')) && $request->header('x-from') === 'cas') {
+                $limit = 220; // Set a different limit
+            }
+
+            // If the user is authenticated, use their ID as the limiting key
             if (!empty($request->user()->id)) {
                 $by = $request->user()->id;
             }
+
             return Limit::perMinute($limit)->by($by);
         });
     }
