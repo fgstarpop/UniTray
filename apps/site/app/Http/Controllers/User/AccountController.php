@@ -368,7 +368,7 @@ class AccountController
 
     public function upgradeVip()
     {
-        $vipPrice = 100000;
+        $vipPrice = 2000;
         if(!Auth::guard('web')->check()){
             flash()->error('Bạn cần đăng nhập để sử dụng tính năng này');
             return redirect()->route('login');
