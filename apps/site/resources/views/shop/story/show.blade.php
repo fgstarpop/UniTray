@@ -10,18 +10,17 @@
     {{ setting('store_slogan') }}
 @endsection
 @section('seo')
-    <link rel="canonical" href="{{ request()->fullUrl() }}"/>
-    <meta name="title" content="{{ $story->name }}"/>
-    <meta name="description" content="{{ $story->description }}"/>
-    <meta name="keywords" content="{{ $story->name }}"/>
-    <meta property="og:url" content="{{ request()->fullUrl() }}"/>
-    <meta property="og:title" content="{{ $story->name }}"/>
-    <meta property="og:locale" content= "vi"/>
-    <meta property="og:description" content="{{ $story->description }}"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:image"
-        content="{{ $story->avatar }}"/>
-    <meta property="og:site_name" content="Giáng Thế"/>
+    <link rel="canonical" href="{{ request()->fullUrl() }}" />
+    <meta name="title" content="{{ $story->name }}" />
+    <meta name="description" content="{{ $story->description }}" />
+    <meta name="keywords" content="{{ $story->name }}" />
+    <meta property="og:url" content="{{ request()->fullUrl() }}" />
+    <meta property="og:title" content="{{ $story->name }}" />
+    <meta property="og:locale" content= "vi" />
+    <meta property="og:description" content="{{ $story->description }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="{{ $story->avatar }}" />
+    <meta property="og:site_name" content="Giáng Thế" />
 @stop
 @push('styles')
     <style>
@@ -78,8 +77,8 @@
         }
 
         /* .text-success {
-            color: rgb(193, 186, 186) !important;
-        } */
+                    color: rgb(193, 186, 186) !important;
+                } */
     </style>
 @endpush
 @section('content')
@@ -225,10 +224,10 @@
                 <div class="row bg-white" style="margin: 0">
                     <div class="col-3 p-2 text-center col-lg-2">
                         <span class="new-menu-mobile">
-                        @if ($story->view > 999 && $story->view <= 999999)
-                        {{ intval($story->view / 1000) }}K
-                        @elseif ($story->view > 1000000 && $story->view <= 99999999)
-                        {{ round(($story->view / 1000000),2) }}M
+                            @if ($story->view > 999 && $story->view <= 999999)
+                                {{ intval($story->view / 1000) }}K
+                            @elseif ($story->view > 1000000 && $story->view <= 99999999)
+                                {{ round($story->view / 1000000, 2) }}M
                             @else
                                 {{ $story->view }}
                             @endif
@@ -284,8 +283,8 @@
         <hr style="height: 2px; background: #fff; margin-top: 0px;">
         <div style="font-size: 12px; color: #545454; text-align: center;">
             <h9 class="title">
-            <strong>  --------- Quảng cáo --------- </strong>
-            {{--  @include('shop.layouts.partials.ads')  --}}
+                <strong> --------- Quảng cáo --------- </strong>
+                {{--  @include('shop.layouts.partials.ads')  --}}
         </div>
         <hr style="height: 2px; background: #fff; margin-top: 0px;">
         <hr style="height: 8px; background: #bdbdbd; margin-top: 0px;">
@@ -297,11 +296,8 @@
                 {!! $story->description !!}
             </div>
         </div>
-
-
     @endif
     @if ((new \Jenssegers\Agent\Agent())->isMobile())
-
         <div class="bg-white">
             <div class="p-2" style="color:rgb(25, 203, 25); font-weight:500; font-size: 15px;"
                 data-bs-toggle="modal" data-bs-target="#source-information"> Thông tin truyện gốc</div>
@@ -379,8 +375,7 @@
                 @endif
             </div>
             @if (strpos(url()->current(), 'truyenvipfaloo'))
-                <div class="p-1 bt">Nguồn truyện: <a class="text-success"
-                        style="white-space: normal"
+                <div class="p-1 bt">Nguồn truyện: <a class="text-success" style="white-space: normal"
                         href="{{ $story->origin ?? '#' }}">{{ $story->origin ?? 'Sáng tác' }}</a>
                 </div>
             @endif
@@ -432,7 +427,11 @@
                             @endphp
                             @if ($firstOccurence == 1 || $firstOccurence == 01)
                                 @php
-                                    $linkStoryFirst = @$chapter['embed_link'] ? @$chapter['link_other'] ?? route('chapters.show', [$story->id, 'link' => @$chapter['embed_link']]) : @$chapter['link_other'] ?? route('chapters.show', [$story->id, 'id' => $chapter['id']]);
+                                    $linkStoryFirst = @$chapter['embed_link']
+                                        ? @$chapter['link_other'] ??
+                                            route('chapters.show', [$story->id, 'link' => @$chapter['embed_link']])
+                                        : @$chapter['link_other'] ??
+                                            route('chapters.show', [$story->id, 'id' => $chapter['id']]);
                                 @endphp
                                 <span id="readnowbtn"><a
                                         @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="color: #766767; font-size:16px;" @endif
@@ -443,7 +442,11 @@
                     @endforeach
                     @if ($firstOccurence != 1 && $firstOccurence != 01)
                         @php
-                            $linkStoryFirst = @$story->chapters[0]['embed_link'] ? @$story->chapters[0]['link_other'] ?? route('chapters.show', [$story->id, 'link' => @$story->chapters[0]['embed_link']]) : @$story->chapters[0]['link_other'] ?? route('chapters.show', [$story->id, 'id' => $story->chapters[0]['id']]);
+                            $linkStoryFirst = @$story->chapters[0]['embed_link']
+                                ? @$story->chapters[0]['link_other'] ??
+                                    route('chapters.show', [$story->id, 'link' => @$story->chapters[0]['embed_link']])
+                                : @$story->chapters[0]['link_other'] ??
+                                    route('chapters.show', [$story->id, 'id' => $story->chapters[0]['id']]);
                         @endphp
                         <span id="readnowbtn"><a
                                 @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="color: #766767; font-size:16px;" @endif
@@ -702,12 +705,28 @@
                                             {{-- !\App\Domain\Admin\Models\Order::where(['chapter_id'=>@$chapter['id'],
                                            'user_id' => currentUser()->id
                                            ])->first() && --}}
-                                            @if (!$userOders->firstWhere('chapter_id', $chapter['id']) && !currentUser()->user_vip == 1)
+                                            {{-- kiểm tra xem biến $chapter có id hay không --}}
+
+                                            @if (!$userOders->firstWhere('chapter_id', @$chapter['id']) && (!currentUser()->user_vip == 1 || !$chapter['buyed']))
                                                 <div class="col-9"
-                                                    style="display: flex; margin-bottom: 10px;">
+                                                    style="display: flex; margin-bottom: 10px;@if (@$chapter['buyed']) color:#0bb948 @else color:red @endif">
                                                     @php
-                                                        $price = number_format($chapter['price']);
-                                                        $dataChapters = $chapter['id'] . ',' . $story->id . ',' . $price . ',' . $story->mod_id;
+                                                        if ($chapter['buyed']) {
+                                                            $price = number_format(config('vipfaloo.pricewordolduser'));
+                                                        } else {
+                                                            $price = number_format(FalooPrice($chapter));
+                                                        }
+                                                        // dd( $price);
+                                                        $dataChapters =
+                                                            @$chapter['id'] .
+                                                            ',' .
+                                                            $story->id .
+                                                            ',' .
+                                                            $price .
+                                                            ',' .
+                                                            $story->mod_id .
+                                                            ',' .
+                                                            @$chapter['chapid'];
                                                     @endphp
                                                     <input type="checkbox" id="chap-{{ $index }}"
                                                         name="chap-{{ $index }}"
@@ -721,11 +740,17 @@
                                                         for="chap-{{ $index }}">
                                                         {{ $chapter['name'] }}</label>
                                                 </div>
-                                                <div class="col-3" style="margin-bottom: 10px;">
+                                                <div class="col-3"
+                                                    style="margin-bottom: 10px;@if (@$chapter['buyed']) color:#0bb948 @else color:red @endif">
                                                     @php
-                                                        $price = number_format($chapter['price']);
+                                                        if (@$chapter['buyed']) {
+                                                            $price = number_format(config('vipfaloo.pricewordolduser'));
+                                                        } else {
+                                                            $price = number_format(FalooPrice($chapter));
+                                                        }
                                                     @endphp
-                                                    <label for="chap-{{ $index }}"> 150 vàng</label>
+                                                    <label for="chap-{{ $index }}">
+                                                        {{ $price }} vàng</label>
                                                 </div>
                                             @endif
                                         @endif
@@ -763,32 +788,32 @@
             </div>
             <!--
 <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h6 class="modal-title">Thưởng truyện</h6>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form method="post" action="" style="text-align:left">
-                @csrf
-                <div class="error text-danger"></div>
-                <p>Hôm nay bạn có 1 điểm thưởng miễn phí</p>
-                <p>Số vàng bạn hiện có</p>
-                <div class="position-relative">
-                    <input type="text" value="{{ number_format((int) $wallet->gold) }}" readonly
-                           class="wallet form-control">
-                </div>
-                <p>Số điểm thưởng muốn tặng?</p>
-                <div class="position-relative">
-                    <input type="text" value="1" readonly class="form-control">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-gt gifts">Tặng ngay</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="modal-content">
+<div class="modal-header">
+<h6 class="modal-title">Thưởng truyện</h6>
+<button type="button" class="btn-close" data-bs-dismiss="modal"
+    aria-label="Close"></button>
+</div>
+<div class="modal-body">
+<form method="post" action="" style="text-align:left">
+@csrf
+<div class="error text-danger"></div>
+<p>Hôm nay bạn có 1 điểm thưởng miễn phí</p>
+<p>Số vàng bạn hiện có</p>
+<div class="position-relative">
+    <input type="text" value="{{ number_format((int) $wallet->gold) }}" readonly
+           class="wallet form-control">
+</div>
+<p>Số điểm thưởng muốn tặng?</p>
+<div class="position-relative">
+    <input type="text" value="1" readonly class="form-control">
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-gt gifts">Tặng ngay</button>
+</div>
+</form>
+</div>
+</div>
 </div>
 </div>
 -->
@@ -837,7 +862,7 @@
     @endif
 
     @if ((new \Jenssegers\Agent\Agent())->isMobile())
-    <hr style="height: 8px; background: #bdbdbd; margin-top: 0px;">
+        <hr style="height: 8px; background: #bdbdbd; margin-top: 0px;">
         <div class="row mb-2">
             <div class="col-7 pt-3" style="margin-left: 5px;font-weight:bold; font-size: 16px;">
                 Danh sách chương
@@ -955,17 +980,28 @@
                                         }
                                     }
                                 }
-                                $linkStory = @$chapter['embed_link'] ? @$chapter['link_other'] ?? route('chapters.show', [$story->id, 'link' => @$chapter['embed_link']]) : @$chapter['link_other'] ?? route('chapters.show', [$story->id, 'id' => $chapter['id']]);
+                                $linkStory = @$chapter['id']
+                                    ?  @$chapter['link_other'] ??
+                                        route('chapters.show', [$story->id, 'id' => $chapter['id']])
+                                    :@$chapter['link_other'] ??
+                                        route('chapters.show', [$story->id, 'link' => @$chapter['embed_link']]);
+
+
                             @endphp
                             @if (!empty(currentUser()->id))
                                 @if (@$chapter['is_vip'] == 1)
-                                    {{-- \App\Domain\Admin\Models\Order::where(['chapter_id'=>@$chapter['id'],
-                                                'user_id' => currentUser()->id
-                                                ])->first() ||  --}}
 
-                                    @if ($userOders->firstWhere('chapter_id', $chapter['id']) || $check || currentUser()->user_vip == 1)
+                                    @php
+                                        if (@$chapter['buyed']) {
+                                            $price = number_format(config('vipfaloo.pricewordolduser'));
+                                        } else {
+                                            $price = number_format(FalooPrice($chapter));
+                                        }
+                                    @endphp
+                                    @if ($userOders->firstWhere('chapter_id', @$chapter['id']) || $check || (currentUser()->user_vip == 1 && @$chapter['buyed']))
                                         <div class="col-md-4" style="width: 100% !important">
-                                            <div class="tt-chapter {{ @$link }}"                                          @if (@$link == 'chaplastreaded') id="last_readed" @endif>
+                                            <div class="tt-chapter {{ @$link }}"
+                                                @if (@$link == 'chaplastreaded') id="last_readed" @endif>
                                                 <a href="{{ $linkStory }}" class="text-success"
                                                     style="white-space: normal"
                                                     title="{{ $chapter['name'] }}">
@@ -982,12 +1018,12 @@
                                                     data-chapter="{{ @$chapter['id'] }}"
                                                     data-chapter-name="{{ @$chapter['name'] }}"
                                                     data-author="{{ $story->mod_id }}"
-                                                    data-price="{{ number_format(@$chapter['price']) }}"
+                                                    data-chapid="{{ @$chapter['chapid'] }}"
+                                                    data-price="{{ number_format($price) }}"
                                                     class="text-success order white-space: normal"
                                                     title="{{ $chapter['name'] }}"
-                                                    style="color: red !important"
-                                                    >
-                                                    <i class="fa fa-lock"></i> {{ $chapter['name'] }} 12312123123123
+                                                    style="color: red !important">
+                                                    <i class="fa fa-lock"></i> {{ $chapter['name'] }}
                                                 </a>
                                             </div>
                                         </div>
@@ -997,8 +1033,8 @@
                                         <div class="tt-chapter {{ @$link }}"
                                             @if (@$link == 'chaplastreaded') id="last_readed" @endif>
                                             <a href="{{ $linkStory }}" class="text-success"
-                                                style="white-space: normal"
-                                                title="{{ $chapter['name'] }}"> {{ @$chapter['name'] }}
+                                                style="white-space: normal" title="{{ $chapter['name'] }}">
+                                                {{ @$chapter['name'] }}
                                             </a>
                                         </div>
                                     </div>
@@ -1009,9 +1045,7 @@
                                         <div class="tt-chapter {{ @$link }} "
                                             @if (@$link == 'chaplastreaded') id="last_readed" @endif>
                                             <a href="{{ $linkStory }}" class="text-success"
-                                                style="white-space: normal"
-                                                title="{{ $chapter['name'] }}"
-                                                >
+                                                style="white-space: normal" title="{{ $chapter['name'] }}">
                                                 {{ $chapter['name'] }}
                                             </a>
                                         </div>
@@ -1019,10 +1053,8 @@
                                 @else
                                     <div class="col-md-4" style="width: 100% !important">
                                         <div class="tt-chapter">
-                                            <a href="{{ @$linkStory }}"
-                                                title="{{ $chapter['name'] }}"
-                                                style="color: red !important"
-                                                >
+                                            <a href="{{ @$linkStory }}" title="{{ $chapter['name'] }}"
+                                                style="color: red !important">
                                                 <i class="fa fa-lock"></i> {{ $chapter['name'] }}
                                             </a>
                                         </div>
@@ -1053,7 +1085,7 @@
                     </div>
                 </div>
                 <span>Chương mới
-                        :{{ \Carbon\Carbon::parse($story->chapter_updated)->diffForHumans(\Carbon\Carbon::now()) }}</span>
+                    :{{ \Carbon\Carbon::parse($story->chapter_updated)->diffForHumans(\Carbon\Carbon::now()) }}</span>
 
             </div>
         </div>
@@ -1163,9 +1195,10 @@
             var chapter = $(this).attr('data-chapter-name');
             var author = $(this).attr('data-author');
             var price = $(this).attr('data-price');
+            var chapid = $(this).attr('data-chapid');
             Swal.fire({
                 title: 'Bạn muốn mua chương này ?',
-                text: `Chương ${chapter} giá 150 vàng`,
+                text: `Chương ${chapter} giá ${price} vàng`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -1183,7 +1216,8 @@
                             data: {
                                 chapter: chapters,
                                 story: story,
-                                author: author
+                                author: author,
+                                chapid: chapid
                             },
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
@@ -1211,21 +1245,26 @@
             })
         })
         var listBuy = [];
+        var tongTien = 0;
         $('.order-many').on('change', function() {
+
             if (this.checked) {
                 var buyCheck = this.value.split(",");
+                tongTien += parseInt(buyCheck[2]);
                 listBuy.push(buyCheck);
             } else {
                 var buyCheck = this.value.split(",");
                 for (var i = listBuy.length - 1; i >= 0; i--) {
                     if (listBuy[i][0] == buyCheck[0]) {
+                        tongTien -= parseInt(listBuy[i][2]);
                         listBuy.splice(i, 1);
+                        break;
                     }
                 }
             }
             window.listBuy = listBuy;
             var countChuong = listBuy.length;
-            var tongTien = 150 * countChuong
+
             $('#show-chuong-vang').html(`${countChuong} chương - ${tongTien} vàng`)
         })
 
@@ -1248,7 +1287,6 @@
 
         $('.buy-chaps-button').on('click', function() {
             var countChuong = listBuy.length;
-            var tongTien = 150 * countChuong;
             var tienTrongVi = $(this).attr('data-wallet');
             tiTrongVi = parseInt(tienTrongVi);
             if (tiTrongVi < tongTien) {
@@ -1288,7 +1326,7 @@
                                         })
                                     }
                                     window.listBuy = [];
-                                    location.reload();
+                                    // location.reload();
                                 }
                             })
                         }

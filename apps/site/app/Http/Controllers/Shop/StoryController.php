@@ -66,6 +66,7 @@ class StoryController extends Controller
             $chapLastReaded = !empty($readeds) ? Chapter::whereIn('id', $readeds)->orderBy('order', 'DESC')->first() : null;
         }
         $story->chapters = $story->chapters_json ? json_decode($story->chapters_json, 1) : $story->chapters;
+
         // if(strcmp($story->origin,'uukanshu') == 1)
         //     $story->chapters =  array_reverse($story->chapters);
         $story->chapters_count = $story->chapters ? count($story->chapters) : 0;
@@ -79,27 +80,27 @@ class StoryController extends Controller
     public function addBrAfterSpecialChars($text) {
         $specialChars = array("】", "》", ".");
         $result = '';
-    
+
         $textLength = mb_strlen($text, 'UTF-8');
-    
+
         for ($i = 0; $i < $textLength; $i++) {
             $char = mb_substr($text, $i, 1, 'UTF-8');
             $result .= $char;
-    
+
             if (in_array($char, $specialChars) && $i > 0) {
                 $prevChar = mb_substr($text, $i - 1, 1, 'UTF-8');
                 $nextChar = mb_substr($text, $i + 1, 1, 'UTF-8');
-    
+
                 if (!in_array($prevChar, $specialChars) || !in_array($nextChar, $specialChars)) {
                     $result .= "<br><br>";
                 }
             }
         }
-    
+
         return $result;
     }
-    
-    
+
+
 
     public function follow($story)
     {
@@ -185,6 +186,10 @@ class StoryController extends Controller
         if ($url) {
             if (empty(currentUser())) {
                 return response()->redirectTo('/');
+            }
+            //kiểm tra xem trong link có chưa faloo.com/ hay không
+            if(strpos($url, 'faloo.com/')) {
+                return FalooSave($url, currentUser());
             }
             if (strpos($url, 'xinyushuwu') || strpos($url, 'trxs')) {
                 $bookId = '';
@@ -294,7 +299,7 @@ class StoryController extends Controller
         $stories = $this->filters($request);
 
         if(isset($request->source)) {
-            
+
             $source = $request->source ?? null;
             if($source) {
                 $stories = $stories->whereIn('host', $source);
@@ -473,11 +478,15 @@ class StoryController extends Controller
             $story = Story::findOrFail($request->story_id);
             $timenow = Carbon::now();
             $time_update = Carbon::parse($story->chapter_updated)->addMinutes(5);
-            if ($timenow < $time_update) {
-                return response()->json([
-                    'code' => 200,
-                    'message' => 'Vừa mới cập nhật, không thể cập nhật thêm!'
-                ]);
+            // if ($timenow < $time_update) {
+            //     return response()->json([
+            //         'code' => 200,
+            //         'message' => 'Vừa mới cập nhật, không thể cập nhật thêm!'
+            //     ]);
+            // }
+            //kiểm tra xem có phải origin là faloo không
+            if(strpos($story->origin, 'faloo.com')) {
+                return FalooUPdateList($story);
             }
             if ($story->type == 1 && $story->origin) {
                 $url = $story->origin;

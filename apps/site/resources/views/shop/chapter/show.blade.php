@@ -16,11 +16,11 @@
     <meta name="keywords" content="{{ $story->name }}">
     <meta property="og:url" content="{{ request()->fullUrl() }}">
     <meta property="og:title" content="{{ $chapter->name }}">
-    <meta property="og:locale" content= "vi"/>
+    <meta property="og:locale" content= "vi" />
     <meta property="og:description" content="{{ $chapter->content }}">
-    <meta property="og:keywords" content= "{{ $story->name }}"/>
+    <meta property="og:keywords" content= "{{ $story->name }}" />
     <meta property="og:type" content="article">
-    <meta property="og:image" content="{{ $story->avatar }}"/>
+    <meta property="og:image" content="{{ $story->avatar }}" />
     <meta property="og:site_name" content="giangthe.com">
 @stop
 @push('styles')
@@ -68,8 +68,9 @@
                 color: #191919 !important;
             }
         </style>
-        <section class="container mt-4 content main-list contentbox notSelectable" id="full" style="margin-bottom: 50px; background: rgba(234, 228, 211, 0.7);"
-            oncopy="return false" oncut="return false" onpaste="return false">
+        <section class="container mt-4 content main-list contentbox notSelectable" id="full"
+            style="margin-bottom: 50px; background: rgba(234, 228, 211, 0.7);" oncopy="return false" oncut="return false"
+            onpaste="return false">
             <div id="inner">
                 {{--        <div class="container bg-light tm-reader-top-br" id="breadcum" style="font-size: 20px;color: gray;padding: 6px 16px;">{{ $story->name}} --}}
                 {{--            / {{ $chapter->name}} --}}
@@ -79,26 +80,29 @@
                     style="font-size: 24px;font-weight: 700;color: gray;display: block;text-align: center;">{{ $story->name }}
                 </a>
                 <center class="text-secondary">{{ $chapter->name }}</center>
-                @if (
-                    (currentUser() &&
+                @if (currentUser() &&
                         \App\Domain\Admin\Models\Order::where([
                             'chapter_id' => @$chapter->id,
                             'story_id' => $story->id,
-                        ])->first()))
-                @php
-                $userBuy = \App\Domain\Admin\Models\Order::firstWhere('chapter_id',  @$chapter->id)->user_id;
-                $userBuy = \App\User::where('id',$userBuy)->first();
-                $userBuy = $userBuy->name
-                @endphp
-                <center class="text-secondary"> Người mua: {{ $userBuy }}</center>
+                        ])->first())
+                    @php
+                        $userBuy = \App\Domain\Admin\Models\Order::firstWhere('chapter_id', @$chapter->id)->user_id;
+                        $userBuy = \App\User::where('id', $userBuy)->first();
+                        $userBuy = $userBuy->name;
+                    @endphp
+                    <center class="text-secondary"> Người mua: {{ $userBuy }}</center>
                 @endif
                 <br>
                 @php
                     if ($chapterNext) {
-                        $nextChapter = @$chapterNext['embed_link'] ? route('chapters.show', [$story->id, 'link' => $chapterNext['embed_link']]) : route('chapters.show', [$story->id, 'id' => $chapterNext['id']]);
+                        $nextChapter = @$chapterNext['embed_link']
+                            ? route('chapters.show', [$story->id, 'link' => $chapterNext['embed_link']])
+                            : route('chapters.show', [$story->id, 'id' => $chapterNext['id']]);
                     }
                     if ($chapterPre) {
-                        $preChapter = @$chapterPre['embed_link'] ? route('chapters.show', [$story->id, 'link' => $chapterPre['embed_link']]) : route('chapters.show', [$story->id, 'id' => $chapterPre['id']]);
+                        $preChapter = @$chapterPre['embed_link']
+                            ? route('chapters.show', [$story->id, 'link' => $chapterPre['embed_link']])
+                            : route('chapters.show', [$story->id, 'id' => $chapterPre['id']]);
                     }
                 @endphp
                 <div class="tm-reader-top-nav" style="font-size: 16px;padding: 6px 0;font-weight: 500">
@@ -113,7 +117,7 @@
                                 @if (
                                     (currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
-                                            'chapter_id' => @$chapterPre['id']
+                                            'chapter_id' => @$chapterPre['id'],
                                         ])->first()) ||
                                         $check ||
                                         currentUser()->user_vip == 1)
@@ -148,7 +152,7 @@
                                 @if (
                                     (currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
-                                            'chapter_id' => @$chapterNext['id']
+                                            'chapter_id' => @$chapterNext['id'],
                                         ])->first() &&
                                         currentUser()->id) ||
                                         $check ||
@@ -192,7 +196,10 @@
                                                             if (!$chapterLastReaded) {
                                                                 $readed = false;
                                                             }
-                                                            if ($chapterLastReaded != '' && $chapterLastReaded == $chap['order']) {
+                                                            if (
+                                                                $chapterLastReaded != '' &&
+                                                                $chapterLastReaded == $chap['order']
+                                                            ) {
                                                                 $link = 'chaplastreaded';
                                                                 $readed = false;
                                                             } elseif ($readed) {
@@ -209,7 +216,17 @@
                                                                 $link = 'chapreaded';
                                                             }
                                                         }
-                                                        $linkStory = @$chap['embed_link'] ? @$chap['link_other'] ?? route('chapters.show', [$story->id, 'link' => @$chap['embed_link']]) : @$chap['link_other'] ?? route('chapters.show', [$story->id, 'id' => $chap['id']]);
+                                                        $linkStory = @$chap['embed_link']
+                                                            ? @$chap['link_other'] ??
+                                                                route('chapters.show', [
+                                                                    $story->id,
+                                                                    'link' => @$chap['embed_link'],
+                                                                ])
+                                                            : @$chap['link_other'] ??
+                                                                route('chapters.show', [
+                                                                    $story->id,
+                                                                    'id' => $chap['id'],
+                                                                ]);
                                                     @endphp
                                                     <div class="listss {{ $link }}">
                                                         @if (currentUser())
@@ -254,13 +271,13 @@
                 </div>
 
                 <div id="content-container" class="container" style="min-height: 300px;padding: 0px;">
-                    <div class="contentbox"
-                        style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
-                        <div class="p-2"  id="maincontent" style="line-height:1.6; background-color: rgba(234, 228, 211, 0.7);">
+                    <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
+                        <div class="p-2" id="maincontent"
+                            style="line-height:1.6; background-color: rgba(234, 228, 211, 0.7);">
                             @if (
                                 (currentUser() &&
                                     \App\Domain\Admin\Models\Order::where([
-                                        'chapter_id' => @$chapter->id
+                                        'chapter_id' => @$chapter->id,
                                     ])->first() &&
                                     $chapter->is_vip) ||
                                     !$chapter->is_vip ||
@@ -393,7 +410,8 @@
             }
         </style>
         <section class="container content main-list contentbox notSelectable reader-book" id="full"
-            style="margin-bottom: 50px; background-color: rgb(223 215 194 / 70%);" oncopy="return false" oncut="return false" onpaste="return false">
+            style="margin-bottom: 50px; background-color: rgb(223 215 194 / 70%);" oncopy="return false"
+            oncut="return false" onpaste="return false">
             <div id="inner">
                 <br class="tm-reader-top-br">
                 <div class="top-link px-3 mb-2">
@@ -404,22 +422,26 @@
                     </a>
                 </div>
                 <br>
-                @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-            <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-        <div style="font-size: 12px; color: #545454; text-align: center;">
-            <h9 class="title">
-            <strong>  --------- Quảng cáo --------- </strong>
-            {{--  @include('shop.layouts.partials.ads')  --}}
-        </div>
-        <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-        @endif
+                @if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
+                    <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+                    <div style="font-size: 12px; color: #545454; text-align: center;">
+                        <h9 class="title">
+                            <strong> --------- Quảng cáo --------- </strong>
+                            {{--  @include('shop.layouts.partials.ads')  --}}
+                    </div>
+                    <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+                @endif
 
                 @php
                     if ($chapterNext) {
-                        $nextChapter = @$chapterNext['embed_link'] ? route('chapters.show', [$story->id, 'link' => $chapterNext['embed_link']]) : route('chapters.show', [$story->id, 'id' => $chapterNext['id']]);
+                        $nextChapter = @$chapterNext['id']
+                            ? route('chapters.show', [$story->id, 'id' => $chapterNext['id']])
+                            : route('chapters.show', [$story->id, 'link' => $chapterNext['embed_link']]);
                     }
                     if ($chapterPre) {
-                        $preChapter = @$chapterPre['embed_link'] ? route('chapters.show', [$story->id, 'link' => $chapterPre['embed_link']]) : route('chapters.show', [$story->id, 'id' => $chapterPre['id']]);
+                        $preChapter = @$chapterPre['id']
+                            ? route('chapters.show', [$story->id, 'id' => $chapterPre['id']])
+                            : route('chapters.show', [$story->id, 'link' => $chapterPre['embed_link']]);
                     }
                 @endphp
                 <div class="tm-reader-top-nav" style="font-size: 16px;padding: 6px 0;font-weight: 500">
@@ -432,11 +454,13 @@
                                     trước</a>
                             @else
                                 @if (
-                                    (currentUser() &&
+                                    ((currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
                                             'chapter_id' => @$chapterPre['id'],
                                         ])->first()) ||
-                                        $check)
+                                        $check) &&
+                                        $chapterPre['buyed']
+                                )
                                     <a href="{{ $preChapter }}" id="prevchap" class="text-dark"
                                         title="{{ $chapterPre['name'] }}">
                                         <span class="btn btn-light rounded-circle btn-redirect"><i
@@ -445,10 +469,10 @@
                                     </a>
                                 @else
                                     <a href="javascript:;" data-url="{{ $preChapter }}"
-                                        data-story="{{ $story->id }}" data-chapter="{{ $chapterPre['id'] }}"
+                                        data-story="{{ $story->id }}" data-chapter="{{ @$chapterPre['id'] }}"
                                         data-chapter-name="{{ $chapterPre['name'] }}"
-                                        data-price="{{ number_format($chapterPre['price']) }}" class="text-primary order"
-                                        title="{{ $chapterPre['name'] }}" id="prevchap">
+                                        data-price="{{ number_format(FalooPrice($chapterPre)) }}"
+                                        class="text-primary order" title="{{ $chapterPre['name'] }}" id="prevchap">
                                         <span class="btn btn-light rounded-circle btn-redirect"><i
                                                 class="fa fa-arrow-left"></i></span> Chương trước <i
                                             class="fa fa-lock"></i>
@@ -478,12 +502,14 @@
                                             class="fa fa-arrow-right"></i></span></a>
                             @else
                                 @if (
-                                    (currentUser() &&
+                                    ((currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
-                                            'chapter_id' => @$chapterNext['id']
+                                            'chapter_id' => @$chapterNext['id'],
                                         ])->first() &&
                                         currentUser()->id) ||
-                                        $check)
+                                        $check) &&
+                                        $chapterNext['buyed']
+                                )
                                     <a href="{{ $nextChapter }}" id="nextchap" class="text-dark"
                                         title="{{ $chapterNext['name'] }}">
                                         Chương sau <span class="btn btn-light rounded-circle btn-redirect"><i
@@ -491,9 +517,9 @@
                                     </a>
                                 @else
                                     <a href="javascript:;" data-url="{{ $nextChapter }}"
-                                        data-story="{{ $story->id }}" data-chapter="{{ $chapterNext['id'] }}"
+                                        data-story="{{ $story->id }}" data-chapter="{{ @$chapterNext['id'] }}"
                                         data-chapter-name="{{ $chapterNext['name'] }}"
-                                        data-price="{{ number_format($chapterNext['price']) }}"
+                                        data-price="{{ number_format(FalooPrice($chapterNext)) }}"
                                         class="text-primary order" title="{{ $chapterNext['name'] }}" id="nextchap">
                                         <i class="fa fa-lock"></i> Chương sau <span
                                             class="btn btn-light rounded-circle btn-redirect"><i
@@ -527,7 +553,10 @@
                                                             if (!$chapterLastReaded) {
                                                                 $readed = false;
                                                             }
-                                                            if ($chapterLastReaded != '' && $chapterLastReaded == $chap['order']) {
+                                                            if (
+                                                                $chapterLastReaded != '' &&
+                                                                $chapterLastReaded == $chap['order']
+                                                            ) {
                                                                 $link = 'chaplastreaded';
                                                                 $readed = false;
                                                             } elseif ($readed) {
@@ -544,15 +573,30 @@
                                                                 $link = 'chapreaded';
                                                             }
                                                         }
-                                                        if (!empty(app('request')->input('id')) && !empty($chap['id']) && app('request')->input('id') == $chap['id']) {
+                                                        if (
+                                                            !empty(app('request')->input('id')) &&
+                                                            !empty($chap['id']) &&
+                                                            app('request')->input('id') == $chap['id']
+                                                        ) {
                                                             $link = 'chapreading';
                                                         } elseif (!empty(app('request')->input('link'))) {
-                                                            $chapterLink = $chap['link_other'] ?? ($chap['embed_link'] ?? '');
+                                                            $chapterLink =
+                                                                $chap['link_other'] ?? ($chap['embed_link'] ?? '');
                                                             if (app('request')->input('link') == $chapterLink) {
                                                                 $link = 'chapreading';
                                                             }
                                                         }
-                                                        $linkStory = @$chap['embed_link'] ? @$chap['link_other'] ?? route('chapters.show', [$story->id, 'link' => @$chap['embed_link']]) : @$chap['link_other'] ?? route('chapters.show', [$story->id, 'id' => $chap['id']]);
+                                                        $linkStory = @$chap['embed_link']
+                                                            ? @$chap['link_other'] ??
+                                                                route('chapters.show', [
+                                                                    $story->id,
+                                                                    'link' => @$chap['embed_link'],
+                                                                ])
+                                                            : @$chap['link_other'] ??
+                                                                route('chapters.show', [
+                                                                    $story->id,
+                                                                    'id' => $chap['id'],
+                                                                ]);
                                                     @endphp
                                                     <div class="listss {{ $link }}">
 
@@ -565,7 +609,8 @@
                                                                         <b>VIP</b> {{ Str::limit($chap['name'], 100) }}
                                                                     </a>
                                                                 @else
-                                                                    <a href="javascript:;" data-url="{{ $linkStory }}"
+                                                                    <a href="javascript:;"
+                                                                        data-url="{{ $linkStory }}"
                                                                         data-story="{{ $story->id }}"
                                                                         data-chapter="{{ @$chap['id'] }}"
                                                                         data-chapter-name="{{ @$chap['name'] }}"
@@ -600,27 +645,27 @@
                     style="border-top: 1px dashed #eee;border-bottom: 1px dashed #eee;min-height: 300px;padding: 0px;">
                     <div class="chapter-info">
                         <p class="text-secondary">{{ $chapter->name }}</p>
-                        @if (
-                                (currentUser() &&
-                                    \App\Domain\Admin\Models\Order::where([
-                                        'chapter_id' => @$chapter->id,
-                                        'story_id' => $story->id
-                                    ])->first()))
-                        @php
-                        $userBuy = \App\Domain\Admin\Models\Order::firstWhere('chapter_id',  @$chapter->id)->user_id;
-                        $userBuy = \App\User::where('id',$userBuy)->first();
-                        $userBuy = $userBuy->name
-                        @endphp
-                              <p class="text-secondary"> Người mua: {{ $userBuy }}</p>
-                            @endif
+                        @if (currentUser() &&
+                                \App\Domain\Admin\Models\Order::where([
+                                    'chapter_id' => @$chapter->id,
+                                    'story_id' => $story->id,
+                                ])->first())
+                            @php
+                                $userBuy = \App\Domain\Admin\Models\Order::firstWhere('chapter_id', @$chapter['id'])
+                                    ->user_id;
+                                $userBuy = \App\User::where('id', $userBuy)->first();
+                                $userBuy = $userBuy->name;
+                            @endphp
+                            <p class="text-secondary"> Người mua: {{ $userBuy }}</p>
+                        @endif
                     </div>
-                    <div class="contentbox"
-                        style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
-                        <div class="" id="maincontent" style="line-height:1.6; background-color: rgba(234, 228, 211, 0.7);">
+                    <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
+                        <div class="" id="maincontent"
+                            style="line-height:1.6; background-color: rgba(234, 228, 211, 0.7);">
                             @if (
                                 (currentUser() &&
                                     \App\Domain\Admin\Models\Order::where([
-                                        'chapter_id' => @$chapter->id
+                                        'chapter_id' => @$chapter->id,
                                     ])->first() &&
                                     $chapter->is_vip) ||
                                     !$chapter->is_vip ||
@@ -641,12 +686,14 @@
                                             class="fa fa-arrow-left"></i></span> Chương trước</a>
                             @else
                                 @if (
-                                    (currentUser() &&
+                                    ((currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
-                                            'chapter_id' => $chapterPre['id']
+                                            'chapter_id' => @$chapterPre['id'],
                                         ])->first() &&
                                         currentUser()->id) ||
-                                        $check)
+                                        $check) &&
+                                        $chapterPre['buyed']
+                                )
                                     <a href="{{ $preChapter }}" class="text-dark"
                                         title="{{ $chapterPre['name'] }}">
                                         <span class="btn btn-light rounded-circle btn-redirect"><i
@@ -655,10 +702,10 @@
                                     </a>
                                 @else
                                     <a href="javascript:;" data-url="{{ $preChapter }}"
-                                        data-story="{{ $story->id }}" data-chapter="{{ $chapterPre['id'] }}"
+                                        data-story="{{ $story->id }}" data-chapter="{{ @$chapterPre['id'] }}"
                                         data-chapter-name="{{ $chapterPre['name'] }}"
-                                        data-price="{{ number_format($chapterPre['price']) }}" class="text-dark order"
-                                        title="{{ $chapter['name'] }}">
+                                        data-price="{{ number_format(FalooPrice($chapterPre)) }}"
+                                        class="text-dark order" title="{{ $chapter['name'] }}">
                                         <span class="btn btn-light rounded-circle btn-redirect"><i
                                                 class="fa fa-arrow-left"></i></span> Chương trước <i
                                             class="fa fa-lock"></i>
@@ -688,12 +735,14 @@
                                             class="fa fa-arrow-right"></i></span></a>
                             @else
                                 @if (
-                                    (currentUser() &&
+                                    ((currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
-                                            'chapter_id' => @$chapterNext['id']
+                                            'chapter_id' => @$chapterNext['id'],
                                         ])->first() &&
                                         currentUser()->id) ||
-                                        $check)
+                                        $check) &&
+                                        $chapterNext['buyed']
+                                )
                                     <a href="{{ $nextChapter }}" class="text-dark"
                                         title="{{ $chapterNext['name'] }}">
                                         Chương sau <span class="btn btn-light rounded-circle btn-redirect"><i
@@ -701,10 +750,10 @@
                                     </a>
                                 @else
                                     <a href="javascript:;" data-url="{{ $nextChapter }}"
-                                        data-story="{{ $story->id }}" data-chapter="{{ $chapterNext['id'] }}"
+                                        data-story="{{ $story->id }}" data-chapter="{{ @$chapterNext['id'] }}"
                                         data-chapter-name="{{ $chapterNext['name'] }}"
-                                        data-price="{{ number_format($chapterNext['price']) }}" class="text-dark order"
-                                        title="{{ $chapter['name'] }}">
+                                        data-price="{{ number_format(FalooPrice($chapterNext)) }}"
+                                        class="text-dark order" title="{{ $chapter['name'] }}">
                                         <i class="fa fa-lock"></i> Chương sau <span
                                             class="btn btn-light rounded-circle btn-redirect"><i
                                                 class="fa fa-arrow-right"></i></span>
@@ -754,7 +803,7 @@
                         @endforeach
                     </div>
                 </div>
-                </div>
+            </div>
 
 
 
@@ -785,17 +834,17 @@
         @endif
     @endif
     {{--  Audio  --}}
-      <div id="audio_platform">
+    <div id="audio_platform">
         <input type="hidden" value="{{ !empty($story->id) ? $story->id : 0 }}" id="_storyID" />
         <input type="hidden" value="{{ !empty($chapter->id) ? $chapter->id : 0 }}" id="_chapterID" />
-      </div>
+    </div>
     {{--  End Audio  --}}
 @endsection
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (config('constants.PLAYER_AUDIO', false))
-    {{--  <script src="http://127.0.0.1:5500/apps/frontend/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>  --}}
-    <script src="https://api.truyenfox.net/plugins/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>
+        {{--  <script src="http://127.0.0.1:5500/apps/frontend/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>  --}}
+        <script src="https://api.truyenfox.net/plugins/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>
     @endif
     <script>
         $.fn.extend({

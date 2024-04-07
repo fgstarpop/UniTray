@@ -51,6 +51,9 @@ class Story extends Model implements HasMedia
     //guard column
     protected $guarded = [];
     protected $connection = 'dbnovel';
+    // protected $casts = [
+    //     "chapters_json" => "array",
+    // ];
     const ACTIVE = 1;
     const INACTIVE = 0;
     const CONTINUE = 3;
