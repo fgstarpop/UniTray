@@ -522,7 +522,7 @@
                 @if (!empty(currentUser()->id))
                     <div class="col-3 col-lg-3 mt-4" data-bs-toggle="modal" data-bs-target="#buy_chapters">
                         <span><i class="fa fa-shopping-cart" aria-hidden="true"></i><br><span
-                                style="font-size:16px;" id="buy_chapters_button">Mua nhiều</span> </span>
+                                style="font-size:16px;" id="buy_chapters_button">Mua chương VIP</span> </span>
                     </div>
                 @endif
             @endif
