@@ -2,19 +2,22 @@
 
 use Carbon\Carbon;
 // use Goutte\Client;
+use GuzzleHttp\Client;
 use Illuminate\Support\Str;
+use Illuminate\Http\Client\Pool;
 use App\Domain\Story\Models\Story;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Domain\Admin\Models\Donate;
 use App\Domain\Admin\Models\Wallet;
 use App\Support\ValuesStore\Setting;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use App\Domain\Chapter\Models\Chapter;
 use App\Domain\Category\Models\Category;
 use Symfony\Component\DomCrawler\Crawler;
 use Stichoza\GoogleTranslate\GoogleTranslate;
-use GuzzleHttp\Client;
 
 if (!function_exists('array_reset_index')) {
     /**
@@ -73,8 +76,8 @@ if (!function_exists('randCode')) {
     }
 }
 
-if (!function_exists('formatDatetimetoGmt')){
-    function formatDatetimetoGmt($date,$format = 'Y-m-d H:i:s'):string
+if (!function_exists('formatDatetimetoGmt')) {
+    function formatDatetimetoGmt($date, $format = 'Y-m-d H:i:s'): string
     {
         $tz1 = 'GMT';
         $tz2 = 'Asia/Ho_Chi_Minh'; // GMT +7
@@ -83,7 +86,6 @@ if (!function_exists('formatDatetimetoGmt')){
         $d->setTimeZone(new DateTimeZone($tz2));
 
         return $d->format($format);
-
     }
 }
 
@@ -189,7 +191,7 @@ if (!function_exists('logActivity')) {
 if (!function_exists('site_get_mail_template')) {
     function site_get_mail_template($slug)
     {
-        $option = \DB::table('mail_settings')
+        $option = DB::table('mail_settings')
             ->where([
                 ['slug', $slug],
             ])
@@ -369,7 +371,7 @@ if (!function_exists('upload_image')) {
         if ($folder)
             $path = public_path() . '/uploads/' . $folder . '/';
 
-        if (!\File::exists($path))
+        if (!File::exists($path))
             mkdir($path, 0777, true);
 
         // di chuyen file vao thu muc uploads
@@ -451,9 +453,9 @@ function embedStoryUukanshu($url, $base_url, $user, $story = false, $returnBool 
     $host = $data['host'];
     if (!empty($breadcrums)) {
         foreach ($breadcrums as $key => $breadcrum) {
-//            if ($key > 1) {
+            //            if ($key > 1) {
             $categories[] = $breadcrum;
-//            }
+            //            }
         }
     }
 
@@ -506,11 +508,11 @@ function storeStory($title, $story_name, $categories, $story_name_vi, $story_des
             $cat_db = Category::where('status', Category::ACTIVE)->where('name_chines', 'like', '%' . $category . '%');
             if (!$cat_db->exists()) {
                 $c_viet = _vp_viet($category);
-                    $cat_db = Category::create([
-                        'name' => $c_viet,
-                        'status' => Category::ACTIVE,
-                        'name_chines' => $category
-                    ]);
+                $cat_db = Category::create([
+                    'name' => $c_viet,
+                    'status' => Category::ACTIVE,
+                    'name_chines' => $category
+                ]);
             } else {
                 $cat_db = $cat_db->first();
             }
@@ -564,7 +566,7 @@ function storeStory($title, $story_name, $categories, $story_name_vi, $story_des
     $story->update([
         'count_chapters' => $countChapters
     ]);
-    if (strpos($url, 'sangtacviet')||strpos($url, 'fanqie.com')||strpos($url, 'uukanshu.com')) {
+    if (strpos($url, 'sangtacviet') || strpos($url, 'fanqie.com') || strpos($url, 'uukanshu.com')) {
         if (Auth::guard('web')->check()) {
             $user = Auth::guard('web')->user();
             $charater = $user->get_charaters;
@@ -674,9 +676,9 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
     //         $content = $getFalooData['data'];
     //     }
     // } else {
-        $chapterData = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
-        $content = $chapterData['content'];
-        $content = strip_tags($content, array('<i>', '<br>', '<p>'));
+    $chapterData = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+    $content = $chapterData['content'];
+    $content = strip_tags($content, array('<i>', '<br>', '<p>'));
     // }
 
     if ($content) {
@@ -745,12 +747,12 @@ function _api_dich($text)
     $text = "giangthe.com" . $text;
     $opts = array(
         'http' =>
-            array(
-                'timeout' => 10,
-                'method' => 'POST',
-                'header' => 'Content-Type: text/plain\r\nContent-Length: ' . strlen($text),
-                'content' => $text
-            )
+        array(
+            'timeout' => 10,
+            'method' => 'POST',
+            'header' => 'Content-Type: text/plain\r\nContent-Length: ' . strlen($text),
+            'content' => $text
+        )
     );
     $text_trans = stream_context_create($opts);
     return file_get_contents('http://103.116.104.176:12323/api/trans', false, $text_trans);
@@ -779,10 +781,10 @@ if (!function_exists('translateArray')) {
         foreach ($list as &$item) {
             $item = implode('\\ ', array_map(
                 function ($v, $k) {
-                    if(is_array($v)){
-                        return $k.'[]='.implode('&'.$k.'[]=', $v);
-                    }else{
-                        return $k.'='.$v;
+                    if (is_array($v)) {
+                        return $k . '[]=' . implode('&' . $k . '[]=', $v);
+                    } else {
+                        return $k . '=' . $v;
                     }
                 },
                 $item,
@@ -807,7 +809,8 @@ if (!function_exists('translateArray')) {
 }
 
 if (!function_exists('get_current_source')) {
-    function get_current_source() {
+    function get_current_source()
+    {
         foreach (Story::SOURCE as $source) {
             if (strpos(url()->current(), $source)) {
                 return $source;
@@ -818,7 +821,8 @@ if (!function_exists('get_current_source')) {
 }
 
 if (!function_exists('encoding_utf8')) {
-    function encoding_utf8 ($str) {
+    function encoding_utf8($str)
+    {
         return preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
             return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
         }, $str);
@@ -826,7 +830,8 @@ if (!function_exists('encoding_utf8')) {
 }
 
 if (!function_exists('setting_custom')) {
-    function setting_custom($key, $value = null, $default = null) {
+    function setting_custom($key, $value = null, $default = null)
+    {
         // Find key in json
         $data = \Illuminate\Support\Facades\Storage::disk('local')->get('setting_custom.json');
         $data = json_decode($data, true);
@@ -848,20 +853,428 @@ if (!function_exists('setting_custom')) {
  *
  */
 if (!function_exists('getChapterFaloo')) {
-    function getChapterFaloo($url) {
+    function getChapterFaloo($bookid, $chapid, $img)
+    {
         // Define URL and body for the API request
-        $apiUrl = 'https://api.giangthe.com/chapter';
+        $apiUrl = 'https://api.giangthe.com/ocr';
         $body = [
-            "url" => $url,
-            "sign" => md5($url . 'isjdojfe9())@38724)41') // Calculating sign
+            "bookid" => $bookid,
+            "chapid" => $chapid,
+            "img" => $img,
+            "sign" => md5($bookid . $chapid . $img . 'isjdojfe9())@38724)41') // Calculating sign
         ];
 
         // Send POST request to the API endpoint with provided body and headers
-        $response = Http::withHeaders([
+        $response = Http::timeout(20)->withHeaders([
             'token' => 'giangthe.com'
         ])->post($apiUrl, $body);
-
         // Return the response from the API
         return $response->json();
+    }
+}
+
+// function lấy danh sách chương vip của truyện faloo
+if (!function_exists("getListFalooVip")) {
+    function getListFalooVip($bookid)
+    {
+        $res = Http::timeout(10)->get("http://103.116.104.176:8000/getfaloolist/$bookid")->json();
+        return $res;
+    }
+}
+
+
+// function tính giá tiền chương vip của truyện faloo
+// giá tiền tính theo số lượng chữ hoặc điểm vip
+if (!function_exists("FalooPrice")) {
+    function FalooPrice(array $word)
+    {
+        if (config('vipfaloo.method') == 1) {
+            // lấy giá vip từ cấu hình hoặc mặc định là 100 vnđ/1 điểm vip
+            $price = config('vipfaloo.pricevip', 100);
+
+            return $word['pricevip'] * $price;
+        } else {
+            // lấy giá tiền từ cấu hình hoặc mặc định là 200 vnđ/1000 chữ
+            $price = config('vipfaloo.price', 180);
+            // lấy số lượng chữ từ cấu hình hoặc mặc định là 1000 chữ
+            $count = config('minword', 1000);
+
+            return round(($word['word'] / $count) * $price, 1);
+        }
+    }
+}
+
+if(!function_exists("CheckFalooChapter")){
+    function CheckFalooChapter($bookid,$chapid){
+        $apiUrl = 'https://api.giangthe.com/check';
+        $body = [
+            "bookid" => $bookid,
+            "chapid" => $chapid,
+
+            "sign" => md5($bookid . $chapid  . 'isjdojfe9())@38724)41') // Calculating sign
+        ];
+        // Send POST request to the API endpoint with provided body and headers
+        $response = Http::timeout(20)->withHeaders([
+            'token' => 'giangthe.com'
+        ])->post($apiUrl, $body);
+        // Return the response from the API
+        return $response->json();
+    }
+}
+
+if (!function_exists("BuyFalooChapter")) {
+    function BuyFalooChapter($bookid, $chapid)
+    {
+        $returnData = [
+            "code" => 0,
+            "status" => "success",
+            "data" => ""
+        ];
+        $checkchapter = CheckFalooChapter($bookid, $chapid);
+        if (!empty($checkchapter)) {
+
+            $returnData['data'] = $checkchapter['data'];
+            return $returnData;
+        }
+        $buyajax = AjaxBuyFaloo($bookid, $chapid);
+        try {
+            switch ($buyajax->ReturnCode) {
+                case 2:
+                    $returnData['status'] = "error";
+                    $returnData['data'] = "Vui lòng đăng nhập faloo";
+                    $returnData['code'] = 3;
+                    return $returnData;
+
+                case 4:
+                    $returnData['status'] = "error";
+                    $returnData['data'] = "Lỗi không xác định";
+                    $returnData['code'] = 4;
+                    return $returnData;
+                case 5:
+                    $returnData['status'] = "error";
+                    $returnData['data'] = "Số dư trong tài khoản faloo không đủ";
+                    $returnData['code'] = 5;
+                    return $returnData;
+                default:
+                    break;
+            }
+        } catch (Exception $e) {
+            $returnData['status'] = "error";
+            $returnData['data'] = "Lỗi không xác định";
+            $returnData['code'] = 6;
+            return $returnData;
+        }
+
+
+        $header = [
+            "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
+            "Referer" => "https://b.faloo.com/",
+            "Cookie" => "curr_url=https%3A//b.faloo.com/vip/$bookid/$chapid.html; host4chongzhi=b.faloo.com; " . config('vipfaloo.cookie')
+        ];
+
+        $reobj = '#ObjectKey="(?<key>.*?)";.*?ObjectNode=(?<n>.*?);var.*?NovelClass=(?<nc>.*?);#s';
+        $reimg = '#image_do.*?\d+?,(?<o>\d+?),(?<id>\d+?),(?<n>\d+?),(?<en>\d+?),(?<t>\d+?),.*?\'(?<k>\w+?)\'.*?\'(?<u>\w+?)\'#s';
+        $response = Http::timeout(10)->withHeaders($header)->get("https://b.faloo.com/vip/$bookid/$chapid.html")->body();
+        //convert text từ gb2312 sang utf-8
+        $response = mb_convert_encoding($response, 'utf-8', 'gb2312');
+        if (!preg_match($reobj, $response, $obj)) {
+            $returnData['status'] = "error";
+            $returnData['data'] = "Không thể lấy ObjectKey";
+            $returnData['code'] = 1;
+            return $returnData;
+        }
+        if (!preg_match($reimg, $response, $img)) {
+            $returnData['status'] = "error";
+            $returnData['data'] = "Không thể lấy Img Key";
+            $returnData['code'] = 2;
+            return $returnData;
+        }
+
+        $imgo = $img['o'];
+        $imgen = $img['en'];
+        $imgt = $img['t'];
+        $imgk = $img['k'];
+        $imgu = $img['u'];
+
+        $urlobj = "https://dongtai.faloo.com/novel/AppCounter.aspx?id=$bookid&nc=" . $obj['key'] . "&k=" . $obj['key'] . "&n=$chapid";
+
+        $urlpv = "https://flux.faloo.com/pvdata.aspx?faloo_ch_id=3&faloo_ref=https://b.faloo.com/vip/$bookid/$chapid.html";
+
+        $urlimg = "https://read.faloo.com/Page4VipImage.aspx?num=0&o=$imgo&id=$bookid&n=$chapid&ct=1&en=$imgen&t=$imgt&font_size=16&font_color=000000&FontFamilyType=0&backgroundtype=0&u=$imgu&time=&k=$imgk";
+
+        $dataimg = Http::timeout(10)->withHeaders($header)->get($urlimg)->body();
+
+        Http::pool(function (Pool $pool) use ($header, $urlobj, $urlpv) {
+            return [
+                $pool->timeout(10)->withHeaders($header)->get($urlpv),
+                $pool->timeout(10)->withHeaders($header)->get($urlobj),
+            ];
+        });
+
+        $returnData['data'] = getChapterFaloo($bookid, $chapid, base64_encode($dataimg))['data'];
+        if(strlen($returnData['data'])<300){
+            $returnData['status'] = "error";
+            $returnData['data'] = "Lỗi không xác định";
+            $returnData['code'] = 7;
+            return $returnData;
+        }
+        return  $returnData;
+    }
+}
+
+// gửi ajax mua chương vip đến faloo
+if (!function_exists("AjaxBuyFaloo")) {
+    function AjaxBuyFaloo($bookid, $chapid)
+    {
+        $header = [
+            "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
+            "Referer" => "https://b.faloo.com/$bookid" . "_$chapid.html",
+            "Cookie" => "https%3A//b.faloo.com/buybook.aspx%3Fid%3D$bookid; host4chongzhi=b.faloo.com; " . config('vipfaloo.cookie')
+        ];
+        $postData = [];
+        $url = "https://b.faloo.com/ajaxinfo.aspx?t=41&id=$bookid&n=$chapid&ran=" . mt_rand();
+        $response = Http::timeout(10)->withHeaders($header)->get($url)->body();
+        //convert text từ gb2312 sang utf-8
+        $return = mb_convert_encoding($response, 'utf-8', 'gb2312');
+        return json_decode($return);
+    }
+}
+
+
+if (!function_exists("FalooSave")) {
+    function FalooSave($url, $user = null)
+    {
+        $datahost = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+        $story = Story::where('idhost', $datahost['bookid'])->where('host', $datahost['host'])->first();
+        //kiểm tra xem truyện có trong database chưa nếu có sẽ chuyển hướng đến trang truyện
+        if ($story) {
+            //chuyển hướng dến trang truyện
+            return redirect()->route('story.show', $story);
+        }
+        $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+
+        $chapterList = $data['listchap'];
+
+
+        $title = [];
+        $story_name = $data['name'];
+
+        $story_description = _vp_viet($data['gioithieu']);
+        $avatar = $data['img'];
+        $breadcrums = [];
+        $categories = [];
+        $tags = [];
+        $author = $data['tacgia'];
+        $author_vi = _vp_viet($author);
+        $story_name_vi = _vp_viet($story_name);
+        $breadcrums[] = $data['theloai'];
+        $bookid = $data['bookid'];
+        $host = $data['host'];
+        if (!empty($breadcrums)) {
+            foreach ($breadcrums as $key => $breadcrum) {
+                $categories[] = $breadcrum;
+            }
+        }
+
+        if (!empty($data['tag'])) {
+            foreach ($data['tag'] as $tag) {
+                $tags[] = _vp_viet($tag);
+            }
+        }
+
+        $chapter_names = '';
+
+        foreach ($chapterList as $chap) {
+            if (empty($chapter_names)) {
+                $chapter_names .= $chap['namechap'];
+            } else {
+                $chapter_names .= '|' . $chap['namechap'];
+            }
+        }
+
+        $cat = [];
+        if (!empty($categories)) {
+            foreach ($categories as $category) {
+                $cat_db = Category::where('status', Category::ACTIVE)->where('name_chines', 'like', '%' . $category . '%');
+                if (!$cat_db->exists()) {
+                    $c_viet = _vp_viet($category);
+                    $cat_db = Category::create([
+                        'name' => $c_viet,
+                        'status' => Category::ACTIVE,
+                        'name_chines' => $category
+                    ]);
+                } else {
+                    $cat_db = $cat_db->first();
+                }
+                $cat[] = $cat_db->id;
+            }
+        }
+
+        $story = Story::updateOrCreate([
+            'name' => $story_name_vi,
+
+            'description' => $story_description,
+            'user_id' => $user->id ?? 0,
+            'type' => 1,
+            'donate' => 0,
+            'status' => 1,
+            'is_vip' => 1,
+            'origin' => $url,
+            'avatar' => $avatar,
+            'author' => $author,
+            'author_vi' => $author_vi,
+            'name_chines' => $story_name,
+            'tags' => json_encode($tags),
+            'idhost' => $bookid,
+            'host' => $host,
+            'chapter_updated' => Carbon::now(),
+        ]);
+
+        $story->categories()->sync(array_unique($cat));
+
+        $chapters = [];
+        $chapter_names = explode('|', _vp_viet($chapter_names));
+        $order =  1;
+        $chapterListVip = collect(getListFalooVip($data['bookid']));
+
+        // lặp qua danh sách chương
+        foreach ($chapterList as $key => $chapter) {
+            $tempchap = [
+                'story_id' => $story->id,
+                'name' => $chapter_names[$key],
+                'name_cn' => $chapter['namechap'],
+                'embed_link' => $chapter['linkchap'],
+                'status' => Chapter::ACTIVE,
+                'order' => $order++,
+                'chapid' => $chapter['id'],
+                'is_vip' => $chapter['vip']
+            ];
+            //kiểm tra chương có phải chương vip không
+            if ($chapter['vip']) {
+                //nếu là chương vip thì sẽ kiểm tra xem chapid có nằm trong $chapterListVip
+                $search = $chapterListVip->search(function ($item, $key) use ($chapter) {
+                    return $item['chapid'] == $chapter['id'];
+                });
+
+
+                if ($search) {
+                    // thêm cột buyed= false vào mảng $chapterList
+                    $tempchap['buyed'] = false;
+                    $tempchap['word'] = $chapterListVip[$search]['word'];
+                    $tempchap['pricevip'] = $chapterListVip[$search]['price'];
+                } else {
+                    $tempchap['is_vip'] = false;
+                }
+            }
+            $chapters[] = $tempchap;
+        }
+        // dd($chapters);
+
+        $countChapters = count($chapters);
+        $story->chapters_json = json_encode($chapters);
+        $story->save();
+
+        $story->update([
+            'count_chapters' => $countChapters
+        ]);
+
+        return redirect()->route('story.show', $story);
+    }
+}
+
+if (!function_exists("FalooUpdateList")) {
+    function FalooUPdateList($story)
+    {
+        $url = $story->origin;
+        $bookid = $story->idhost;
+        $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+        $chapterList = $data['listchap'];
+        $chaptperListOld = collect(json_decode($story->chapters_json));
+        $countListNew = count($chapterList);
+        $countlistOld = count($chaptperListOld);
+        if ($countListNew <= $countlistOld) {
+            return response()->json([
+                'code' => 200,
+                'message' => 'Không có chương mới nào được đăng.'
+            ]);
+        }
+        $chapter_names = '';
+
+        foreach ($chapterList as $chap) {
+            if (empty($chapter_names)) {
+                $chapter_names .= $chap['namechap'];
+            } else {
+                $chapter_names .= '|' . $chap['namechap'];
+            }
+        }
+        $chapterListVip = collect(getListFalooVip($data['bookid']));
+        $chapters = [];
+        $chapter_names = explode('|', _vp_viet($chapter_names));
+        $order =  1;
+        $chapterListVip = collect(getListFalooVip($data['bookid']));
+        //lặp qua danh sách chương mới và so sánh với chương cũ
+        foreach ($chapterList as $key => $chapter) {
+            $search = $chaptperListOld->search(function ($item, $key) use ($chapter) {
+                return $item->chapid == $chapter['id'];
+            });
+            //nếu không tìm thấy chương mới trong danh sách chương cũ thì thêm chương mới vào danh sách chương cũ
+            if (!$search) {
+                $tempchap = [
+                    'story_id' => $story->id,
+                    'name' => $chapter_names[$key],
+                    'name_cn' => $chapter['namechap'],
+                    'embed_link' => $chapter['linkchap'],
+                    'status' => Chapter::ACTIVE,
+                    'order' => $order++,
+                    'chapid' => $chapter['id'],
+                    'is_vip' => $chapter['vip']
+                ];
+                if ($chapter['vip']) {
+                    $searchprice = $chapterListVip->search(function ($item, $key) use ($chapter) {
+                        return $item['chapid'] == $chapter['id'];
+                    });
+
+
+                    if ($searchprice) {
+                        // thêm cột buyed= false vào mảng $chapterList
+                        $tempchap['buyed'] = false;
+                        $tempchap['word'] = $chapterListVip[$search]['word'];
+                        $tempchap['pricevip'] = $chapterListVip[$search]['price'];
+                    }
+                }
+            } else {
+                //nếu tìm thấy chương trong danh sách chương cũ thì sẽ lấy dữ liệu của chương cũ
+                $tempchap = $chaptperListOld[$search];
+                //đổi order của tempchap thành order hiện tại
+                $tempchap->order = $order++;
+            }
+            $chapters[] = $tempchap;
+        }
+        $story->chapters_json = json_encode($chapters);
+        $story->chapter_updated = Carbon::now();
+        $story->count_chapters = $countListNew;
+        $story->save();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Cập nhật thành công!'
+        ]);
+    }
+}
+if (!function_exists("daertytest")) {
+    function daertytest($url)
+    {
+        $datahost = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+        $bookid = $datahost['bookid'];
+        $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+        $chapterList = $data['listchap'];
+
+        foreach ($chapterList as $key => $chapter) {
+            # code...
+            if ($chapter['vip']) {
+                $aa = BuyFalooChapter($bookid, $chapter['id']);
+                //ngủ ngẫu nhiên từ 2-10 giây
+                sleep(random_int(2, 10));
+            }
+        }
     }
 }

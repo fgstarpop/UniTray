@@ -16,15 +16,17 @@ use App\Domain\Activity\Follow;
 use App\Domain\Activity\Whishlist;
 use DB;
 use App\Domain\Activity\Notification;
+
 class OrderController
 {
-    public function index(){
+    public function index()
+    {
         $order = Order::where('user_id', currentUser()->id)
             ->where('source', get_current_source())
             ->with('story')
             ->select(\DB::raw('sum(price) as total_price'), \DB::raw('count(*) as total_chapter_buy'), \DB::raw('max(created_at) as last_buy_at'), 'story_id')
             ->groupBy('story_id')
-            ->orderBy('last_buy_at','desc')->paginate(50);
+            ->orderBy('last_buy_at', 'desc')->paginate(50);
 
         $storyIds = $order->getCollection()->pluck('story_id')->toArray();
         $orderChapter = Order::whereIn('orders.story_id', $storyIds)
@@ -48,68 +50,154 @@ class OrderController
         //     ->get()
         //     ->groupBy('story_id');
 
-        $order->getCollection()->transform(function ($d) use ($orderChapter){
+        $order->getCollection()->transform(function ($d) use ($orderChapter) {
             $d->orderChapter = isset($orderChapter[$d->story_id]) ? $orderChapter[$d->story_id] : collect();
             return $d;
         });
-        return view('shop.user.order.index',compact('order'));
+        return view('shop.user.order.index', compact('order'));
     }
 
-    public function chapter(Request $req){
-        if($req->listBuy) {
+    public function chapter(Request $req)
+    {
+        // kiểm tra xem user có đăng nhập hay chưa
+        if (!currentUser()) {
+            return response()->json([
+                'status' => '300',
+                'message' => __('Bạn cần đăng nhập để mua chương này!'),
+            ]);
+        }
+        if ($req->listBuy) {
             $listBuy = $req->listBuy;
-            for($i = 0; $i < count($listBuy); $i++) {
-                $chapter  = Chapter::find($listBuy[$i][0]);
-                $wallet   = Wallet::where('user_id',currentUser()->id)->first();
-                $vip = currentUser()->user_vip;
+            if (count($listBuy) > 10) {
+                return response()->json([
+                    'status' => '300',
+                    'message' => __('Bạn không thể mua quá 10 chương cùng lúc!'),
+                ]);
+            }
 
-                if($vip == 1){
-                    $price_chapters = 0;
-                }else{
-                    $price_chapters = 150;
-                }
-                if($wallet->gold < $price_chapters){
+            for ($i = 0; $i < count($listBuy); $i++) {
+                //kiểm tra xem $listBuy[$i][0] có là null hay không
+                //nếu là null thì sẽ sử dụng $listBuy[$i][4]
+                $chapter  = Chapter::find($listBuy[$i][0]);
+                $wallet   = Wallet::where('user_id', currentUser()->id)->first();
+                $listBuyConnect = $listBuy[$i];
+                $story    = Story::find($listBuyConnect[1]);
+                if (!$story) {
                     return response()->json([
                         'status' => '300',
-                        'message' => __('Bạn không đủ vàng để mua chương này!'),
+                        'message' => __('Truyện không tồn tại!'),
                     ]);
                 }
-                $orderss = Order::where(['chapter_id'=>$listBuy[$i][0],
-                    'user_id' => currentUser()->id
-                ])
-                    ->where('source', get_current_source())
-                    ->first();
-                if($orderss){
-                    return response()->json([
-                        'status' => '200',
-                        'message' => __('Bạn đã mua chương này rồi !'),
+                $first = false;
+                if (empty($listBuy[$i][0]) || !$chapter) {
+                    $listBuyConnect = $listBuy[$i];
+
+                    $bookid = $story->idhost;
+                    $chapterList = json_decode($story->chapters_json, 1);
+                    $collectChapterList = collect($chapterList);
+                    $chapid = $listBuyConnect[4];
+                    $searchList = $collectChapterList->search(function ($item) use ($chapid) {
+                        return $item['chapid'] == $chapid;
+                    });
+                    if ($searchList === false) {
+                        return response()->json([
+                            'status' => '300',
+                            'message' => __('Chương không tồn tại!'),
+                        ]);
+                    }
+                    $price_chapters = number_format(FalooPrice($chapterList[$searchList]));
+                    if ($wallet->gold < $price_chapters) {
+                        return response()->json([
+                            'status' => '300',
+                            'message' => __('Bạn không đủ vàng để mua chương này!'),
+                        ]);
+                    }
+                    $text = BuyFalooChapter($bookid, $chapid);
+                    if ($text['code'] != 0) {
+                        return response()->json([
+                            'status' => '300',
+                            'message' => __('Mua chương thất bại!'),
+                            'code' => $text['code']
+                        ]);
+                    }
+
+                    $chapter = Chapter::create([
+                        'name' => $chapterList[$searchList]['name'],
+                        'order' =>  $chapterList[$searchList]['order'],
+                        'content' => $text['data'],
+                        'status' => Chapter::ACTIVE,
+                        'is_cn' => true,
+                        'story_id' => $story->id,
+                        'is_vip' => true,
+                        'link_other ' =>  null,
+                        'mod_id' =>  null,
+                        'price' =>  $price_chapters,
+                        'embed_link' => $chapterList[$searchList]['embed_link'],
+                        'host' => $story->host,
+                        'idhost' => $bookid,
+                        'idchap' => $chapid,
+                        'user_id' => currentUser()->id,
+
                     ]);
+                    $chapterList[$searchList]['id'] = $chapter->id;
+                    $chapterList[$searchList]['buyed'] = true;
+
+                    $story->update(['chapters_json' => json_encode($chapterList)]);
+                    $first = true;
                 }
-                $listBuyConnect = $listBuy[$i];
+
+                $vip = currentUser()->user_vip;
+                if (!$first) {
+                    if ($vip == 1) {
+                        $price_chapters = config("vipfaloo.priceworduservip");
+                    } else {
+                        $price_chapters = config("vipfaloo.pricewordolduser");
+                    }
+                    if ($wallet->gold < $price_chapters) {
+                        return response()->json([
+                            'status' => '300',
+                            'message' => __('Bạn không đủ vàng để mua chương này!'),
+                        ]);
+                    }
+                    $orderss = Order::where([
+                        'chapter_id' => $listBuy[$i][0],
+                        'user_id' => currentUser()->id
+                    ])
+                        ->where('source', get_current_source())
+                        ->first();
+                    if ($orderss) {
+                        return response()->json([
+                            'status' => '200',
+                            'message' => __('Bạn đã mua chương này rồi !'),
+                        ]);
+                    }
+                }
+
+
+
                 try {
-                    \DB::transaction(function () use ($listBuyConnect,$chapter,$wallet,$price_chapters) {
-                        $story    = Story::find($listBuyConnect[1]);
-                        $currentMod = $listBuyConnect[3];
-                        if($listBuyConnect[3] == NULL || $listBuyConnect[3] == '') {
+                    \DB::transaction(function () use ($first,$story, $chapter, $wallet, $price_chapters) {
+                        $currentMod = $chapter->user_id;
+                        if (empty($currentMod)||$first) {
                             $currentMod = 4;
                         }
                         $userTurnOver = User::find($currentMod);
-                        $moneyAuthorReceived = $price_chapters - $price_chapters *  setting('fee_order_vip',0) / 100;
-                        $moneyAuthorReceived = $moneyAuthorReceived / 2;
+                        $moneyAuthorReceived = $price_chapters * config("vipfaloo.percentprofit");
+                        // $moneyAuthorReceived = $moneyAuthorReceived / 2;
                         $tomorrow = new Carbon('tomorrow midnight');
                         $today    = new Carbon('today midnight');
                         $wallet->gold = $wallet->gold - $price_chapters;
-                        $walletAuthor = Wallet::where('user_id',$currentMod)->first();
+                        $walletAuthor = Wallet::where('user_id', $currentMod)->first();
                         $walletAuthor->silver = $walletAuthor->silver + $moneyAuthorReceived;
                         $wallet->update();
                         $walletAuthor->update();
-                        $statistics = Statistics::where('created_at','<', $tomorrow)->where('created_at','>', $today)->first();
-                        if($statistics){
-                            $statistics->money = $statistics->money + $price_chapters *  setting('fee_order_vip',0) / 100;
+                        $statistics = Statistics::where('created_at', '<', $tomorrow)->where('created_at', '>', $today)->first();
+                        if ($statistics) {
+                            $statistics->money = $statistics->money + $price_chapters *  setting('fee_order_vip', 0) / 100;
                             $statistics->save();
-                        }else{
+                        } else {
                             Statistics::create([
-                                'money'   =>  $price_chapters *  setting('fee_order_vip',0) / 100,
+                                'money'   =>  $price_chapters *  setting('fee_order_vip', 0) / 100,
                             ]);
                         }
 
@@ -120,34 +208,34 @@ class OrderController
                             'user_id'  =>  currentUser()->id,
                             'story_id' => $story->id
                         ])->where('source', get_current_source())
-                            ->orderBy('updated_at','desc')->first();
+                            ->orderBy('updated_at', 'desc')->first();
                         //check xem truyện đó đã được mua hay chưa
                         $allOrder = Order::where([
                             'story_id' => $story->id
                         ])->where('source', get_current_source())
-                            ->orderBy('updated_at','asc')->first();
+                            ->orderBy('updated_at', 'asc')->first();
                         //check xem chương đó đã được mua hay chưa
                         $orderChapter = Order::where([
                             'story_id' => $story->id,
                             'chapter_id' => $chapter->id
                         ])->where('source', get_current_source())
-                            ->orderBy('updated_at','desc')->first();
+                            ->orderBy('updated_at', 'desc')->first();
                         $checkStory = Order::where([
                             'story_id' => $story->id,
                             'type' => 1,
                         ])->where('source', get_current_source())
                             ->first();
-                        if($checkStory){
+                        if ($checkStory) {
                             $checkStory->type = 0;
                             $checkStory->update();
                         }
 
                         $priceOrderChapter = $orderChapter ? $orderChapter->total_money_per_chapter : 0;
                         $countOrderChapter = $orderChapter ? $orderChapter->total_order_per_chapter : 0;
-                        if($order){
+                        if ($order) {
                             $saveOrder = Order::create([
                                 'number'        => $orderCode,
-                                'chapter_id'    => $chapter->id ,
+                                'chapter_id'    => $chapter->id,
                                 'user_id'       => currentUser()->id,
                                 'price'         => $price_chapters,
                                 'total'         => $order->total + $price_chapters,
@@ -160,10 +248,10 @@ class OrderController
                                 'type' => 1,
                                 'source' => get_current_source()
                             ]);
-                        }else if($allOrder){
+                        } else if ($allOrder) {
                             $saveOrder = Order::create([
                                 'number'        => $orderCode,
-                                'chapter_id'    => $chapter->id ,
+                                'chapter_id'    => $chapter->id,
                                 'user_id'       => currentUser()->id,
                                 'price'         => $price_chapters,
                                 'total'         => $price_chapters,
@@ -176,11 +264,10 @@ class OrderController
                                 'type' => 1,
                                 'source' => get_current_source()
                             ]);
-                        }
-                        else{
+                        } else {
                             $saveOrder = Order::create([
                                 'number'        => $orderCode,
-                                'chapter_id'    => $chapter->id ,
+                                'chapter_id'    => $chapter->id,
                                 'user_id'       => currentUser()->id,
                                 'price'         => $price_chapters,
                                 'total'         => $price_chapters,
@@ -220,66 +307,127 @@ class OrderController
                             'gold_balance'      => $wallet->gold,
                             'yuan_balance'      => $wallet->silver,
                         ]);
-
                     });
                 } catch (\Exception $e) {
                     return back()->with(['message' => $e->getMessage()]);
                 }
-
-
             }
-        }
-        else {
+        } else {
+
             $chapter  = Chapter::find($req->chapter);
-            $wallet   = Wallet::where('user_id',currentUser()->id)->first();
-            $vip = currentUser()->user_vip;
-
-            if($vip == 1){
-                $price_chapters = 0;
-            }else{
-                $price_chapters = 150;
-            }
-            if($wallet->gold < $price_chapters){
+            $wallet   = Wallet::where('user_id', currentUser()->id)->first();
+            $story = Story::find($req->story);
+            if (!$story) {
                 return response()->json([
                     'status' => '300',
-                    'message' => __('Bạn không đủ vàng để mua chương này!'),
+                    'message' => __('Truyện không tồn tại!'),
                 ]);
             }
-            $orderss = Order::where(['chapter_id'=>$req->chapter,
-                'user_id' => currentUser()->id
-            ])
-                ->where('source', get_current_source())
-                ->first();
-            if($orderss){
-                return response()->json([
-                    'status' => '200',
-                    'message' => __('Bạn đã mua chương này rồi !'),
-                ]);
+            $vip = currentUser()->user_vip;
+            $first = false;
+            if (!$chapter) {
+                $chapid = $req->chapid;
+                $bookid = $story->idhost;
+                $chapterList = json_decode($story->chapters_json, 1);
+                $collectChapterList = collect($chapterList);
+                $searchList = $collectChapterList->search(function ($item) use ($chapid) {
+                    return $item['chapid'] == $chapid;
+                });
+                if ($searchList === false) {
+                    return response()->json([
+                        'status' => '300',
+                        'message' => __('Chương không tìm thấy!')
+                    ]);
+                }
+                $price_chapters = number_format(FalooPrice($chapterList[$searchList]));
+                    if ($wallet->gold < $price_chapters) {
+                        return response()->json([
+                            'status' => '300',
+                            'message' => __('Bạn không đủ vàng để mua chương này!'),
+                        ]);
+                    }
+                    $text = BuyFalooChapter($bookid, $chapid);
+                    if ($text['code'] != 0) {
+                        return response()->json([
+                            'status' => '300',
+                            'message' => __('Mua chương thất bại!'),
+                            'code' => $text['code']
+                        ]);
+                    }
+
+                    $chapter = Chapter::create([
+                        'name' => $chapterList[$searchList]['name'],
+                        'order' =>  $chapterList[$searchList]['order'],
+                        'content' => $text['data'],
+                        'status' => Chapter::ACTIVE,
+                        'is_cn' => true,
+                        'story_id' => $story->id,
+                        'is_vip' => true,
+                        'link_other ' =>  null,
+                        'mod_id' =>  null,
+                        'price' =>  $price_chapters,
+                        'embed_link' => $chapterList[$searchList]['embed_link'],
+                        'host' => $story->host,
+                        'idhost' => $bookid,
+                        'idchap' => $chapid,
+                        'user_id' => currentUser()->id,
+
+                    ]);
+                    $chapterList[$searchList]['id'] = $chapter->id;
+                    $chapterList[$searchList]['buyed'] = true;
+
+                    $story->update(['chapters_json' => json_encode($chapterList)]);
+                    $first = true;
+            }
+            if (!$first) {
+                if ($vip == 1) {
+                    $price_chapters = config("vipfaloo.priceworduservip");
+                } else {
+                    $price_chapters = config("vipfaloo.pricewordolduser");
+                }
+                if ($wallet->gold < $price_chapters) {
+                    return response()->json([
+                        'status' => '300',
+                        'message' => __('Bạn không đủ vàng để mua chương này!'),
+                    ]);
+                }
+                $orderss = Order::where([
+                    'chapter_id' => $req->chapid,
+                    'user_id' => currentUser()->id
+                ])
+                    ->where('source', get_current_source())
+                    ->first();
+                if ($orderss) {
+                    return response()->json([
+                        'status' => '200',
+                        'message' => __('Bạn đã mua chương này rồi !'),
+                    ]);
+                }
             }
             try {
-                \DB::transaction(function () use ($req,$chapter,$wallet,$price_chapters) {
-                    $story    = Story::find($req->story);
-                    $currentMod = $req->author;
-                    if($story->mod_id == NULL) {
+                \DB::transaction(function () use ($first,$story,$req, $chapter, $wallet, $price_chapters) {
+
+                    $currentMod = $chapter->user_id;
+                    if (empty($currentMod)||$first) {
                         $currentMod = 4;
                     }
                     $userTurnOver = User::find($currentMod);
-                    $moneyAuthorReceived = $price_chapters - $price_chapters *  setting('fee_order_vip',0) / 100;
-                    $moneyAuthorReceived = $moneyAuthorReceived / 2;
+                    $moneyAuthorReceived = $price_chapters * config("vipfaloo.percentprofit");
+                    // $moneyAuthorReceived = $moneyAuthorReceived / 2;
                     $tomorrow = new Carbon('tomorrow midnight');
                     $today    = new Carbon('today midnight');
                     $wallet->gold = $wallet->gold - $price_chapters;
-                    $walletAuthor = Wallet::where('user_id',$currentMod)->first();
+                    $walletAuthor = Wallet::where('user_id', $currentMod)->first();
                     $walletAuthor->silver = $walletAuthor->silver + $moneyAuthorReceived;
                     $wallet->update();
                     $walletAuthor->update();
-                    $statistics = Statistics::where('created_at','<', $tomorrow)->where('created_at','>', $today)->first();
-                    if($statistics){
-                        $statistics->money = $statistics->money + $price_chapters *  setting('fee_order_vip',0) / 100;
+                    $statistics = Statistics::where('created_at', '<', $tomorrow)->where('created_at', '>', $today)->first();
+                    if ($statistics) {
+                        $statistics->money = $statistics->money + $price_chapters *  setting('fee_order_vip', 0) / 100;
                         $statistics->save();
-                    }else{
+                    } else {
                         Statistics::create([
-                            'money'   =>  $price_chapters *  setting('fee_order_vip',0) / 100,
+                            'money'   =>  $price_chapters *  setting('fee_order_vip', 0) / 100,
                         ]);
                     }
 
@@ -290,34 +438,34 @@ class OrderController
                         'user_id'  =>  currentUser()->id,
                         'story_id' => $story->id
                     ])->where('source', get_current_source())
-                        ->orderBy('updated_at','desc')->first();
+                        ->orderBy('updated_at', 'desc')->first();
                     //check xem truyện đó đã được mua hay chưa
                     $allOrder = Order::where([
                         'story_id' => $story->id
                     ])->where('source', get_current_source())
-                        ->orderBy('updated_at','asc')->first();
+                        ->orderBy('updated_at', 'asc')->first();
                     //check xem chương đó đã được mua hay chưa
                     $orderChapter = Order::where([
                         'story_id' => $story->id,
                         'chapter_id' => $chapter->id
                     ])->where('source', get_current_source())
-                        ->orderBy('updated_at','desc')->first();
+                        ->orderBy('updated_at', 'desc')->first();
                     $checkStory = Order::where([
                         'story_id' => $story->id,
                         'type' => 1,
                     ])->where('source', get_current_source())
                         ->first();
-                    if($checkStory){
+                    if ($checkStory) {
                         $checkStory->type = 0;
                         $checkStory->update();
                     }
 
                     $priceOrderChapter = $orderChapter ? $orderChapter->total_money_per_chapter : 0;
                     $countOrderChapter = $orderChapter ? $orderChapter->total_order_per_chapter : 0;
-                    if($order){
+                    if ($order) {
                         $saveOrder = Order::create([
                             'number'        => $orderCode,
-                            'chapter_id'    => $chapter->id ,
+                            'chapter_id'    => $chapter->id,
                             'user_id'       => currentUser()->id,
                             'price'         => $price_chapters,
                             'total'         => $order->total + $price_chapters,
@@ -330,10 +478,10 @@ class OrderController
                             'type' => 1,
                             'source' => get_current_source()
                         ]);
-                    }else if($allOrder){
+                    } else if ($allOrder) {
                         $saveOrder = Order::create([
                             'number'        => $orderCode,
-                            'chapter_id'    => $chapter->id ,
+                            'chapter_id'    => $chapter->id,
                             'user_id'       => currentUser()->id,
                             'price'         => $price_chapters,
                             'total'         => $price_chapters,
@@ -346,11 +494,10 @@ class OrderController
                             'type' => 1,
                             'source' => get_current_source()
                         ]);
-                    }
-                    else{
+                    } else {
                         $saveOrder = Order::create([
                             'number'        => $orderCode,
-                            'chapter_id'    => $chapter->id ,
+                            'chapter_id'    => $chapter->id,
                             'user_id'       => currentUser()->id,
                             'price'         => $price_chapters,
                             'total'         => $price_chapters,
@@ -390,7 +537,6 @@ class OrderController
                         'gold_balance'      => $wallet->gold,
                         'yuan_balance'      => $wallet->silver,
                     ]);
-
                 });
             } catch (\Exception $e) {
                 return back()->with(['message' => $e->getMessage()]);
@@ -402,14 +548,15 @@ class OrderController
         ]);
     }
 
-    public function statistic(){
+    public function statistic()
+    {
         $myStoryIds = Story::where('mod_id', currentUser()->id)->pluck('id')->toArray();
         $order = Order::whereIn('story_id', $myStoryIds)
             ->where('source', get_current_source())
             ->with('story')
             ->select(\DB::raw('sum(price) as total_price'), \DB::raw('count(*) as total_chapter_buy'), \DB::raw('max(created_at) as last_buy_at'), 'story_id')
             ->groupBy('story_id')
-            ->orderBy('total_price','desc')->paginate(50);
+            ->orderBy('total_price', 'desc')->paginate(50);
 
         $storyIds = $order->getCollection()->pluck('story_id')->toArray();
         $orderChapter = Order::whereIn('story_id', $storyIds)
@@ -420,12 +567,11 @@ class OrderController
             ->get()
             ->groupBy('story_id');
 
-        $order->getCollection()->transform(function ($d) use ($orderChapter){
+        $order->getCollection()->transform(function ($d) use ($orderChapter) {
             $d->orderChapter = isset($orderChapter[$d->story_id]) ? $orderChapter[$d->story_id] : collect();
             return $d;
         });
 
-        return view('shop.user.order.statistic',compact('order'));
+        return view('shop.user.order.statistic', compact('order'));
     }
-
 }
