@@ -368,7 +368,7 @@ class AccountController
 
     public function upgradeVip()
     {
-        $vipPrice = 2000;
+        $vipPrice = 100000;
         if(!Auth::guard('web')->check()){
             flash()->error('Bạn cần đăng nhập để sử dụng tính năng này');
             return redirect()->route('login');
@@ -381,10 +381,10 @@ class AccountController
             return redirect()->route('home');
         }
 
-        if (empty($user->get_charaters)) {
-            flash()->error('Bạn chưa tạo nhân vật.');
-            return redirect()->route('tuluyen.create');
-        }
+        // if (empty($user->get_charaters)) {
+        //     flash()->error('Bạn chưa tạo nhân vật.');
+        //     return redirect()->route('tuluyen.create');
+        // }
 
         //Check if not enough linh thach
         $players = $user->get_charaters;
