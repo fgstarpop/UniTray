@@ -53,6 +53,7 @@ class ChapterController
             foreach ($chapters as $key => $chap) {
                 if (@$chap['embed_link'] && @$chap['embed_link'] == $embed_link) {
                     $search_link = $key;
+                    break;
                 }
             }
             if ($search_link === false) {
@@ -100,8 +101,11 @@ class ChapterController
                                 'idchap' => $datahosts['chapid'],
                             ];
                             $chapter = Chapter::create($new_chap);
-
-                            $chapters[$search_link] = $chapter->toArray();
+                            if(strpos($url,'faloo.com')){
+                                $chapters[$search_link]['id']=$chapter->id;
+                            }else{
+                                $chapters[$search_link] = $chapter->toArray();
+                            }
                             $story->update(['chapters_json' => json_encode($chapters)]);
                             $chapter = embedChapter($url, $base_url, currentUser(), $chapter, $request->is_vip ?? 0) ?? $chapter;
                             $chapterNewContent = $chapter['content'];
@@ -151,6 +155,7 @@ class ChapterController
                 foreach ($chapters as $key => $chap) {
                     if (@$chap['id'] && $chap['id'] == $chapter['id']) {
                         $search_link = $key;
+                        break;
                     }
                 }
             }
@@ -243,7 +248,7 @@ class ChapterController
                 ->afterResponse()->onQueue('redis');
         }
 
-
+        // dd($chapter,$chapters);
         return view('shop.chapter.show', [
             'comment' => $comment,
             'story' => $story,
