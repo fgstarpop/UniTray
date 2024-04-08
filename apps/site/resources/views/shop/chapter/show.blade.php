@@ -95,14 +95,14 @@
                 <br>
                 @php
                     if ($chapterNext) {
-                        $nextChapter = @$chapterNext['embed_link']
-                            ? route('chapters.show', [$story->id, 'link' => $chapterNext['embed_link']])
-                            : route('chapters.show', [$story->id, 'id' => $chapterNext['id']]);
+                        $nextChapter = @$chapterNext['id']
+                            ? route('chapters.show', [$story->id, 'id' => $chapterNext['id']])
+                            : route('chapters.show', [$story->id, 'link' => $chapterNext['embed_link']]);
                     }
                     if ($chapterPre) {
-                        $preChapter = @$chapterPre['embed_link']
-                            ? route('chapters.show', [$story->id, 'link' => $chapterPre['embed_link']])
-                            : route('chapters.show', [$story->id, 'id' => $chapterPre['id']]);
+                        $preChapter = @$chapterPre['id']
+                            ? route('chapters.show', [$story->id, 'id' => $chapterPre['id']])
+                            : route('chapters.show', [$story->id, 'link' => $chapterPre['embed_link']]);
                     }
                 @endphp
                 <div class="tm-reader-top-nav" style="font-size: 16px;padding: 6px 0;font-weight: 500">
@@ -118,7 +118,7 @@
                                     (currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
                                             'chapter_id' => @$chapterPre['id'],
-                                        ])->first()) ||
+                                        ])->where('user_id',currentUser()->id)->first()) ||
                                         $check ||
                                         currentUser()->user_vip == 1)
                                     <a href="{{ $preChapter }}" id="prevchap" class="text-primary"
@@ -127,9 +127,10 @@
                                     </a>
                                 @else
                                     <a href="javascript:;" data-url="{{ $preChapter }}" data-story="{{ $story->id }}"
-                                        data-chapter="{{ $chapterPre['id'] }}"
+                                        data-chapter="{{ @$chapterPre['id'] }}"
                                         data-chapter-name="{{ $chapterPre['name'] }}"
-                                        data-price="{{ number_format($chapterPre['price']) }}" class="text-primary order"
+                                        data-price="{{ 150 }}"
+                                        data-chapid={{ $chapterPre }} class="text-primary order"
                                         title="{{ $chapterPre['name'] }}" id="prevchap">
                                         <i class="fas fa-chevron-left"></i> Chương trước <i class="fa fa-lock"></i>
                                     </a>
@@ -153,7 +154,7 @@
                                     (currentUser() &&
                                         \App\Domain\Admin\Models\Order::where([
                                             'chapter_id' => @$chapterNext['id'],
-                                        ])->first() &&
+                                        ])->where('user_id', currentUser()->id)->first() &&
                                         currentUser()->id) ||
                                         $check ||
                                         currentUser()->user_vip == 1)
@@ -163,9 +164,9 @@
                                     </a>
                                 @else
                                     <a href="javascript:;" data-url="{{ $nextChapter }}" data-story="{{ $story->id }}"
-                                        data-chapter="{{ $chapterNext['id'] }}"
+                                        data-chapter="{{ @$chapterNext['id'] }}"
                                         data-chapter-name="{{ $chapterNext['name'] }}"
-                                        data-price="{{ number_format($chapterNext['price']) }}" class="text-primary order"
+                                        data-price="{{ 150 }}" class="text-primary order"
                                         title="{{ $chapterNext['name'] }}" id="nextchap">
                                         <i class="fa fa-lock"></i> Chương sau <i class="fas fa-chevron-right"></i>
                                     </a>
@@ -216,16 +217,16 @@
                                                                 $link = 'chapreaded';
                                                             }
                                                         }
-                                                        $linkStory = @$chap['embed_link']
+                                                        $linkStory = @$chap['id']
                                                             ? @$chap['link_other'] ??
                                                                 route('chapters.show', [
                                                                     $story->id,
-                                                                    'link' => @$chap['embed_link'],
+                                                                    'id' => $chap['id'],
                                                                 ])
                                                             : @$chap['link_other'] ??
                                                                 route('chapters.show', [
                                                                     $story->id,
-                                                                    'id' => $chap['id'],
+                                                                    'link' => @$chap['embed_link'],
                                                                 ]);
                                                     @endphp
                                                     <div class="listss {{ $link }}">
@@ -238,13 +239,18 @@
                                                                         {{ Str::limit($chap['name'], 35) }}
                                                                     </a>
                                                                 @else
-                                                                    <a href="javascript:;" data-url="{{ $linkStory }}"
+                                                                    {{-- <a href="javascript:;" data-url="{{ $linkStory }}"
                                                                         data-story="{{ $story->id }}"
                                                                         data-chapter="{{ @$chap['id'] }}"
                                                                         data-chapter-name="{{ @$chap['name'] }}"
                                                                         data-price="{{ number_format(@$chap['price']) }}"
                                                                         class="text-success order"
                                                                         title="{{ $chap['name'] }}">
+                                                                        {{ Str::limit($chap['name'], 35) }}
+                                                                    </a> --}}
+                                                                    <a href="{{ $linkStory }}" class="text-success"
+                                                                        title="{{ $chap['name'] }}">
+                                                                        <i class="fal fa-check"></i>
                                                                         {{ Str::limit($chap['name'], 35) }}
                                                                     </a>
                                                                 @endif
@@ -274,11 +280,12 @@
                     <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
                         <div class="p-2" id="maincontent"
                             style="line-height:1.6; background-color: rgba(234, 228, 211, 0.7);">
+
                             @if (
                                 (currentUser() &&
                                     \App\Domain\Admin\Models\Order::where([
                                         'chapter_id' => @$chapter->id,
-                                    ])->first() &&
+                                    ])->where('user_id', currentUser()->id)->first() &&
                                     $chapter->is_vip) ||
                                     !$chapter->is_vip ||
                                     $check)
@@ -348,9 +355,9 @@
                                     </a>
                                 @else
                                     <a href="javascript:;" data-url="{{ $nextChapter }}"
-                                        data-story="{{ $story->id }}" data-chapter="{{ $chapterNext['id'] }}"
+                                        data-story="{{ $story->id }}" data-chapter="{{ @$chapterNext['id'] }}"
                                         data-chapter-name="{{ $chapterNext['name'] }}"
-                                        data-price="{{ number_format($chapterNext['price']) }}"
+                                        data-price="{{ 150 }}"
                                         class="text-primary order" title="{{ $chapter['name'] }}">
                                         <i class="fa fa-lock"></i> Chương sau <i class="fas fa-chevron-right"></i>
                                     </a>
@@ -459,7 +466,7 @@
                                             'chapter_id' => @$chapterPre['id'],
                                         ])->first()) ||
                                         $check) &&
-                                        $chapterPre['buyed']
+                                        @$chapterPre['buyed']
                                 )
                                     <a href="{{ $preChapter }}" id="prevchap" class="text-dark"
                                         title="{{ $chapterPre['name'] }}">
@@ -471,7 +478,7 @@
                                     <a href="javascript:;" data-url="{{ $preChapter }}"
                                         data-story="{{ $story->id }}" data-chapter="{{ @$chapterPre['id'] }}"
                                         data-chapter-name="{{ $chapterPre['name'] }}"
-                                        data-price="{{ number_format(FalooPrice($chapterPre)) }}"
+                                        data-price="{{ 150 }}"
                                         class="text-primary order" title="{{ $chapterPre['name'] }}" id="prevchap">
                                         <span class="btn btn-light rounded-circle btn-redirect"><i
                                                 class="fa fa-arrow-left"></i></span> Chương trước <i
@@ -508,7 +515,7 @@
                                         ])->first() &&
                                         currentUser()->id) ||
                                         $check) &&
-                                        $chapterNext['buyed']
+                                        @$chapterNext['buyed']
                                 )
                                     <a href="{{ $nextChapter }}" id="nextchap" class="text-dark"
                                         title="{{ $chapterNext['name'] }}">
@@ -519,7 +526,7 @@
                                     <a href="javascript:;" data-url="{{ $nextChapter }}"
                                         data-story="{{ $story->id }}" data-chapter="{{ @$chapterNext['id'] }}"
                                         data-chapter-name="{{ $chapterNext['name'] }}"
-                                        data-price="{{ number_format(FalooPrice($chapterNext)) }}"
+                                        data-price="{{ 150 }}"
                                         class="text-primary order" title="{{ $chapterNext['name'] }}" id="nextchap">
                                         <i class="fa fa-lock"></i> Chương sau <span
                                             class="btn btn-light rounded-circle btn-redirect"><i
@@ -609,7 +616,7 @@
                                                                         <b>VIP</b> {{ Str::limit($chap['name'], 100) }}
                                                                     </a>
                                                                 @else
-                                                                    <a href="javascript:;"
+                                                                    {{-- <a href="javascript:;"
                                                                         data-url="{{ $linkStory }}"
                                                                         data-story="{{ $story->id }}"
                                                                         data-chapter="{{ @$chap['id'] }}"
@@ -618,6 +625,11 @@
                                                                         class="text-success order"
                                                                         title="{{ $chap['name'] }}">
                                                                         {{ Str::limit($chap['name'], 100) }}
+                                                                    </a> --}}
+                                                                    <a href="{{ $linkStory }}"
+                                                                        class="text-success {{ empty($link) ? 'text-vip' : '' }}"
+                                                                        title="{{ $chap['name'] }}">
+                                                                        <b>VIP</b> {{ Str::limit($chap['name'], 100) }}
                                                                     </a>
                                                                 @endif
                                                             @else
@@ -662,11 +674,12 @@
                     <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
                         <div class="" id="maincontent"
                             style="line-height:1.6; background-color: rgba(234, 228, 211, 0.7);">
+                            {{-- @dd($chapter) --}}
                             @if (
                                 (currentUser() &&
                                     \App\Domain\Admin\Models\Order::where([
                                         'chapter_id' => @$chapter->id,
-                                    ])->first() &&
+                                    ])->where('user_id', currentUser()->id)->first() &&
                                     $chapter->is_vip) ||
                                     !$chapter->is_vip ||
                                     $check)
@@ -692,7 +705,7 @@
                                         ])->first() &&
                                         currentUser()->id) ||
                                         $check) &&
-                                        $chapterPre['buyed']
+                                        @$chapterPre['buyed']
                                 )
                                     <a href="{{ $preChapter }}" class="text-dark"
                                         title="{{ $chapterPre['name'] }}">
@@ -704,7 +717,7 @@
                                     <a href="javascript:;" data-url="{{ $preChapter }}"
                                         data-story="{{ $story->id }}" data-chapter="{{ @$chapterPre['id'] }}"
                                         data-chapter-name="{{ $chapterPre['name'] }}"
-                                        data-price="{{ number_format(FalooPrice($chapterPre)) }}"
+                                        data-price="{{ 150 }}"
                                         class="text-dark order" title="{{ $chapter['name'] }}">
                                         <span class="btn btn-light rounded-circle btn-redirect"><i
                                                 class="fa fa-arrow-left"></i></span> Chương trước <i
@@ -741,7 +754,7 @@
                                         ])->first() &&
                                         currentUser()->id) ||
                                         $check) &&
-                                        $chapterNext['buyed']
+                                        @$chapterNext['buyed']
                                 )
                                     <a href="{{ $nextChapter }}" class="text-dark"
                                         title="{{ $chapterNext['name'] }}">
@@ -752,7 +765,7 @@
                                     <a href="javascript:;" data-url="{{ $nextChapter }}"
                                         data-story="{{ $story->id }}" data-chapter="{{ @$chapterNext['id'] }}"
                                         data-chapter-name="{{ $chapterNext['name'] }}"
-                                        data-price="{{ number_format(FalooPrice($chapterNext)) }}"
+                                        data-price="{{ 150 }}"
                                         class="text-dark order" title="{{ $chapter['name'] }}">
                                         <i class="fa fa-lock"></i> Chương sau <span
                                             class="btn btn-light rounded-circle btn-redirect"><i
@@ -864,53 +877,22 @@
             $('.notSelectable').disableSelection();
 
             $('.order').on('click', function() {
-                var story = $(this).attr('data-story');
-                var chapter = $(this).attr('data-chapter-name');
-                var price = $(this).attr('data-price');
+                Swal.fire({
+                    title: 'Thông báo',
+                    html: `Bạn chưa mua chương đến trang mua chương`,
+                    // showCancelButton: true,
+                    confirmButtonColor: '#C9B708',
 
-                // Swal.fire({
-                //     title: 'Bạn muốn mua chương này ?',
-                //     text: `Chương ${chapter} giá 99 vàng`,
-                //     icon: 'warning',
-                //     showCancelButton: true,
-                //     confirmButtonColor: '#3085d6',
-                //     cancelButtonColor: '#d33',
-                //     confirmButtonText: 'Tất nhiên rồi!',
-                //     cancelButtonText: 'Chưa phải lúc này!'
-                // }).then((result) => {
-                //     if (result.isConfirmed) {
-                $(this).attr("disabled", true);
-                var href = $(this).attr('data-url');
-                var chapter = $(this).attr('data-chapter');
-                var url = "{{ route('user.order.chapter') }}";
-                $.post({
-                    url: url,
-                    data: {
-                        chapter: chapter,
-                        story: story
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(res) {
-                        if (res.status == 300) {
-                            toastr.error(res.message, 'Cảnh Báo');
-                        } else {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Thành công',
-                                text: res.message,
-                                confirmButtonText: 'Đọc ngay',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.href = href;
-                                }
-                            })
-                        }
+                    confirmButtonText: 'Đến'
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var bookid = "{{ $story->id }}";
+                        var url = "/truyen/" + bookid;
+                        window.location.href = url;
                     }
                 })
-                //     }
-                // })
+
 
             })
 

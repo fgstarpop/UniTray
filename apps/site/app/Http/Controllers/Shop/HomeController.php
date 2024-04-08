@@ -87,11 +87,11 @@ class HomeController extends Controller
 		// });
 
 		$storyVip = Cache::remember('storyVip', 900, function () {
-			return Story::where('is_vip', '1')->where('complete_free', '1')->orderBy('view_day', 'desc')->take(9)->get();
+			return Story::where('is_vip', '1')->orderBy('view_day', 'desc')->take(9)->get();
 		});
 
 		$storyNew = Cache::remember('storyNew', 900, function () {
-            return Story::where('complete_free', '1')->orderBy('chapter_updated', 'desc')->take(9)->get();
+            return Story::where('is_vip', '1')->orderBy('chapter_updated', 'desc')->take(9)->get();
 		});
 
         $storyNewChap = Cache::remember('storyNewChap', 900, function () {
