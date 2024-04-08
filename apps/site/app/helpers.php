@@ -904,8 +904,9 @@ if (!function_exists("FalooPrice")) {
     }
 }
 
-if(!function_exists("CheckFalooChapter")){
-    function CheckFalooChapter($bookid,$chapid){
+if (!function_exists("CheckFalooChapter")) {
+    function CheckFalooChapter($bookid, $chapid)
+    {
         $apiUrl = 'https://api.giangthe.com/check';
         $body = [
             "bookid" => $bookid,
@@ -1012,7 +1013,7 @@ if (!function_exists("BuyFalooChapter")) {
         });
 
         $returnData['data'] = getChapterFaloo($bookid, $chapid, base64_encode($dataimg))['data'];
-        if(strlen($returnData['data'])<300){
+        if (strlen($returnData['data']) < 300) {
             $returnData['status'] = "error";
             $returnData['data'] = "Lỗi không xác định";
             $returnData['code'] = 7;
@@ -1150,22 +1151,23 @@ if (!function_exists("FalooSave")) {
                 'is_vip' => $chapter['vip']
             ];
             //kiểm tra chương có phải chương vip không
-            if ($chapter['vip']) {
-                //nếu là chương vip thì sẽ kiểm tra xem chapid có nằm trong $chapterListVip
-                $search = $chapterListVip->search(function ($item, $key) use ($chapter) {
-                    return $item['chapid'] == $chapter['id'];
-                });
+
+            //nếu là chương vip thì sẽ kiểm tra xem chapid có nằm trong $chapterListVip
+            $search = $chapterListVip->search(function ($item, $key) use ($chapter) {
+                return $item['chapid'] == $chapter['id'];
+            });
 
 
-                if ($search) {
-                    // thêm cột buyed= false vào mảng $chapterList
-                    $tempchap['buyed'] = false;
-                    $tempchap['word'] = $chapterListVip[$search]['word'];
-                    $tempchap['pricevip'] = $chapterListVip[$search]['price'];
-                } else {
-                    $tempchap['is_vip'] = false;
-                }
+            if ($search !== false) {
+                // thêm cột buyed= false vào mảng $chapterList
+                $tempchap['buyed'] = false;
+                $tempchap['word'] = $chapterListVip[$search]['word'];
+                $tempchap['pricevip'] = $chapterListVip[$search]['price'];
+                $tempchap['is_vip'] = true;
+            } else {
+                $tempchap['is_vip'] = false;
             }
+
             $chapters[] = $tempchap;
         }
         // dd($chapters);
@@ -1193,6 +1195,8 @@ if (!function_exists("FalooUpdateList")) {
         $countListNew = count($chapterList);
         $countlistOld = count($chaptperListOld);
         if ($countListNew <= $countlistOld) {
+            $story->chapter_updated = Carbon::now();
+            $story->save();
             return response()->json([
                 'code' => 200,
                 'message' => 'Không có chương mới nào được đăng.'
@@ -1218,7 +1222,7 @@ if (!function_exists("FalooUpdateList")) {
                 return $item->chapid == $chapter['id'];
             });
             //nếu không tìm thấy chương mới trong danh sách chương cũ thì thêm chương mới vào danh sách chương cũ
-            if (!$search) {
+            if ($search === false) {
                 $tempchap = [
                     'story_id' => $story->id,
                     'name' => $chapter_names[$key],
@@ -1227,21 +1231,24 @@ if (!function_exists("FalooUpdateList")) {
                     'status' => Chapter::ACTIVE,
                     'order' => $order++,
                     'chapid' => $chapter['id'],
-                    'is_vip' => $chapter['vip']
+
                 ];
-                if ($chapter['vip']) {
-                    $searchprice = $chapterListVip->search(function ($item, $key) use ($chapter) {
-                        return $item['chapid'] == $chapter['id'];
-                    });
+
+                $searchprice = $chapterListVip->search(function ($item, $key) use ($chapter) {
+                    return $item['chapid'] == $chapter['id'];
+                });
 
 
-                    if ($searchprice) {
-                        // thêm cột buyed= false vào mảng $chapterList
-                        $tempchap['buyed'] = false;
-                        $tempchap['word'] = $chapterListVip[$search]['word'];
-                        $tempchap['pricevip'] = $chapterListVip[$search]['price'];
-                    }
+                if ($searchprice !== false) {
+                    // thêm cột buyed= false vào mảng $chapterList
+                    $tempchap['buyed'] = false;
+                    $tempchap['word'] = $chapterListVip[$search]['word'];
+                    $tempchap['pricevip'] = $chapterListVip[$search]['price'];
+                    $tempchap['is_vip'] = true;
+                }else{
+                    $tempchap['is_vip'] = false;
                 }
+
             } else {
                 //nếu tìm thấy chương trong danh sách chương cũ thì sẽ lấy dữ liệu của chương cũ
                 $tempchap = $chaptperListOld[$search];

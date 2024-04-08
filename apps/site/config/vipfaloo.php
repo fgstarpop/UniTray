@@ -19,5 +19,5 @@ return [
     "method" => 0, // 0: tính theo 1000 chữ, 1: tính theo giá vip của faloo
 
     //cookie đã đăng nhập của faloo
-    "cookie" => "KeenFire=UMID=33728928&UserID=fgstarpo&Pwd=ba209c3bc007ba61fbd7424082e535f0&Identity=web45387.7350331364&PhotoID=0&NickName=fgstarpo; UU12345678=uuc=132736771118206864325121945"
+    "cookie" => "KeenFire=UMID=33728928&UserID=fgstarpo&Pwd=bf3f10c541737da87cc6007512ef545e&Identity=web45390.4348272298&PhotoID=0&NickName=fgstarpo; UU12345678=uuc=132736771118206864325121945"
 ];

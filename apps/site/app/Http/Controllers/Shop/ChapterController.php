@@ -30,7 +30,7 @@ class ChapterController
     {
         $story = Story::find($story);
         $create_new = 1;
-        if($story == NULL) {
+        if ($story == NULL) {
             return view('errors.404');
         }
 
@@ -60,9 +60,9 @@ class ChapterController
                 abort(404);
             }
             $chapter = Chapter::where('embed_link', $embed_link)->first();
-//            if('https://wap.faloo.com/1012883_4.html' == $embed_link){
-//                dd($chapter);
-//            }
+            //            if('https://wap.faloo.com/1012883_4.html' == $embed_link){
+            //                dd($chapter);
+            //            }
 
             if (!$chapter) {
                 $chapter = $chapters[$search_link];
@@ -85,9 +85,11 @@ class ChapterController
                 } else {
                     if ($parse) {
                         $base_url = $parse['scheme'] . '://' . $parse['host'];
-                        $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+                        $datahosts = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
                         // dd($datahosts);
-                        try{
+                        try {
+
+
                             $new_chap = [
                                 'name' => $chapter['name'],
                                 'story_id' => $chapter['story_id'],
@@ -99,26 +101,25 @@ class ChapterController
                                 'host' => $datahosts['host'],
                                 'idhost' => $datahosts['bookid'],
                                 'idchap' => $datahosts['chapid'],
+                                'content' => $datahosts['content'],
                             ];
                             $chapter = Chapter::create($new_chap);
-                            if(strpos($url,'faloo.com')){
-                                $chapters[$search_link]['id']=$chapter->id;
-                            }else{
+                            if (strpos($url, 'faloo.com')) {
+                                $chapters[$search_link]['id'] = $chapter->id;
+                            } else {
                                 $chapters[$search_link] = $chapter->toArray();
                             }
                             $story->update(['chapters_json' => json_encode($chapters)]);
                             $chapter = embedChapter($url, $base_url, currentUser(), $chapter, $request->is_vip ?? 0) ?? $chapter;
-                            $chapterNewContent = $chapter['content'];
                             $create_new = 2;
-                        }
-                        catch (\Exception $e) {
+                        } catch (\Exception $e) {
                             dd('Không nhúng được');
                         }
                     } else {
                         dd('Không nhúng được');
                     }
                 }
-            }elseif(empty($chapter->content)){
+            } elseif (empty($chapter->content)) {
                 $url = filter_var($embed_link, FILTER_VALIDATE_URL);
                 $parse = parse_url($url);
                 if ($parse) {
@@ -132,19 +133,16 @@ class ChapterController
                     //         ]);
                     //     }
                     // } else {
-                        $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
-                        if (isset($datahosts) && isset($datahosts['bookid']) && isset($datahosts['chapid'])){
-                            $chapter = UpdateContentChapter($url, $base_url, $chapter) ?? $chapter;
-                        }
+                    $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+                    if (isset($datahosts) && isset($datahosts['bookid']) && isset($datahosts['chapid'])) {
+                        $chapter = UpdateContentChapter($url, $base_url, $chapter) ?? $chapter;
+                    }
                     // }
                 }
             }
-
-
-
         } else { // query chapter
             $chapter = Chapter::findOrFail($id);
-            if(!currentUser() && $chapter->is_vip == 1){
+            if (!currentUser() && $chapter->is_vip == 1) {
                 flash()->warning('Vui lòng đăng nhập để mua chương !');
                 return back();
             }
@@ -166,7 +164,8 @@ class ChapterController
             $chapterNext = Chapter::where('story_id', $story->id)->where('id', '>', $chapter->id)->orderBy('id', 'asc')->limit(1)->first();
         }
 
-        $comment = Comment::where(['commentable_type' => 'App/Domain/Chapter/Models/Chapter',
+        $comment = Comment::where([
+            'commentable_type' => 'App/Domain/Chapter/Models/Chapter',
             'commentable_id' => $chapter->id
         ])
             ->with('users', 'parents')
@@ -201,24 +200,25 @@ class ChapterController
             'view_day' => DB::raw('view_day + 1'),
             'view_week' => DB::raw('view_week + 1')
         ]);
-        if(strcmp($story->origin,'uukanshu') == 1)
+        if (strcmp($story->origin, 'uukanshu') == 1)
             $story->chapters =  array_reverse($story->chapters);
         ChapterViewed::dispatch($chapter);
-//        $catStories = StoryCategories::where('stories_id', $story->id)->first() != NULL ? StoryCategories::where('stories_id', $story->id)->first() : '';
-        $listRelated = Story::leftJoin('story_categories','stories.id','=','story_categories.stories_id')
-            ->where('id','!=',$story->id)
-            ->where('count_chapters','>',100)
+        //        $catStories = StoryCategories::where('stories_id', $story->id)->first() != NULL ? StoryCategories::where('stories_id', $story->id)->first() : '';
+        $listRelated = Story::leftJoin('story_categories', 'stories.id', '=', 'story_categories.stories_id')
+            ->where('id', '!=', $story->id)
+            ->where('count_chapters', '>', 100)
             ->whereNull('story_categories.stories_id')
-            ->orderBy('view_week','DESC')->limit(5)->get();
+            ->orderBy('view_week', 'DESC')->limit(5)->get();
 
-            if (!strpos($chapter->content, '<i h=')) {
-                $chapter->content = translate(trim($chapter->content));
-              }
+        if (!strpos($chapter->content, '<i h=')) {
+            $chapter->content = translate(trim($chapter->content));
+        }
 
-              $storyId = $chapter['story_id'];
-              $id =  $chapter["id"];
-        if($create_new == 2) {
+        $storyId = $chapter['story_id'];
+        $id =  $chapter["id"];
+        if ($create_new == 2) {
             $client = new Client();
+            $chapterNewContent = $chapter['content'];
 
             $response = $client->post('http://103.116.104.183:3002/chapter/create-new', [
                 'json' => [
@@ -229,17 +229,15 @@ class ChapterController
             $chapter->update([
                 'content' => NULL
             ]);
-
+            $chapter['content'] = $chapterNewContent;
             $create_new = 1;
-
-            $chapterbase = Chapter::where('id', $chapter['id'])->first();
         }
-        if($chapter['content'] == null) {
-                $dataFromTele = $this->getRemoteData($chapterbase['telegram_id'], $chapterbase['story_id'], $chapterbase["id"]);
-                $chapter['content'] = $dataFromTele;
-                // if (!$chapter['content']) {
-                //     return redirect()->to(url()->current() . "?link=". $embed_link);
-                // }
+        if ($chapter['content'] == null && $chapter['telegram_id'] != null) {
+            $dataFromTele = $this->getRemoteData($chapter['telegram_id'], $chapter['story_id'], $chapter["id"]);
+            $chapter['content'] = $dataFromTele;
+            // if (!$chapter['content']) {
+            //     return redirect()->to(url()->current() . "?link=". $embed_link);
+            // }
         }
 
         if (config('constants.GENERATING_AUDIO', false)) {
@@ -262,7 +260,8 @@ class ChapterController
         ]);
     }
 
-    public function getRemoteData($telegram_id, $storyId, $id) {
+    public function getRemoteData($telegram_id, $storyId, $id)
+    {
         $content = '';
         try {
             $url = "http://103.116.104.183:3002/chapter/file-by-id/{$telegram_id}/storyId/{$storyId}/chapterId/${id}";
@@ -271,14 +270,14 @@ class ChapterController
 
             $content = $response->getBody()->getContents();
         } catch (\Throwable $th) {
-
         }
 
 
         return $content;
     }
 
-    public function getRemoteVipData($storyId, $id) {
+    public function getRemoteVipData($storyId, $id)
+    {
         $url = "http://103.116.104.183:3002/chapter/vip/storyId/{$storyId}/id/{$id}";
 
 
@@ -295,7 +294,8 @@ class ChapterController
 
 
 
-    public function extractNumbersFromURL($url) {
+    public function extractNumbersFromURL($url)
+    {
         if (preg_match('/(\d+)_(\d+)\.html/', $url, $matches)) {
             $firstNumber = $matches[1];
             $secondNumber = $matches[2];
@@ -304,5 +304,4 @@ class ChapterController
             return false;
         }
     }
-
 }
