@@ -53,6 +53,19 @@ class StoryController extends Controller
         $donate = 0;
         $chapLastReaded = 0;
 
+        // if(strpos($story->origin, 'faloo.com')) {
+        //     $chapterList = collect(json_decode($story->chapters_json, 1));
+        //     $chapterListVip = getListFalooVip($story->idhost);
+        //     foreach ($chapterList as $keyx => $chapterx) {
+        //         $search = $chapterListVip->search(function ($item, $key) use ($chapterx) {
+        //             return $item['chapid'] == $chapter['id'];
+        //         });
+
+        //     }
+
+        // }
+
+
         if (!empty(currentUser()->id)) {
 //            if(currentUser()->is_vip == 1){
 //                if($story->type == 1 && $story->mod_id == null){
