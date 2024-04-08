@@ -1191,7 +1191,7 @@ if (!function_exists("FalooUpdateList")) {
         $bookid = $story->idhost;
         $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
         $chapterList = $data['listchap'];
-        $chaptperListOld = collect(json_decode($story->chapters_json));
+        $chaptperListOld = collect(json_decode($story->chapters_json,1));
         $countListNew = count($chapterList);
         $countlistOld = count($chaptperListOld);
         if ($countListNew <= $countlistOld) {
@@ -1219,7 +1219,7 @@ if (!function_exists("FalooUpdateList")) {
         //lặp qua danh sách chương mới và so sánh với chương cũ
         foreach ($chapterList as $key => $chapter) {
             $search = $chaptperListOld->search(function ($item, $key) use ($chapter) {
-                return $item->chapid == $chapter['id'];
+                return $item['chapid'] == $chapter['id'];
             });
             //nếu không tìm thấy chương mới trong danh sách chương cũ thì thêm chương mới vào danh sách chương cũ
             if ($search === false) {
@@ -1253,7 +1253,7 @@ if (!function_exists("FalooUpdateList")) {
                 //nếu tìm thấy chương trong danh sách chương cũ thì sẽ lấy dữ liệu của chương cũ
                 $tempchap = $chaptperListOld[$search];
                 //đổi order của tempchap thành order hiện tại
-                $tempchap->order = $order++;
+                $tempchap['order'] = $order++;
             }
             $chapters[] = $tempchap;
         }
