@@ -245,10 +245,11 @@
                                     <li>
                                         <a href="{{ route('user.order.statistic') }}">Thống kê mua VIP</a>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('user.withdraw') }}">Rút tiền</a>
-                                    </li>
+
                                 @endif
+                                <li>
+                                    <a href="{{ route('user.withdraw') }}">Rút tiền</a>
+                                </li>
                                 <hr>
                                 <li>
                                     <a href="javascript:void(0)" onclick="nhapgift()">Nhập gift code</a>
@@ -1067,6 +1068,7 @@
 
 </header>
 <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
+<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
 @if (isset($players) && !empty($players))
     @if (!$players['is_ban'])
         @push('scripts')

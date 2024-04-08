@@ -77,8 +77,8 @@
         }
 
         /* .text-success {
-                    color: rgb(193, 186, 186) !important;
-                } */
+                            color: rgb(193, 186, 186) !important;
+                        } */
     </style>
 @endpush
 @section('content')
@@ -707,15 +707,22 @@
                                            ])->first() && --}}
                                             {{-- kiểm tra xem biến $chapter có id hay không --}}
 
-                                            @if (!$userOders->firstWhere('chapter_id', @$chapter['id']) && (!currentUser()->user_vip == 1 || !$chapter['buyed']))
+                                            @if (!$userOders->firstWhere('chapter_id', @$chapter['id']) && (!currentUser()->user_vip == 1 || !@$chapter['buyed']))
                                                 <div class="col-9"
                                                     style="display: flex; margin-bottom: 10px;@if (@$chapter['buyed']) color:#0bb948 @else color:red @endif">
                                                     @php
-                                                        if ($chapter['buyed']) {
-                                                            $price = number_format(config('vipfaloo.pricewordolduser'));
+                                                        if (isset($chapter['buyed'])) {
+                                                            if (@$chapter['buyed']) {
+                                                                $price = number_format(
+                                                                    config('vipfaloo.pricewordolduser'),
+                                                                );
+                                                            } else {
+                                                                $price = number_format(FalooPrice($chapter));
+                                                            }
                                                         } else {
-                                                            $price = number_format(FalooPrice($chapter));
+                                                            $price = 150;
                                                         }
+
                                                         // dd( $price);
                                                         $dataChapters =
                                                             @$chapter['id'] .
@@ -743,10 +750,16 @@
                                                 <div class="col-3"
                                                     style="margin-bottom: 10px;@if (@$chapter['buyed']) color:#0bb948 @else color:red @endif">
                                                     @php
-                                                        if (@$chapter['buyed']) {
-                                                            $price = number_format(config('vipfaloo.pricewordolduser'));
+                                                        if (isset($chapter['buyed'])) {
+                                                            if (@$chapter['buyed']) {
+                                                                $price = number_format(
+                                                                    config('vipfaloo.pricewordolduser'),
+                                                                );
+                                                            } else {
+                                                                $price = number_format(FalooPrice($chapter));
+                                                            }
                                                         } else {
-                                                            $price = number_format(FalooPrice($chapter));
+                                                            $price = 150;
                                                         }
                                                     @endphp
                                                     <label for="chap-{{ $index }}">
@@ -792,7 +805,7 @@
 <div class="modal-header">
 <h6 class="modal-title">Thưởng truyện</h6>
 <button type="button" class="btn-close" data-bs-dismiss="modal"
-    aria-label="Close"></button>
+aria-label="Close"></button>
 </div>
 <div class="modal-body">
 <form method="post" action="" style="text-align:left">
@@ -801,15 +814,15 @@
 <p>Hôm nay bạn có 1 điểm thưởng miễn phí</p>
 <p>Số vàng bạn hiện có</p>
 <div class="position-relative">
-    <input type="text" value="{{ number_format((int) $wallet->gold) }}" readonly
-           class="wallet form-control">
+<input type="text" value="{{ number_format((int) $wallet->gold) }}" readonly
+class="wallet form-control">
 </div>
 <p>Số điểm thưởng muốn tặng?</p>
 <div class="position-relative">
-    <input type="text" value="1" readonly class="form-control">
+<input type="text" value="1" readonly class="form-control">
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-gt gifts">Tặng ngay</button>
+<button type="button" class="btn btn-gt gifts">Tặng ngay</button>
 </div>
 </form>
 </div>
@@ -981,24 +994,30 @@
                                     }
                                 }
                                 $linkStory = @$chapter['id']
-                                    ?  @$chapter['link_other'] ??
+                                    ? @$chapter['link_other'] ??
                                         route('chapters.show', [$story->id, 'id' => $chapter['id']])
-                                    :@$chapter['link_other'] ??
+                                    : @$chapter['link_other'] ??
                                         route('chapters.show', [$story->id, 'link' => @$chapter['embed_link']]);
-
 
                             @endphp
                             @if (!empty(currentUser()->id))
                                 @if (@$chapter['is_vip'] == 1)
-
                                     @php
+                                    if(isset($chapter['buyed'])){
                                         if (@$chapter['buyed']) {
                                             $price = number_format(config('vipfaloo.pricewordolduser'));
                                         } else {
                                             $price = number_format(FalooPrice($chapter));
                                         }
+                                    }else{
+                                        $price = 150;
+                                    }
+
                                     @endphp
-                                    @if ($userOders->firstWhere('chapter_id', @$chapter['id']) || $check || (currentUser()->user_vip == 1 && @$chapter['buyed']))
+                                    @if (
+                                        $userOders->firstWhere('chapter_id', @$chapter['id']) ||
+                                            $check ||
+                                            (currentUser()->user_vip == 1 && @$chapter['buyed']))
                                         <div class="col-md-4" style="width: 100% !important">
                                             <div class="tt-chapter {{ @$link }}"
                                                 @if (@$link == 'chaplastreaded') id="last_readed" @endif>
@@ -1069,8 +1088,7 @@
                 <div class='row @if ((new \Jenssegers\Agent\Agent())->isMobile()) pt-3 @endif'
                     style="display: flex; flex-direction: row; justify-content: center;">
                     @if (currentUser() &&
-                            $story->type == 1 &&
-                            $story->complete_free == \App\Domain\Story\Models\Story::COMPLETE_FREE_INACTIVE)
+                            $story->type == 1)
                         <div class="col-6">
                             <div style="background-color:#f2f2f2; cursor: pointer;"
                                 class="pt-2 pb-2 mt-1 updateEmbedStory">Cập nhật chương mới
@@ -1225,7 +1243,11 @@
                             },
                             success: function(res) {
                                 if (res.status == 300) {
-                                    toastr.error(res.message, 'Cảnh Báo');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Lỗi',
+                                        text: res.message,
+                                    })
                                 } else {
                                     Swal.fire({
                                         icon: 'success',
@@ -1296,7 +1318,12 @@
                 $('.buy-chaps-button').prop('disabled', true);
                 Swal.fire({
                     title: 'Xác nhận mua chương',
-                    text: `Bạn muốn mua ${countChuong } chương với giá ${tongTien} vàng ?`,
+                    html: `
+                    Bạn muốn mua ${countChuong } chương với giá ${tongTien} vàng ?
+                    <br>Lưu ý:
+                    <br>Mỗi lần được mua tối đa 3 chương màu đỏ, màu xanh lá mua không giới hạn.
+                    <br>Mỗi phút chỉ được mua chương 3 lần.
+                    <br>Khi bấm mua chương vui lòng không thoát trang cho đến khi có thông báo.`,
                     showCancelButton: true,
                     confirmButtonColor: '#C9B708',
                     cancelButtonColor: '#d33',
@@ -1317,16 +1344,21 @@
                                 },
                                 success: function(res) {
                                     if (res.status == 300) {
-                                        toastr.error(res.message, 'Cảnh Báo');
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Lỗi',
+                                            text: res.message,
+                                        })
                                     } else {
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Thành công',
                                             text: res.message,
                                         })
+                                        window.listBuy = [];
+                                        location.reload();
                                     }
-                                    window.listBuy = [];
-                                    // location.reload();
+
                                 }
                             })
                         }

@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
+use DB;
 use Str;
-use Carbon\Carbon;
-use App\Domain\Admin\Models\Order;
 use App\User;
-use App\Domain\Admin\Models\Wallet;
-use App\Domain\Chapter\Models\Chapter;
-use App\Domain\Story\Models\Story;
-use App\Domain\Admin\Models\Statistics;
-use App\Domain\Admin\Models\WalletTransaction;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use App\Domain\Activity\Follow;
 use App\Domain\Activity\Whishlist;
-use DB;
+use App\Domain\Admin\Models\Order;
+use App\Domain\Story\Models\Story;
+use App\Domain\Admin\Models\Wallet;
 use App\Domain\Activity\Notification;
+use Illuminate\Support\Facades\Cache;
+use App\Domain\Chapter\Models\Chapter;
+use App\Domain\Admin\Models\Statistics;
+use App\Domain\Admin\Models\WalletTransaction;
 
 class OrderController
 {
@@ -68,11 +70,66 @@ class OrderController
         }
         if ($req->listBuy) {
             $listBuy = $req->listBuy;
-            if (count($listBuy) > 10) {
+            if (count($listBuy) < 1) {
                 return response()->json([
                     'status' => '300',
-                    'message' => __('Bạn không thể mua quá 10 chương cùng lúc!'),
+                    'message' => __('Bạn cần chọn chương để mua!'),
                 ]);
+            }
+            // if (count($listBuy) > 10) {
+            //     return response()->json([
+            //         'status' => '300',
+            //         'message' => __('Bạn không thể mua quá 10 chương cùng lúc!'),
+            //     ]);
+            // }
+            $story    = Story::find($listBuy[0][1]);
+            if (!$story) {
+                return response()->json([
+                    'status' => '300',
+                    'message' => __('Truyện không tồn tại!'),
+                ]);
+            }
+            $bookid = $story->idhost;
+            $chapterList = json_decode($story->chapters_json, 1);
+            $collectChapterList = collect($chapterList);
+            $ichapvip = 0;
+            for ($i = 0; $i < count($listBuy); $i++) {
+                $chapid = $listBuy[$i][4] ?? $listBuy[$i][0];
+                $searchList = $collectChapterList->search(function ($item) use ($chapid) {
+                    // dd($item['id']);
+                    // if (isset($item['chapid'])) {
+                        return Arr::get($item,'chapid') == $chapid || Arr::get($item,'id') == $chapid;
+                    // } else {
+                        // return Arr::get($item,'id') == $chapid;
+                        // return $item['id'] == $chapid;
+                    } );
+                if ($searchList === false) {
+                    return response()->json([
+                        'status' => '300',
+                        'message' => __('Chương không tồn tại!'),
+                    ]);
+                }
+                //check chap xem có phải là vip hay không
+                if ($chapterList[$searchList]['is_vip'] && empty(@$chapterList[$searchList]['id'])&& !@$chapterList[$searchList]['buyed']) {
+                    $ichapvip += 1;
+                }
+            }
+            if ($ichapvip > 3) {
+
+                return response()->json([
+                    'status' => '300',
+                    'message' => __('Bạn không thể mua quá 3 chương vip cùng lúc!'),
+                ]);
+            }
+            //kiểm tra nếu ichapvip lớn hơn 0 thì sẽ lock mua chương không cho các user khác mua.
+            if ($ichapvip > 0) {
+                $lock = Cache::lock("lockBuyFaloo", 60);
+                if (!$lock->get()) {
+                    return response()->json([
+                        'status' => '300',
+                        'message' => __('Hệ thống đang mua chương, vui lòng thử lại sau!'),
+                    ]);
+                }
             }
 
             for ($i = 0; $i < count($listBuy); $i++) {
@@ -82,27 +139,19 @@ class OrderController
                 $wallet   = Wallet::where('user_id', currentUser()->id)->first();
                 $listBuyConnect = $listBuy[$i];
                 $story    = Story::find($listBuyConnect[1]);
-                if (!$story) {
-                    return response()->json([
-                        'status' => '300',
-                        'message' => __('Truyện không tồn tại!'),
-                    ]);
-                }
+
                 $first = false;
                 if (empty($listBuy[$i][0]) || !$chapter) {
                     $listBuyConnect = $listBuy[$i];
-
-                    $bookid = $story->idhost;
-                    $chapterList = json_decode($story->chapters_json, 1);
-                    $collectChapterList = collect($chapterList);
                     $chapid = $listBuyConnect[4];
                     $searchList = $collectChapterList->search(function ($item) use ($chapid) {
+                        // dd($item['id']);
                         return $item['chapid'] == $chapid;
                     });
                     if ($searchList === false) {
                         return response()->json([
                             'status' => '300',
-                            'message' => __('Chương không tồn tại!'),
+                            'message' => __('Chương không tồn tại!')
                         ]);
                     }
                     $price_chapters = number_format(FalooPrice($chapterList[$searchList]));
@@ -151,7 +200,11 @@ class OrderController
                     if ($vip == 1) {
                         $price_chapters = config("vipfaloo.priceworduservip");
                     } else {
-                        $price_chapters = config("vipfaloo.pricewordolduser");
+                        if ($chapter->user_id == null) {
+                            $price_chapters = 150;
+                        } else {
+                            $price_chapters = config("vipfaloo.pricewordolduser");
+                        }
                     }
                     if ($wallet->gold < $price_chapters) {
                         return response()->json([
@@ -176,9 +229,9 @@ class OrderController
 
 
                 try {
-                    \DB::transaction(function () use ($first,$story, $chapter, $wallet, $price_chapters) {
+                    \DB::transaction(function () use ($first, $story, $chapter, $wallet, $price_chapters) {
                         $currentMod = $chapter->user_id;
-                        if (empty($currentMod)||$first) {
+                        if (empty($currentMod) || $first) {
                             $currentMod = 4;
                         }
                         $userTurnOver = User::find($currentMod);
@@ -312,6 +365,12 @@ class OrderController
                     return back()->with(['message' => $e->getMessage()]);
                 }
             }
+            $countss = count($listBuy);
+            //unlock mua chương
+            if($ichapvip > 0){
+                $lock->release();
+            }
+
         } else {
 
             $chapter  = Chapter::find($req->chapter);
@@ -326,6 +385,14 @@ class OrderController
             $vip = currentUser()->user_vip;
             $first = false;
             if (!$chapter) {
+                //khoá mua chương
+                $lock = Cache::lock("lockBuyFaloo", 60);
+                if (!$lock->get()) {
+                    return response()->json([
+                        'status' => '300',
+                        'message' => __('Hệ thống đang mua chương, vui lòng thử lại sau!'),
+                    ]);
+                }
                 $chapid = $req->chapid;
                 $bookid = $story->idhost;
                 $chapterList = json_decode($story->chapters_json, 1);
@@ -336,55 +403,61 @@ class OrderController
                 if ($searchList === false) {
                     return response()->json([
                         'status' => '300',
-                        'message' => __('Chương không tìm thấy!')
+                        'message' => __('Chương không tồn tại!')
                     ]);
                 }
                 $price_chapters = number_format(FalooPrice($chapterList[$searchList]));
-                    if ($wallet->gold < $price_chapters) {
-                        return response()->json([
-                            'status' => '300',
-                            'message' => __('Bạn không đủ vàng để mua chương này!'),
-                        ]);
-                    }
-                    $text = BuyFalooChapter($bookid, $chapid);
-                    if ($text['code'] != 0) {
-                        return response()->json([
-                            'status' => '300',
-                            'message' => __('Mua chương thất bại!'),
-                            'code' => $text['code']
-                        ]);
-                    }
-
-                    $chapter = Chapter::create([
-                        'name' => $chapterList[$searchList]['name'],
-                        'order' =>  $chapterList[$searchList]['order'],
-                        'content' => $text['data'],
-                        'status' => Chapter::ACTIVE,
-                        'is_cn' => true,
-                        'story_id' => $story->id,
-                        'is_vip' => true,
-                        'link_other ' =>  null,
-                        'mod_id' =>  null,
-                        'price' =>  $price_chapters,
-                        'embed_link' => $chapterList[$searchList]['embed_link'],
-                        'host' => $story->host,
-                        'idhost' => $bookid,
-                        'idchap' => $chapid,
-                        'user_id' => currentUser()->id,
-
+                if ($wallet->gold < $price_chapters) {
+                    return response()->json([
+                        'status' => '300',
+                        'message' => __('Bạn không đủ vàng để mua chương này!'),
                     ]);
-                    $chapterList[$searchList]['id'] = $chapter->id;
-                    $chapterList[$searchList]['buyed'] = true;
+                }
+                $text = BuyFalooChapter($bookid, $chapid);
+                if ($text['code'] != 0) {
+                    return response()->json([
+                        'status' => '300',
+                        'message' => __('Mua chương thất bại!'),
+                        'code' => $text['code']
+                    ]);
+                }
 
-                    $story->update(['chapters_json' => json_encode($chapterList)]);
-                    $first = true;
+                $chapter = Chapter::create([
+                    'name' => $chapterList[$searchList]['name'],
+                    'order' =>  $chapterList[$searchList]['order'],
+                    'content' => $text['data'],
+                    'status' => Chapter::ACTIVE,
+                    'is_cn' => true,
+                    'story_id' => $story->id,
+                    'is_vip' => true,
+                    'link_other ' =>  null,
+                    'mod_id' =>  null,
+                    'price' =>  $price_chapters,
+                    'embed_link' => $chapterList[$searchList]['embed_link'],
+                    'host' => $story->host,
+                    'idhost' => $bookid,
+                    'idchap' => $chapid,
+                    'user_id' => currentUser()->id,
+
+                ]);
+                $chapterList[$searchList]['id'] = $chapter->id;
+                $chapterList[$searchList]['buyed'] = true;
+
+                $story->update(['chapters_json' => json_encode($chapterList)]);
+                $first = true;
+                $lock->release();
             }
             if (!$first) {
                 if ($vip == 1) {
                     $price_chapters = config("vipfaloo.priceworduservip");
                 } else {
-                    $price_chapters = config("vipfaloo.pricewordolduser");
+                    if ($chapter->user_id == null) {
+                        $price_chapters = 150;
+                    } else {
+                        $price_chapters = config("vipfaloo.pricewordolduser");
+                    }
                 }
+
                 if ($wallet->gold < $price_chapters) {
                     return response()->json([
                         'status' => '300',
@@ -405,10 +478,10 @@ class OrderController
                 }
             }
             try {
-                \DB::transaction(function () use ($first,$story,$req, $chapter, $wallet, $price_chapters) {
+                \DB::transaction(function () use ($first, $story, $req, $chapter, $wallet, $price_chapters) {
 
                     $currentMod = $chapter->user_id;
-                    if (empty($currentMod)||$first) {
+                    if (empty($currentMod) || $first) {
                         $currentMod = 4;
                     }
                     $userTurnOver = User::find($currentMod);
