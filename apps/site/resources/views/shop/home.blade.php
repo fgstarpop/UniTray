@@ -10,7 +10,7 @@
 @section('seo')
     <link rel="canonical" href="{{ url('/') }}"/>
     <meta name="title" content="Giáng Thế - Đọc truyện Vip Faloo online miễn phí kết hợp game tu tiên"/>
-    <meta name="description" content="ĐĐọc truyện VIP FALOO online miễn phí, sảng văn, hài hước từ Trung Quốc miễn phí. Đủ các thể loại từ huyền huyễn, tiên võ, đô thị,...."/>
+    <meta name="description" content="Đọc truyện VIP FALOO online miễn phí, sảng văn, hài hước từ Trung Quốc miễn phí. Đủ các thể loại từ huyền huyễn, tiên võ, đô thị,...."/>
     <meta name="keywords" content="Đọc truyện sảng văn hài hước online"/>
     <meta property="og:url" content="https://giangthe.com/"/>
     <meta property="og:title" content="Giáng Thế - Đọc truyện Vip Faloo online miễn phí kết hợp game tu tiên"/>
@@ -52,7 +52,9 @@
         </div>
     </div>
     @if((new \Jenssegers\Agent\Agent())->isMobile())
-
+    @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
+        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
+    @endif
 
         <section class="content container mt-2 search-section" style="min-height: unset">
             <div class="col-12">
