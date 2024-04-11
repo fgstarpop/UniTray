@@ -2,7 +2,7 @@
 
 // Cài đặt giá tiền cho mỗi 1000 chữ, tính theo VNĐ
 return [
-    "priceword" => 180, // giá tiền cho mỗi 1000 chữ khi chưa có trong db (mua lần đầu tiên)
+    "priceword" => 200, // giá tiền cho mỗi 1000 chữ khi chưa có trong db (mua lần đầu tiên)
 
     "pricevip" => 100, // giá tiền cho mỗi 1 điểm vip của faloo khi chưa có trong db (mua lần đầu tiên)
 
@@ -20,4 +20,5 @@ return [
 
     //cookie đã đăng nhập của faloo
     "cookie" => "KeenFire=UMID=33728928&UserID=fgstarpo&Pwd=bf3f10c541737da87cc6007512ef545e&Identity=web45390.4348272298&PhotoID=0&NickName=fgstarpo; UU12345678=uuc=132736771118206864325121945"
+    // "cookie" => "KeenFire=UMID=34092005&UserID=hoanganh97&Pwd=74639c9632ac61ab0292f3ee2d30ceeb&Identity=web45394.1252113685&PhotoID=0&NickName=hoanganh97; UU12345678=uuc=133573096409661720189114593"
 ];
