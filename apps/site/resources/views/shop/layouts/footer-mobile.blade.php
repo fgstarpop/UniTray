@@ -3,7 +3,9 @@
         <img src="{{ asset('frontend/images/mobile/bg-footer.svg') }}"
              alt="{{ setting('store_name', 'Giangthe.com') }}">
     </div>
-    
+    @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
+    <script src="https://www.vipads.live/vn/D39546F9-D087-1733-33-2E598A56F3FB.blpha"></script>
+    @endif
     <div class="row d-flex justify-content-center">
         <div class="col-sm-7 re-col-foot">
             @if (setting('store_logo'))
