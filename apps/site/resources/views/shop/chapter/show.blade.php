@@ -435,9 +435,6 @@
                         <h9 class="title">
                             <strong> --------- Quảng cáo --------- </strong>
                             {{--  @include('shop.layouts.partials.ads')  --}}
-                            @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                            <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
-                            @endif
                     </div>
                     <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
                 @endif
@@ -797,9 +794,6 @@
                 {{--        <br> --}}
                 {{--       @include('shop.layouts.comment',['type' => "App/Domain/Chapter/Models/Chapter",'id' => $chapter->id ]) --}}
             </div>
-            @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-            <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
-            @endif
             <div class="related-stories">
                 <h4 class="title">
                     Có thể bạn sẽ thích

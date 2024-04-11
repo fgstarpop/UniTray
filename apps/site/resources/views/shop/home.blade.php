@@ -52,9 +52,6 @@
         </div>
     </div>
     @if((new \Jenssegers\Agent\Agent())->isMobile())
-    @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
-    @endif
 
         <section class="content container mt-2 search-section" style="min-height: unset">
             <div class="col-12">
