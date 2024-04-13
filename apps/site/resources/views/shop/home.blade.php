@@ -52,7 +52,9 @@
         </div>
     </div>
     @if((new \Jenssegers\Agent\Agent())->isMobile())
-
+    @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
+<script src="https://www.vipads.live/vn/c-1734-25.js"></script>
+@endif
         <section class="content container mt-2 search-section" style="min-height: unset">
             <div class="col-12">
                 <div class="noti-block p-3 mb-3 border-danger border-3" style="border-style: solid; background-color: #FFF8B7;">
