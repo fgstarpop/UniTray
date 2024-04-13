@@ -368,7 +368,7 @@ class AccountController
 
     public function upgradeVip()
     {
-        $vipPrice = 2000;
+        $vipPrice = 200000;
         if(!Auth::guard('web')->check()){
             flash()->error('Bạn cần đăng nhập để sử dụng tính năng này');
             return redirect()->route('login');
@@ -387,20 +387,31 @@ class AccountController
         // }
 
         //Check if not enough linh thach
-        $players = $user->get_charaters;
-        $linh_thach = $players->linh_thach;
-        if ($linh_thach < $vipPrice) {
-            flash()->error('Bạn chưa đủ linh thạch!');
+        // $players = $user->get_charaters;
+        $wallet = $user->get_gold;
+        $gold = $wallet->gold;
+        // $linh_thach = $players->linh_thach;
+        if ($gold < $vipPrice) {
+            flash()->error('Bạn chưa đủ 200k vàng!');
         } else {
             try {
-                $players->update([
-                    'linh_thach' => $linh_thach - $vipPrice
-                ]);
+                $nowtime = Carbon::now();
                 $user = currentUser();
                 $user->user_vip = 1;
                 $user->vip_registration_date = Carbon::now();
                 $user->vip_expired_date = Carbon::now()->addMonth();
                 $user->save();
+                WalletTransaction::create([
+                    'transaction_id'    => \Illuminate\Support\Str::uuid(),
+                    'user_id'           => $user->id,
+                    'change_type'       => 1,
+                    'transaction_type'  => 7,
+                    'created_at'        => $nowtime,
+                    'gold'              => 200000,
+                    'yuan'              => 0,
+                    'gold_balance'      => $user->get_gold->gold,
+                    'yuan_balance'      => $user->get_gold->silver,
+                ]);
             } catch (\Exception $e) {
                 flash()->error($e->getMessage());
             }
