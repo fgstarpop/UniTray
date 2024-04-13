@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use App\Domain\Chapter\Models\Chapter;
 use App\Domain\Category\Models\Category;
+use PhpParser\JsonDecoder;
 use Symfony\Component\DomCrawler\Crawler;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
@@ -1191,7 +1192,7 @@ if (!function_exists("FalooUpdateList")) {
         $bookid = $story->idhost;
         $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
         $chapterList = $data['listchap'];
-        $chaptperListOld = collect(json_decode($story->chapters_json,1));
+        $chaptperListOld = collect(json_decode($story->chapters_json, 1));
         $countListNew = count($chapterList);
         $countlistOld = count($chaptperListOld);
         if ($countListNew <= $countlistOld) {
@@ -1245,10 +1246,9 @@ if (!function_exists("FalooUpdateList")) {
                     $tempchap['word'] = $chapterListVip[$search]['word'];
                     $tempchap['pricevip'] = $chapterListVip[$search]['price'];
                     $tempchap['is_vip'] = true;
-                }else{
+                } else {
                     $tempchap['is_vip'] = false;
                 }
-
             } else {
                 //nếu tìm thấy chương trong danh sách chương cũ thì sẽ lấy dữ liệu của chương cũ
                 $tempchap = $chaptperListOld[$search];
@@ -1267,21 +1267,60 @@ if (!function_exists("FalooUpdateList")) {
         ]);
     }
 }
-if (!function_exists("daertytest")) {
-    function daertytest($url)
-    {
-        $datahost = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
-        $bookid = $datahost['bookid'];
-        $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
-        $chapterList = $data['listchap'];
+// if (!function_exists("daertytest")) {
+//     function daertytest($url)
+//     {
+//         $datahost = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+//         $bookid = $datahost['bookid'];
 
-        foreach ($chapterList as $key => $chapter) {
-            # code...
-            if ($chapter['vip']) {
-                $aa = BuyFalooChapter($bookid, $chapter['id']);
-                //ngủ ngẫu nhiên từ 2-10 giây
-                sleep(random_int(2, 10));
-            }
-        }
-    }
-}
+//         $story = Story::where('idhost', $bookid)->where('host', $datahost['host'])->first();
+//         if ($story) {
+//             $chapterList = json_decode($story->chapters_json, 1);
+//         }
+
+//         foreach ($chapterList as $key => $chapter) {
+//             # code...
+//             if ($chapter['is_vip'] && $chapter['chapid'] >= 3235) {
+//                 // $aa = BuyFalooChapter($bookid, $chapter['id']);
+//                 //ngủ ngẫu nhiên từ 2-10 giây
+//                 $chapterc = Chapter::where('host', $datahost['host'])->where('idchap', $chapter['chapid'])->where('idhost', "$bookid")->first();
+//                 // sleep(random_int(2, 10));
+//                 if (!$chapterc) {
+//                     $text = BuyFalooChapter($bookid, $chapter['chapid']);
+//                     if ($text['code'] != 0) {
+//                         dd ($text['data']);
+//                         continue;
+//                     }
+//                     $price_chapters = number_format(FalooPrice($chapter));
+//                     $chapterc = Chapter::create([
+//                         'name' => $chapter['name'],
+//                         'order' =>  $chapter['order'],
+//                         'content' => $text['data'],
+//                         'status' => Chapter::ACTIVE,
+//                         'is_cn' => true,
+//                         'story_id' => $story->id,
+//                         'is_vip' => true,
+//                         'link_other ' =>  null,
+//                         'mod_id' =>  null,
+//                         'price' =>  $price_chapters,
+//                         'embed_link' => $chapter['embed_link'],
+//                         'host' => $story->host,
+//                         'idhost' => $bookid,
+//                         'idchap' => $chapter['chapid'],
+//                         'user_id' => 4,
+
+//                     ]);
+//                     $chapterList[$key]['id'] = $chapterc->id;
+//                     $chapterList[$key]['buyed'] = true;
+//                     $story->update(['chapters_json' => json_encode($chapterList)]);
+//                     file_put_contents("$bookid.txt", $chapter['name_cn'] . "\r\n\r\n\r\n" . $chapterc->content . "\r\n\r\n\r\n\r\n\r\n", FILE_APPEND);
+//                     sleep(random_int(2, 10));
+//                 } else {
+//                     file_put_contents("$bookid.txt", $chapter['name_cn'] . "\r\n\r\n\r\n" . $chapterc->content . "\r\n\r\n\r\n\r\n\r\n", FILE_APPEND);
+//                 }
+//                 //sleep random từ 2-10 giây
+
+//             }
+//         }
+//     }
+// }

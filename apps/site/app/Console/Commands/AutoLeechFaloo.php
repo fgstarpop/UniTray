@@ -52,7 +52,7 @@ class AutoLeechFaloo extends Command
                 }
                 $url = self::URL;
                 $url = str_replace('{bookid}', $value['bookid'], $url);
-                embedStoryUukanshu($url, '', $admin);
+                FalooSave($url, $admin);
                 sleep(rand(1,5));
             }
             setting_custom('faloo_leech_book_id', $matches[0]['bookid']);
