@@ -392,7 +392,7 @@ class AccountController
         $gold = $wallet->gold;
         // $linh_thach = $players->linh_thach;
         if ($gold < $vipPrice) {
-            flash()->error('Bạn chưa đủ 200k vàng!');
+            flash()->error('Bạn chưa đủ 100k vàng!');
         } else {
             try {
                 $nowtime = Carbon::now();
@@ -407,7 +407,7 @@ class AccountController
                     'change_type'       => 1,
                     'transaction_type'  => 7,
                     'created_at'        => $nowtime,
-                    'gold'              => 200000,
+                    'gold'              => 100000,
                     'yuan'              => 0,
                     'gold_balance'      => $user->get_gold->gold,
                     'yuan_balance'      => $user->get_gold->silver,
