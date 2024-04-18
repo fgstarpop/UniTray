@@ -73,7 +73,7 @@
                         <p style="margin-bottom: 0.1rem;">- Số tích phân đang có: {{ $player->tichphan }}</p>
                     </div>
                 </div>
-               
+
                 <div class="row body-mid-pk">
                     <div class="col-12">
                         <p> Chế độ PK: Có 2 chế độ Thường và Cao cấp
@@ -342,7 +342,7 @@
                     </div>
                 </div>
             </div>
-            <div class="chat-section">
+            {{-- <div class="chat-section">
                         <div class="chat-header">
                             <span class="fs-4">Chat Box</span><br>
                             <span class="mt-4" style="font-size: 13px;">Kênh chính</span>
@@ -354,7 +354,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div>--}}
                     <hr style="height: 45px; background: #596785; margin-top: 0px;">
 
                     <div class="row table-than-long" style="">

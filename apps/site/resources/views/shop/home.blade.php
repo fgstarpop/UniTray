@@ -295,7 +295,7 @@
             </div>
         </div>
 
-        <div class="container contents mt-3">
+        {{-- <div class="container contents mt-3">
             <div class="body-section row mobile-padding">
                 <div class="col-sm-7 col-md-7">
                     <div class="chat-section">
@@ -311,7 +311,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div>--}}
 
 
                 <div class="col-sm-5 col-md-5">
@@ -670,7 +670,7 @@
     </div>
 
 
-    <div class="chat-section">
+    {{-- <div class="chat-section">
                         <div class="chat-header" style= "text-align: center;" >
                             <span class="fs-4" >Chat Box</span><br>
                             <span class="mt-4" style="font-size: 13px; color: red">Kênh chính</span>
@@ -682,7 +682,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div>--}}
 
 
     @foreach($rankingModal as $modal)

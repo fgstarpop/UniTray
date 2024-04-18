@@ -68,9 +68,9 @@ class Kernel extends ConsoleKernel
 		//  $schedule->command('leech:trxs')->everyFiveMinutes()->withoutOverlapping();
 		// $schedule->command('leech:xinyushuwu')->everyFiveMinutes()->withoutOverlapping();
 		// $schedule->command(AutoLeechFaloo::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command(AutoLeechUukanshu::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        // $schedule->command(AutoLeechUukanshu::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
         $schedule->command(AutoLeechQimao::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command(AutoLeechTongrenquan::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        // $schedule->command(AutoLeechTongrenquan::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
         $schedule->command(AutoLeech69shuba::class)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
         $schedule->command(AutoLeechFanqienovel::class)->everyTenMinutes()->withoutOverlapping()->runInBackground();
         // $schedule->command(AutoLeechXinyushuwu::class)->everyTenMinutes()->withoutOverlapping()->runInBackground();
@@ -80,11 +80,11 @@ class Kernel extends ConsoleKernel
             SitemapGenerator::create(config('app.url')->writeToFile(public_path('sitemap.xml')));
         })->daily();
 
-		$schedule->call(function () {
-            $now = Carbon::now();
+		// $schedule->call(function () {
+            // $now = Carbon::now();
             //user is offline after 5 minutes
-            Model_charater::where('time_last_online', '<', $now->copy()->subMinutes(5)->toDateTimeString())
-                ->update(['is_online' => false]);
+            // Model_charater::where('time_last_online', '<', $now->copy()->subMinutes(5)->toDateTimeString())
+                // ->update(['is_online' => false]);
 
             //kiểm tra hộ đạo, nếu hết thời gian sẽ set is_hodao = false
             Model_charater::where('date_hodao', '<', $now)
@@ -98,35 +98,35 @@ class Kernel extends ConsoleKernel
             ->update(['pkmode' => 0]);
             //kiểm tra có auto và đến thời gian nhặt sẽ tự nhặt
 
-            $players = Model_charater::where("is_auto", 1)
-                ->where("time_next_collect" ,'<', $now)
-                ->get();
-            foreach ($players as $player) {
-                $time_min = 220;
-                $time_max = 800;
-                $time_rand = rand($time_min - $player->luk, $time_max - ($player->luk * 6));
-                $time = $time_rand < 120 ? 120 : $time_rand;
-                $item = new TuLuyenItems($player);
-                $collect = $item->get_collect();
+            // $players = Model_charater::where("is_auto", 1)
+                // ->where("time_next_collect" ,'<', $now)
+                // ->get();
+            // foreach ($players as $player) {
+                // $time_min = 220;
+                // $time_max = 800;
+                // $time_rand = rand($time_min - $player->luk, $time_max - ($player->luk * 6));
+                // $time = $time_rand < 120 ? 120 : $time_rand;
+                // $item = new TuLuyenItems($player);
+                // $collect = $item->get_collect();
                 // dd($collect);
-                if ($collect['type'] == 15) {
-                    $cfg = new TuLuyenCfg();
-                    $rand_lt = $cfg->random_weight([1 => 100]);
-                    $player->update([
-                        'linh_thach' => $player->linh_thach + $rand_lt,
-                        'is_collect' => false,
-                        'time_next_collect' => $now->copy()->addSeconds($time),
-                        'time_last_collect' => $now,
-                    ]);
-                }else{
-                    $player->update([
-                        'is_collect' => false,
-                        'time_next_collect' => $now->copy()->addSeconds($time),
-                        'time_last_collect' => $now,
-                    ]);
-                }
-            }
-        })->hourly();
+                // if ($collect['type'] == 15) {
+                    // $cfg = new TuLuyenCfg();
+                    // $rand_lt = $cfg->random_weight([1 => 100]);
+                    // $player->update([
+                        // 'linh_thach' => $player->linh_thach + $rand_lt,
+                        // 'is_collect' => false,
+                        // 'time_next_collect' => $now->copy()->addSeconds($time),
+                        // 'time_last_collect' => $now,
+                    // ]);
+                // }else{
+                    // $player->update([
+                        // 'is_collect' => false,
+                        // 'time_next_collect' => $now->copy()->addSeconds($time),
+                        // 'time_last_collect' => $now,
+                    // ]);
+                // }
+            // }
+        // })->hourly();
 
 
 
