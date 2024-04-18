@@ -9,11 +9,11 @@
 @endsection
 @section('seo')
     <link rel="canonical" href="{{ url('/') }}"/>
-    <meta name="title" content="Giáng Thế - Đọc truyện Vip Faloo online miễn phí kết hợp game tu tiên"/>
+    <meta name="title" content="Giáng Thế - Đọc truyện Vip Faloo online"/>
     <meta name="description" content="Đọc truyện VIP FALOO online miễn phí, sảng văn, hài hước từ Trung Quốc miễn phí. Đủ các thể loại từ huyền huyễn, tiên võ, đô thị,...."/>
     <meta name="keywords" content="Đọc truyện sảng văn hài hước online"/>
     <meta property="og:url" content="https://giangthe.com/"/>
-    <meta property="og:title" content="Giáng Thế - Đọc truyện Vip Faloo online miễn phí kết hợp game tu tiên"/>
+    <meta property="og:title" content="Giáng Thế - Đọc truyện Vip Faloo online"/>
     <meta property="og:locale" content= "vi"/>
     <meta property="og:description" content="Đọc truyện VIP FALOO online miễn phí, sảng văn, hài hước từ Trung Quốc miễn phí. Đủ các thể loại từ huyền huyễn, tiên võ, đô thị,...."/>
     <meta property="og:type" content="website"/>
