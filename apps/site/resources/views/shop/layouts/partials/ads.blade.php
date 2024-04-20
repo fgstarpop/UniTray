@@ -1,4 +1,4 @@
-@if(!empty(currentUser()) && currentUser()->user_vip == 0)
+{{-- @if(!empty(currentUser()) && currentUser()->user_vip == 0)
     @php
         $currentTime = \Carbon\Carbon::now()->format('i');
         $canEarn = 0;
@@ -39,3 +39,4 @@
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 @endif
+--}}
