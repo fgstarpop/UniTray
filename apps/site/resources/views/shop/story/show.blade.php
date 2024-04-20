@@ -485,7 +485,7 @@
                         </span></span>
                 @else
                     <span> <img src="{{ asset('frontend/images/black-heart.webp') }}"
-                            alt="{{ setting('store_name', 'Giangthe.com') }}"
+                            alt="{{ setting('store_name', 'Giangthe.online') }}"
                             style="width: 22px; margin-top: -4px;"><br><span
                             @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="font-size:16px;" @endif>Bỏ Th.dõi
                         </span></span>

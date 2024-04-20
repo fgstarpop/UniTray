@@ -21,7 +21,7 @@
     <meta property="og:keywords" content= "{{ $story->name }}" />
     <meta property="og:type" content="article">
     <meta property="og:image" content="{{ $story->avatar }}" />
-    <meta property="og:site_name" content="giangthe.com">
+    <meta property="og:site_name" content="giangthe.online">
 @stop
 @push('styles')
     <style>
