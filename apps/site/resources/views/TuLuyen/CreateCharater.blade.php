@@ -25,6 +25,6 @@
     </style>
 @endpush
 @section('content')
-{{--  @livewire('tuluyen.createcharater', ['user_id' => @$user->id])  --}}
+ @livewire('tuluyen.createcharater', ['user_id' => @$user->id])
 
 @endsection

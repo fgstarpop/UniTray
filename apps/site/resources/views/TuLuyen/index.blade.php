@@ -37,7 +37,7 @@
    die;
 @endphp --}}
 {{-- @dd(@$players_user) --}}
-    {{--  @livewire('tuluyen.index', ['players_user' => $players_user->id, 'players' => $players,'item_list'=>$item_list,'gold'=>$gold])  --}}
+     @livewire('tuluyen.index', ['players_user' => $players_user->id, 'players' => $players,'item_list'=>$item_list,'gold'=>$gold])
 </div>
 @endsection
 
