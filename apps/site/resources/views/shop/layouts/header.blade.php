@@ -121,17 +121,17 @@
 
                                 @if (isset($players) && !empty($players))
                                     @if (!$players['is_ban'])
-                                        {{--  @livewire('layouts.header', [
+                                          @livewire('layouts.header', [
                                         'user_online' => $players_user->id,
                                         'chien_bao' => @$players['chien_bao'],
                                         'last_request' => @$players['last_online'],
                                         'has_player' => 1
-                                        ])  --}}
+                                        ])
                                     @endif
                                 @else
-                                    {{--  @livewire('layouts.header', [
+                                      @livewire('layouts.header', [
                                         'has_player' => 0,
-                                    ])  --}}
+                                    ])
                                 @endif
                             @endauth
 
