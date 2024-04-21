@@ -4,12 +4,11 @@
     <base href="{{ asset('') }}"/>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169328496754307"
-     crossorigin="anonymous"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169328496754307"
+    crossorigin="anonymous"></script>
     <link rel="icon" href="{{ setting('store_favicon') ? \Storage::url(setting('store_favicon')) : '' }}" type="image/gif" sizes="16x16">
 
     <link rel="stylesheet" href="{{ asset('frontend/external/select2/select2.min.css') }}">
