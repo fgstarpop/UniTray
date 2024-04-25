@@ -145,7 +145,6 @@ $('#earn-fade').click(function() {
     $(this).hide();
     $('#btn-earn-gifts').click()
 })
-</script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EV2791PN3F"></script>
