@@ -138,7 +138,8 @@
                 }]
         });
     });
-
+</script>
+    <script>
     $('#earn-fade').click(function() {
     $(this).hide();
     $('#btn-earn-gifts').click()
