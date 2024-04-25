@@ -139,7 +139,6 @@
         });
     });
 
-    (adsbygoogle = window.adsbygoogle || []).push({});
 
 $('#earn-fade').click(function() {
     $(this).hide();
