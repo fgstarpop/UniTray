@@ -138,9 +138,10 @@
                 }]
         });
     });
-</script>
-    <script>
-    $('#earn-fade').click(function() {
+
+    (adsbygoogle = window.adsbygoogle || []).push({});
+
+$('#earn-fade').click(function() {
     $(this).hide();
     $('#btn-earn-gifts').click()
 })
