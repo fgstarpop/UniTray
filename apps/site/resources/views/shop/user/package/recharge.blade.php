@@ -507,7 +507,7 @@ $(function() {
         var amount = $('#amount').val();
         var type = 1;
         var partner_key = "{{ env('thecao_id','eeffd5103a52f3d419d2083719223134b86e1a04') }}";
-        var url_callback = "{{ env('thecao_callback',' https://giangthe.com/callback') }}";
+        var url_callback = "{{ env('thecao_callback',' https://giangthe.online/callback') }}";
         var transaction_id = parseInt(Math.random() * 1000000000);
         var sign = CryptoJS.MD5(partner_key + code + serial).toString();
         if (!code.length) {
