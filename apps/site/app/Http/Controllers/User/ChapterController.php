@@ -109,7 +109,7 @@ class ChapterController extends Controller
             $curl = curl_init();
             curl_setopt_array($curl, array(
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => 'http://103.116.104.176:8000/upload/',
+                CURLOPT_URL => 'http://154.26.130.48:8000/upload/',
                 CURLOPT_POST => 1,
                 CURLOPT_SSL_VERIFYPEER => false, //Bỏ kiểm tra SSL
                 CURLOPT_CONNECTTIMEOUT => 100,

@@ -32,7 +32,7 @@ class StoryController extends Controller
             return view('errors.404');
         }
         if ($story && empty($story->idhost)) {
-            $datahost = Http::get("http://103.116.104.176:8000/gethost?link=$story->origin")->json();
+            $datahost = Http::get("http://154.26.130.48:8000/gethost?link=$story->origin")->json();
             if (isset($datahost) && isset($datahost['bookid']) && isset($datahost['host'])) {
                 $story->idhost = $datahost['bookid'];
                 $story->host = $datahost['host'];
@@ -234,7 +234,7 @@ class StoryController extends Controller
                     dd('Không nhúng được');
                 }
             }
-            $datahost = Http::timeout(10)->get("http://103.116.104.176:8000/gethost?link=$url")->json();
+            $datahost = Http::timeout(10)->get("http://154.26.130.48:8000/gethost?link=$url")->json();
             if (isset($datahost) && isset($datahost['bookid']) && isset($datahost['host'])) {
                 $story = Story::where([['idhost', '=', $datahost['bookid']], ['host', '=', $datahost['host']]])->first();
                 if (!empty($story)) {
@@ -505,7 +505,7 @@ class StoryController extends Controller
                 $url = $story->origin;
                 $parse = parse_url($url);
                 $base_url = $parse['scheme'] . '://' . $parse['host'];
-                $datahost = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+                $datahost = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
                 if (isset($datahost['bookid']) && isset($datahost['host'])) {
                     embedStoryUukanshu($url, $base_url, currentUser(), $story);
                 }

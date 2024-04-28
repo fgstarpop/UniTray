@@ -418,7 +418,7 @@ function embedStoryUukanshu($url, $base_url, $user, $story = false, $returnBool 
 {
 
     // $data = Http::get("http://103.116.104.174:8000/getlink?link=$url")->json();
-    $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+    $data = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
     if (!$data) {
         if ($returnBool) {
             return false;
@@ -615,7 +615,7 @@ function checkExistStory($story_name, $url, $user)
 {
 
 
-    $datahost = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+    $datahost = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
 
     $story = Story::where('idhost', $datahost['bookid'])->where('host', $datahost['host'])->first();
     // $datahost = Http::get("http://103.116.104.174:8000/gethost?link=$url")->json();
@@ -633,7 +633,7 @@ function checkExistStory($story_name, $url, $user)
         if (empty($story->idhost)) {
 
 
-            $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$story->origin")->json();
+            $datahosts = Http::get("http://154.26.130.48:8000/gethost?link=$story->origin")->json();
 
 
             if ($story->idhost != $datahosts['bookid']) {
@@ -664,7 +664,7 @@ function checkExistStory($story_name, $url, $user)
 
 function embedChapter($url, $base_url, $user, $chapter, $is_vip)
 {
-    $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+    $data = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
     $content = $data['content'];
     $content = strip_tags($content, array('<i>', '<br>', '<p>'));
 
@@ -696,7 +696,7 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
 
 function UpdateContentChapter($url, $base_url, $chapter)
 {
-    $data = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+    $data = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
     $content = $data['content'];
 
     $content = strip_tags($content, array('<i>', '<br>', '<p>'));
@@ -747,7 +747,7 @@ function _api_dich($text)
             )
     );
     $text_trans = stream_context_create($opts);
-    return file_get_contents('http://103.116.104.176:12323/api/trans', false, $text_trans);
+    return file_get_contents('http://154.26.130.48:12323/api/trans', false, $text_trans);
 }
 
 function _utf8($text)
