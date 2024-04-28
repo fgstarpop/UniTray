@@ -1,0 +1,15 @@
+{
+    "link_book_info": "https://www.tongrenquan.org/tongren/{id}.html",
+    "link_chap_list": "https://www.tongrenquan.org/tongren/{id}.html",
+    "link_chap_read": "https://www.tongrenquan.org/tongren/{id}/{c}.html",
+    "reg_book": "<div class=\"readContent\">.*?href=\"/tongren/\">(?P<category>.*?)</a>.*?class=\"pic\">.*?<img src=\"(?P<thumb>.*?)\" alt=\"(?P<bookname>.*?)\".*?<span>作者：(?P<author>.*?)</span>.*?/h3></div>(?P<description>.*?)</div>",
+    "reg_chap_list": "<li>.*?href=\"/tongren/(\\d+)/(?P<cid>\\d+).html\">(?P<title>.*?)</a>",
+    "reg_chap_read": "class=\"readTop\">.*?html\">(?P<bookname>.*?)</a>.*?class=\"read_chapterName.*?<h1>(?P<chaptername>.*?)</h1>.*?<div class=\"read_chapterDetail\">(?P<content>.*?)</div>",
+    "reload": false,
+    "sort": false,
+    "tag": null,
+    "utf-8": false,
+    "vip": true,
+    "repimg": "https://www.tongrenquan.org",
+    "repread": null
+}

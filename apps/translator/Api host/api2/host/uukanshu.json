@@ -1,0 +1,14 @@
+{
+    "link_book_info": "https://www.uukanshu.com/b/{id}/",
+    "link_chap_list": "https://www.uukanshu.com/b/{id}/",
+    "link_chap_read": "https://www.uukanshu.com/b/{id}/{c}.html",
+    "reg_book": "/list/.*?-1\\.html\">(?P<category>.*?)</a>.*?='/images/fengmian\\.jpg'\"  src=\"//(?P<thumb>.*?)\" alt=\"(?P<bookname>.+?)\"/>.*?search\\.aspx\\?t=.*?\" target=\"_blank\">(?P<author>.*?)</a></h2>.*?<h3>(?P<description>.*?)</h3>",
+    "reg_chap_list": "<li><a href=\"/b/\\d+/(?P<cid>\\d+)\\.html\".*?>(?P<title>.*?)</a></li>",
+    "reg_chap_read": "<h1 id=\"timu\">(?P<chaptername>.*?)</h1>.*?<span class=\"shuming\">.*?<a href=\"/b/\\d+/\" title=\".+?\">(?P<bookname>.*?)</a>.*?<div id=\"contentbox\".*?>(?P<content>.*?)<div style=\"margin:0px;\">",
+    "reload": false,
+    "sort": true,
+    "tag": null,
+    "utf-8": true,
+    "vip": false,
+    "repimg": "https://"
+}

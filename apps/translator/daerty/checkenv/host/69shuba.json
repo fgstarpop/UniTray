@@ -1,0 +1,15 @@
+{
+    "link_book_info": "https://www.69shuba.com/book/{id}.htm",
+    "link_chap_list": "https://www.69shuba.com/book/{id}/",
+    "link_chap_read": "https://www.69shuba.com/txt/{id}/{c}",
+    "reg_book": "og:image\".*?content=\"(?P<thumb>.*?)\".*?og:novel:category.*?content=\"(?P<category>.*?)\".*?og:novel:author.*?content=\"(?P<author>.*?)\".*?og:novel:book_name.*?content=\"(?P<bookname>.*?)\".*?<div class=\"navtxt\">(?P<description>.*?)</div>",
+    "reg_chap_list": "<li data-num.*?href=\"https://www.69shuba.com.*?/\\d+/(?P<cid>\\d+)\">(?P<title>.*?)</a>",
+    "reg_chap_read": "<div class=\"bread\">.*?htm\">.*?(?P<bookname>.*?)</a>.*?<h1 class=\"hide720\">(?P<chaptername>.*?)</h1>.*?<div id=\"txtright\">.*?</div>(?P<content>.*?)<div class=\"bottom-ad\">",
+    "reload": true,
+    "sort": false,
+    "tag": null,
+    "utf-8": false,
+    "vip": false,
+    "repimg": null,
+    "repread": null
+}
