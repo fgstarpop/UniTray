@@ -1,0 +1,15 @@
+{
+    "link_book_info": "https://m.qidian.com/book/{id}",
+    "link_chap_list": "https://m.qidian.com/book/{id}/catalog",
+    "link_chap_read": "https://m.qidian.com/book/{id}/{c}",
+    "reg_book": "og:description\" content=\"(?P<description>.*?)\".*?og:image\" content=\"(?P<thumb>.*?)\".*?og:novel:category\" content=\"(?P<category>.*?)\".*?og:novel:author\" content=\"(?P<author>.*?)\".*?og:novel:book_name\" content=\"(?P<bookname>.*?)\"",
+    "reg_chap_list": "\"uuid\":\\d+,\"cN\":\"(?P<title>[^\"]+)\",\"uT\":\"[\\d :\\-]+\",\"cnt\":\\d+,\"cU\":\"\",\"id\":(?P<cid>\\d+),\"sS\":(?:1|(?P<vip>0))",
+    "reg_chap_read": "bookName\":\"(?P<bookname>.*?)\".*?chapterName\":\"(?P<chaptername>.*?)\".*?content\":\"(?P<content>.*?)\",\"author",
+    "reload": true,
+    "repimg": "http:",
+    "repread": null,
+    "sort": false,
+    "tag": null,
+    "utf-8": true,
+    "vip": true
+}

@@ -1,0 +1,25 @@
+{
+    
+    "faloo": [
+        ".faloo.com/[pfboklithtm]+/(\\d+)(?:.html|/(\\d+).html)?",
+        ".faloo.com/(\\d+).html",
+        ".faloo.com/(\\d+)_(\\d+).html"
+    ],
+    "qidian": [
+        "qidian.com/(?:book|info)/(\\d+)(?:/|.html)(:?\\d+)?"
+    ],
+    "sfacg": [
+        "sfacg.com/(?:Novel|b|i)/(\\d+)/(?:\\d+)/(\\d+)",
+        "sfacg.com/(?:Novel|b|i)/(\\d*)/?",
+        "sfacg.com/Novel/(\\d*)/MainIndex/"
+    ],
+    "tadu": [
+        "tadu.com/book/(\\d+)/?(\\d*)/?"
+    ],
+    
+    "uukanshu": [
+        "uukanshu.com/b/(\\d+)/(\\d+)?(.html)?",
+        "sj.uukanshu.com/?book(?:_amp)?.aspx\\?id=(\\d+)",
+        "sj.uukanshu.com/?read.aspx\\?tid=(\\d+)&sid=(\\d+)"
+    ]
+}

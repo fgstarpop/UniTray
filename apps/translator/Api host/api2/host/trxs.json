@@ -1,0 +1,15 @@
+{
+    "link_book_info": "http://www.trxs.cc/tongren/{id}.html",
+    "link_chap_list": "http://www.trxs.cc/tongren/{id}.html",
+    "link_chap_read": "http://www.trxs.cc/tongren/{id}/{c}.html",
+    "reg_book": "title>(?P<bookname>.*?)\\((?P<author>.*?)\\).*?(?P<category>同人小说).*?<img src=\"(?P<thumb>.*?)\".*?<p>(?P<description>.*?)</p>",
+    "reg_chap_list": "<a href=\"/tongren/\\d+/(?P<cid>\\d+).html\">(?P<title>.*?)<",
+    "reg_chap_read": "readContent.*?a href=\"/tongren/\\d+.html\">(?P<bookname>.*?)</a>.*?h1>(?P<chaptername>.*?)</h1.*?Detail\">(?P<content>.*?)</div>",
+    "reload": false,
+    "repimg": "https://trxs.cc",
+    "repread": "",
+    "sort": false,
+    "tag": null,
+    "utf-8": false,
+    "vip": true
+}

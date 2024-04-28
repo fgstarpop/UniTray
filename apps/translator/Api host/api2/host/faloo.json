@@ -1,0 +1,15 @@
+{
+    "link_book_info": "https://b.faloo.com/{id}.html",
+    "link_chap_list": "https://wap.faloo.com/booklist/{id}.html",
+    "link_chap_read": "https://b.faloo.com/{id}_{c}.html",
+    "reg_book": "og:image\" content=\"(?P<thumb>.*?)\".*?:category\" content=\"(?P<category>.*?)\".*?:author\" content=\"(?P<author>.*?)\".*?:book_name\" content=\"(?P<bookname>.*?)\".*?class=\"T-L-T-C-Box1\">(?P<description>.*?)</div>.*?class=\"LXbq\".*?title=\"(?P<tag>.*?)\"",
+    "reg_chap_list": "href=\"//wap.faloo.com/\\d+_(?P<cid>\\d+).html\">(?:<span  class=\"v_0\">(?P<vip>V)</span>)?(?P<title>.*?)</a>",
+    "reg_chap_read": "<h1>(?P<bookname>.*?)   (?P<chaptername>.*?)</h1>.*?novel?Content\">(?P<content>.*?)<font color=red>",
+    "reload": true,
+    "sort": false,
+    "tag": "<a class=\"LXbq\".*?title=\"(.*?)\"",
+    "utf-8": true,
+    "vip": true,
+    "repimg": null,
+    "repread": null
+}

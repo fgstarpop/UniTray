@@ -1,0 +1,14 @@
+{
+    "link_book_info": "https://www.bxwxorg.com/read/{id}/",
+    "link_chap_list": "https://www.bxwxorg.com/read/{id}/",
+    "link_chap_read": "https://www.bxwxorg.com/read/{id}/{c}.html",
+    "reg_book": "og:description.*?观看小说:(?P<description>.*?)/>.*?og:image\" content=\"//(?P<thumb>.*?)\".*?og:novel:category\" content=\"(?P<category>.*?)\".*?og:novel:author\" content=\"(?P<author>.*?)\".*?og:novel:book_name\" content=\"(?P<bookname>.*?)\"",
+    "reg_chap_list": "<a href=\"/read/\\d+/(?P<cid>\\d+).html.*?\">(?P<title>.*?)</a>",
+    "reg_chap_read": "<title>(?P<chaptername>.*?)_(?P<bookname>.*?)_.*?<div id=\"content\">.*?查找最新章节！</p>(?P<content>.*?)<p style=\"color",
+    "reload": false,
+    "repimg": "https://",
+    "sort": false,
+    "tag": "<a target=\"_blank\" class=\"\">(.*?)</a>",
+    "utf-8": true,
+    "vip": false
+}

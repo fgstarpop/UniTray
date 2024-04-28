@@ -1,0 +1,15 @@
+{
+    "link_book_info": "https://www.tadu.com/book/{id}",
+    "link_chap_list": "https://www.tadu.com/book/{id}",
+    "link_chap_read": "https://www.tadu.com/book/{id}/{c}/",
+    "reg_book": "og:description\" content=\"(?P<description>.*?) .*?og:novel:category\" content=\"(?P<category>.*?)\".*?og:novel:author\".*?content=\"(?P<author>.*?)\".*?og:novel:book_name.*?content=\"(?P<bookname>.*?)\".*?<div class=\"bookIntro\">.*?data-src=\"(?P<thumb>.*?)\"",
+    "reg_chap_list": "<a title=.*?href=\".*?/book/\\d+/(?P<cid>.*?)/.*?\"[^>]+>(?P<title>.*?)</a>",
+    "reg_chap_read": "<title>(?P<bookname>.*?)_(?P<chaptername>.*?)_.*?id=\"bookPartResourceUrl\".*?\"(?P<content>.*?)\"",
+    "reload": false,
+    "sort": false,
+    "tag": "<a target=\"_blank\" class=\"\">(.*?)</a>",
+    "utf-8": true,
+    "vip": false,
+    "repimg": null,
+    "repread": null
+}

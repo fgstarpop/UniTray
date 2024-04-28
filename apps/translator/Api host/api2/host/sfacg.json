@@ -1,0 +1,15 @@
+{
+    "link_book_info": "https://book.sfacg.com/Novel/{id}/",
+    "link_chap_list": "https://book.sfacg.com/Novel/{id}/MainIndex/",
+    "link_chap_read": "https://m.sfacg.com/c/{c}/",
+    "reg_book": "class=\"summary-pic\">.*?img src=\"(?P<thumb>.*?)\".*?=\"text\">(?P<bookname>.*?)<.*?author-name.*?span>(?P<author>.*?)<.*?类型：(?P<category>.*?)<.*?introduce\">(?P<description>.*?)</p>",
+    "reg_chap_list": "<a href=\"/Novel/\\d+/\\d+/(?P<cid>\\d+)/\" title=\"(?P<title>.*?)\"",
+    "reg_chap_read": "<title>(?P<bookname>.*?)-(?P<chaptername>.*?)-.*?<div style=\"text-indent: 2em;\">(?P<content>.*?)</div>",
+    "reload": true,
+    "repimg": null,
+    "repread": "https://book.sfacg.com/Novel/{id}/424007/{c}/",
+    "sort": false,
+    "tag": "class=\"tag\".*?class=\"text\">(.*?)</span",
+    "utf-8": true,
+    "vip": true
+}
