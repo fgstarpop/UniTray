@@ -85,7 +85,7 @@ class ChapterController
                 } else {
                     if ($parse) {
                         $base_url = $parse['scheme'] . '://' . $parse['host'];
-                        $datahosts = Http::get("http://103.116.104.176:8000/getlink?link=$url")->json();
+                        $datahosts = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
                         // dd($datahosts);
                         try {
 
@@ -133,7 +133,7 @@ class ChapterController
                     //         ]);
                     //     }
                     // } else {
-                    $datahosts = Http::get("http://103.116.104.176:8000/gethost?link=$url")->json();
+                    $datahosts = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
                     if (isset($datahosts) && isset($datahosts['bookid']) && isset($datahosts['chapid'])) {
                         $chapter = UpdateContentChapter($url, $base_url, $chapter) ?? $chapter;
                     }
@@ -220,7 +220,7 @@ class ChapterController
             $client = new Client();
             $chapterNewContent = $chapter['content'];
 
-            $response = $client->post('http://103.116.104.183:3002/chapter/create-new', [
+            $response = $client->post('http://154.26.130.48:3002/chapter/create-new', [
                 'json' => [
                     'chapter' => $chapter
                 ]
@@ -264,7 +264,7 @@ class ChapterController
     {
         $content = '';
         try {
-            $url = "http://103.116.104.183:3002/chapter/file-by-id/{$telegram_id}/storyId/{$storyId}/chapterId/${id}";
+            $url = "http://154.26.130.48:3002/chapter/file-by-id/{$telegram_id}/storyId/{$storyId}/chapterId/${id}";
             $client = new Client();
             $response = $client->get($url);
 
@@ -278,7 +278,7 @@ class ChapterController
 
     public function getRemoteVipData($storyId, $id)
     {
-        $url = "http://103.116.104.183:3002/chapter/vip/storyId/{$storyId}/id/{$id}";
+        $url = "http://154.26.130.48:3002/chapter/vip/storyId/{$storyId}/id/{$id}";
 
 
         $client = new Client();
