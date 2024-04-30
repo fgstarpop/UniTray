@@ -57,7 +57,7 @@
 @endif
         <section class="content container mt-2 search-section" style="min-height: unset">
             <div class="col-12">
-                <div class="noti-block p-3 mb-3 border-danger border-3" style="border-style: solid; background-color: #FFF8B7;">
+                <div class="noti-block p-3 mb-3 border-danger border-3" style="border-style: solid; background-color: #F8F4D2;">
                     <h5 class="text-success font-weight-bold">Thông báo</h5>
                     {!! setting('noti_mobile') !!}
                 </div>
@@ -360,11 +360,11 @@
 @if((new \Jenssegers\Agent\Agent())->isMobile())
     <style>
         .home-header {
-            background: url("{{ asset('frontend/images/bg-title-home.webp') }}") no-repeat;
+            background: url("{{ asset('frontend/images/mobile/bgm3.png') }}") no-repeat;
             background-size: cover;
         }
         .bg-home-2 {
-            background: url("{{ asset('frontend/images/bg-title-home-2.webp') }}") no-repeat;
+            background: url("{{ asset('frontend/images/mobile/bgm3.png') }}") no-repeat;
             background-size: cover;
         }
         .slides {
@@ -587,7 +587,7 @@
             grid-row-gap: 20px;
         }
         .btn-ranking {
-            background-color: #C9B708;
+            background-color: #1B4972;
             border: 2px solid #ffffff;
             border-radius: 5px;
             padding: 20px 0;
