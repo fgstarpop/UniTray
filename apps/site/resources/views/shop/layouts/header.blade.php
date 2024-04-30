@@ -34,10 +34,10 @@
                 <div class="col-lg-2 col-xl-2 col-md-2 col-4 re_col_logo">
                     <div class="div-logo">
                         @if (setting('store_logo'))
-                            <a href="{{ route('home') }}"><img src="/frontend/images/new-logo.jpg"
+                            <a href="{{ route('home') }}"><img src="/frontend/images/GIANGTHE.png"
                                     alt="" class="logo"></a>
                         @else
-                            <a href="{{ route('home') }}"><img src="frontend/images/new-logo.jpg" alt=""
+                            <a href="{{ route('home') }}"><img src="frontend/images/GIANGTHE.png" alt=""
                                     class="logo"></a>
                         @endif
                     </div>

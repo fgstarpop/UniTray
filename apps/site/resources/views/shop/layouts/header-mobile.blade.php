@@ -17,7 +17,7 @@
     <div class="header header-mobile">
         <div class="back-gr-mobile" style="height: 100%;overflow: hidden;"><img
                 src="{{ asset('frontend/images/mobile/backgroundmobile.svg') }}"
-                alt="{{ setting('store_name', 'Giangthe.com') }}"></div>
+                alt="{{ setting('store_name', 'Giangthe.online') }}"></div>
         <div class="container">
             <div class="row" style="display: flex; align-items: center;">
                 {{--                <div class="col-lg-3 col-xl-3 col-md-3 col-3 mobile-nav" --}}
@@ -51,14 +51,14 @@
                             <a href="{{ route('home') }}">
                                 {{--                                <img src="{{ \Storage::url(setting('store_logo')) }}" --}}
                                 {{--                                    alt="" class="logo"> --}}
-                                <img src="{{ asset('frontend/images/mobile/logo-header-mobile.svg') }}" alt=""
+                                <img src="{{ asset('frontend/images/mobile/GIANGTHE.png') }}" alt=""
                                     class="logo">
                             </a>
                         @else
                             <a href="{{ route('home') }}">
                                 {{--                                <img src="{{ \Storage::url(setting('store_logo')) }}" --}}
                                 {{--                                    alt="" class="logo"> --}}
-                                <img src="{{ asset('frontend/images/mobile/logo-header-mobile.svg') }}" alt=""
+                                <img src="{{ asset('frontend/images/mobile/GIANGTHE.png') }}" alt=""
                                     class="logo">
                             </a>
                             {{--                            <a href="{{ route('home') }}"><img src="frontend/images/new-logo.jpg" alt="" --}}
