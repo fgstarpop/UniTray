@@ -124,7 +124,7 @@ body {
     margin: 0;
     font-family: var(--bs-font-sans-serif);
     font-size: 1rem;
-    font-weight: 450;
+    font-weight: 550;
     line-height: 1.5;
     color: #212529;
     background-color: #fff;
@@ -7651,7 +7651,7 @@ fieldset:disabled .btn {
 }
 
 .border-danger {
-    border-color: #dc3545 !important
+    border-color: #6890B4
 }
 
 .border-light {
@@ -7675,7 +7675,7 @@ fieldset:disabled .btn {
 }
 
 .border-3 {
-    border-width: 3px !important
+    border-width: 5px !important
 }
 
 .border-4 {
@@ -8478,7 +8478,7 @@ fieldset:disabled .btn {
 }
 
 .text-danger {
-    color: #dc3545 !important
+    color: #1B4972
 }
 
 .text-light {
@@ -12748,7 +12748,7 @@ header .navigation a {
 }
 
 body {
-    font-size: 14.3px;
+    font-size: 15px;
 }
 
 .fa,
@@ -12988,7 +12988,7 @@ table {
     padding: 10px 0;
     margin: 0 0 10px 0;
     font-size: 14px;
-    color: #004c1f;
+    color: #1B4972;
     font-weight: bold;
 }
 

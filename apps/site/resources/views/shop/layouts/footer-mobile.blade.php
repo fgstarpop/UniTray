@@ -1,6 +1,6 @@
 <footer class="footer-mobile">
     <div class="bg-footer">
-        <img src="{{ asset('frontend/images/mobile/bg-footer.svg') }}"
+        <img src="{{ asset('frontend/images/mobile/bgm5.png') }}"
              alt="{{ setting('store_name', 'giangthe.online') }}">
     </div>
     @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
@@ -10,7 +10,7 @@
         <div class="col-sm-7 re-col-foot">
             @if (setting('store_logo'))
                 <a href="{{ route('home') }}" class="logo">
-                    <img src="frontend/images/GIANGTHE.png"
+                    <img src="frontend/images/mobile/giangthe1.png"
                          alt="{{ setting('store_name', 'giangthe.online') }}">
                 </a>
             @else
