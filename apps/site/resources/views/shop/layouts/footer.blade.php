@@ -3,13 +3,13 @@
         <div class="col-sm-7 re-col-foot">
             @if (setting('store_logo'))
                 <a href="{{ route('home') }}" class="logo">
-                    <img src="frontend/images/new-logo.jpg"
-                        alt="{{ setting('store_name', 'Giangthe.com') }}">
+                    <img src="frontend/images/GIANGTHE.png"
+                        alt="{{ setting('store_name', 'Giangthe.online') }}">
                 </a>
             @else
                 <a href="{{ route('home') }}" class="logo logo-footer">
                     <img src="{{ asset('frontend/images/new-logo.jpg') }}"
-                        alt="{{ setting('store_name', 'Giangthe.com') }}">
+                        alt="{{ setting('store_name', 'Giangthe.online') }}">
                 </a>
             @endif
             <br>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-sm-4 re-col-foot ">
             <p class="foot-text">Mọi vấn đề xin liên hệ:</p>
-            <img src="{{ asset('frontend/images/qr.webp') }}" alt="{{ setting('store_name', 'Giangthe.com') }}"
+            <img src="{{ asset('frontend/images/qr.webp') }}" alt="{{ setting('store_name', 'Giangthe.online') }}"
                 style="width: 30%; display:inline-block;">
             <p class="foot-text" style="display: inline-block;">Group Giáng thế: <br> https://zalo.me/g/rqfhlz892</p>
         </div>
