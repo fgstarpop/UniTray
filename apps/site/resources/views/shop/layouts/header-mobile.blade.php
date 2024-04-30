@@ -16,7 +16,7 @@
 
     <div class="header header-mobile">
         <div class="back-gr-mobile" style="height: 100%;overflow: hidden;"><img
-                src="{{ asset('frontend/images/mobile/bgm2.png') }}"
+                src="{{ asset('frontend/images/mobile/bgm3.png') }}"
                 alt="{{ setting('store_name', 'Giangthe.online') }}"></div>
         <div class="container">
             <div class="row" style="display: flex; align-items: center;">
