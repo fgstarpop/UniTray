@@ -51,14 +51,14 @@
                             <a href="{{ route('home') }}">
                                 {{--                                <img src="{{ \Storage::url(setting('store_logo')) }}" --}}
                                 {{--                                    alt="" class="logo"> --}}
-                                <img src="{{ asset('frontend/images/mobile/GIANGTHE.png') }}" alt=""
+                                <img src="{{ asset('frontend/images/mobile/giangthe1.png') }}" alt=""
                                     class="logo">
                             </a>
                         @else
                             <a href="{{ route('home') }}">
                                 {{--                                <img src="{{ \Storage::url(setting('store_logo')) }}" --}}
                                 {{--                                    alt="" class="logo"> --}}
-                                <img src="{{ asset('frontend/images/mobile/GIANGTHE.png') }}" alt=""
+                                <img src="{{ asset('frontend/images/mobile/giangthe1.png') }}" alt=""
                                     class="logo">
                             </a>
                             {{--                            <a href="{{ route('home') }}"><img src="frontend/images/new-logo.jpg" alt="" --}}
