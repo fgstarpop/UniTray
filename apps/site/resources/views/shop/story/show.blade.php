@@ -145,7 +145,7 @@
                             </div>
                             <br>
                             <span class="cap"
-                                style="color:orange; display: inline-block;margin-top: -17px !important; font-size: 14px;">
+                                style="color:#001469; display: inline-block;margin-top: -17px !important; font-size: 14px;">
                                 Thời gian: {{ \Carbon\Carbon::parse($story->chapter_updated) }} </span>
                         </div>
                     </div>
@@ -302,7 +302,7 @@
     @endif
     @if ((new \Jenssegers\Agent\Agent())->isMobile())
         <div class="bg-white">
-            <div class="p-2" style="color:rgb(25, 203, 25); font-weight:500; font-size: 15px;"
+            <div class="p-2" style="color:#001469; font-weight:700; font-size: 15px;"
                 data-bs-toggle="modal" data-bs-target="#source-information"> Thông tin truyện gốc</div>
             <div class="p-2 bt now-less" id="mobile-story-des" style="color: gray; overflow: hidden;">
                 {!! $story->description !!}

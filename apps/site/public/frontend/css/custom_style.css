@@ -13400,19 +13400,20 @@ button {
 }
 
 .new-mobile-top-nomination {
-    background: #FFEAD7;
+    background: #3D6D99;
     margin: 0;
-    color: #e11818;
+    color: #fff;
 }
 
 .new-chap-label-mobile {
+    font-weight: 550;
     color: white;
-    background: orange;
+    background: #001469;
     display: inline-block;
     text-align: center;
     border-radius: 10px;
     width: 100%;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 .new-story-name-mobile {
@@ -13427,8 +13428,8 @@ button {
     float: left;
     max-width: fit-content;
     background: white;
-    color: #0a9f0a;
-    border: solid #0a9f0a 1.5px;
+    color: #1B4972;
+    border: solid #1B4972 1.96px;
     font-size: 13px;
     border-radius: 30px;
     height: 24px;
@@ -13437,7 +13438,7 @@ button {
 
 .story-title-with-overflow {
     font-weight: bold;
-    color: orange;
+    color: #001469;
     white-space: nowrap;
     font-size: 14px;
     width: 95%;
