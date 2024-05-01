@@ -189,7 +189,7 @@
         border: none;
         padding:2.5rem 1rem;
         width: 100%;
-        background:url('/frontend/images/mobile/bg-popup-search.svg') no-repeat;
+        background:url('/frontend/images/mobile/bgm6.png') no-repeat;
         background-size: 100%;
         background-position: left top;
 
@@ -220,17 +220,17 @@
         font-size: 14px;
     }
     .mobile .search-modal .modal-body{
-        background: #FFFDE8;
+        background: #F2F2F2;
     }
     .mobile .search-modal .modal-footer{
         display: none;
     }
     .mobile .search-modal .name-item{
-        font-weight: 400;
-        font-size: 13px;
+        font-weight: 550;
+        font-size: 15px;
         line-height: 15px;
-        color: #DD3300;
-        margin-top: 11px;
+        color: #1B4972;
+        margin-top: 12px;
         position: relative;
     }
     .mobile .search-modal .name-item.active:after{

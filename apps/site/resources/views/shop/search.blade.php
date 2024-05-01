@@ -74,7 +74,7 @@
         }
 
         .btn-mob {
-            background: #0C9A00 !important;
+            background: #3D6D99 !important;
         }
 
         .modal-header-mob {
