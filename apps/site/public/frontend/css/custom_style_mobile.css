@@ -229,7 +229,7 @@
         font-weight: 550;
         font-size: 15px;
         line-height: 15px;
-        color: #1B4972;
+        color: #3c688f;
         margin-top: 12px;
         position: relative;
     }
@@ -304,7 +304,7 @@
         color: #b0b0b0 !important;
     }
     .btn-gt {
-        background-color:#C9B708;
+        background-color:#3c688f;
         color: #EEEEEE;
     }
 
@@ -366,7 +366,7 @@
     }
 
     .updateEmbedStory {
-        background-color: #1B4972;
+        background-color: #3c688f;
         border-radius: 5px!important;
         color: white!important;
         height: 38px;
