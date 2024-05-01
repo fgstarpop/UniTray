@@ -1219,9 +1219,13 @@ if (!function_exists("FalooUpdateList")) {
         $chapterListVip = collect(getListFalooVip($data['bookid']));
         //lặp qua danh sách chương mới và so sánh với chương cũ
         foreach ($chapterList as $key => $chapter) {
-            $search = $chaptperListOld->search(function ($item, $key) use ($chapter) {
-                return $item['chapid'] == $chapter['id'];
-            });
+            try {
+                $search = $chaptperListOld->search(function ($item, $key) use ($chapter) {
+                    return $item['chapid'] == $chapter['id'];
+                });
+            } catch (Exception $e) {
+                $search = false;
+            }
             //nếu không tìm thấy chương mới trong danh sách chương cũ thì thêm chương mới vào danh sách chương cũ
             if ($search === false) {
                 $tempchap = [
