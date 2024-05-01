@@ -756,7 +756,7 @@ function _api_dich($text)
         )
     );
     $text_trans = stream_context_create($opts);
-    return file_get_contents('http://154.26.130.48:12323/api/trans', false, $text_trans);
+    return file_get_contents('http://103.75.182.190:12323/api/trans', false, $text_trans);
 }
 
 function _utf8($text)
