@@ -587,7 +587,7 @@
             grid-row-gap: 20px;
         }
         .btn-ranking {
-            background-color: #1B4972;
+            background-color: #3c688f;
             border: 2px solid #ffffff;
             border-radius: 5px;
             padding: 20px 0;
