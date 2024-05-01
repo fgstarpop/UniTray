@@ -421,7 +421,7 @@ function translated($text = null)
 function embedStoryUukanshu($url, $base_url, $user, $story = false, $returnBool = false)
 {
 
-    $data = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
+    $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
     if (!$data) {
         if ($returnBool) {
             return false;
@@ -618,7 +618,7 @@ function checkExistStory($story_name, $url, $user)
 {
 
 
-    $datahost = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
+    $datahost = Http::get("http://103.75.182.190:8000/gethost?link=$url")->json();
 
     $story = Story::where('idhost', $datahost['bookid'])->where('host', $datahost['host'])->first();
     // $datahost = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
@@ -636,7 +636,7 @@ function checkExistStory($story_name, $url, $user)
         if (empty($story->idhost)) {
 
 
-            $datahosts = Http::get("http://154.26.130.48:8000/gethost?link=$story->origin")->json();
+            $datahosts = Http::get("http://103.75.182.190:8000/gethost?link=$story->origin")->json();
 
 
             if ($story->idhost != $datahosts['bookid']) {
@@ -668,7 +668,7 @@ function checkExistStory($story_name, $url, $user)
 function embedChapter($url, $base_url, $user, $chapter, $is_vip)
 {
     $content = '';
-    $data = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
+    $data = Http::get("http://103.75.182.190:8000/gethost?link=$url")->json();
 
     // if (str_contains($url, 'faloo.com')) {
     //     // FALOO VIP
@@ -677,7 +677,7 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
     //         $content = $getFalooData['data'];
     //     }
     // } else {
-    $chapterData = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
+    $chapterData = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
     $content = $chapterData['content'];
     $content = strip_tags($content, array('<i>', '<br>', '<p>'));
     // }
@@ -705,7 +705,7 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
 
 function UpdateContentChapter($url, $base_url, $chapter)
 {
-    $data = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
+    $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
     $content = $data['content'];
 
     $content = strip_tags($content, array('<i>', '<br>', '<p>'));
@@ -878,7 +878,7 @@ if (!function_exists('getChapterFaloo')) {
 if (!function_exists("getListFalooVip")) {
     function getListFalooVip($bookid)
     {
-        $res = Http::timeout(10)->get("http://154.26.130.48:8000/getfaloolist/$bookid")->json();
+        $res = Http::timeout(10)->get("http://103.75.182.190:8000/getfaloolist/$bookid")->json();
         return $res;
     }
 }
@@ -1046,14 +1046,14 @@ if (!function_exists("AjaxBuyFaloo")) {
 if (!function_exists("FalooSave")) {
     function FalooSave($url, $user = null)
     {
-        $datahost = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
+        $datahost = Http::get("http://103.75.182.190:8000/gethost?link=$url")->json();
         $story = Story::where('idhost', $datahost['bookid'])->where('host', $datahost['host'])->first();
         //kiểm tra xem truyện có trong database chưa nếu có sẽ chuyển hướng đến trang truyện
         if ($story) {
             //chuyển hướng dến trang truyện
             return redirect()->route('story.show', $story);
         }
-        $data = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
+        $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
 
         $chapterList = $data['listchap'];
 
@@ -1190,7 +1190,7 @@ if (!function_exists("FalooUpdateList")) {
     {
         $url = $story->origin;
         $bookid = $story->idhost;
-        $data = Http::get("http://154.26.130.48:8000/getlink?link=$url")->json();
+        $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
         $chapterList = $data['listchap'];
         $chaptperListOld = collect(json_decode($story->chapters_json, 1));
         $countListNew = count($chapterList);
