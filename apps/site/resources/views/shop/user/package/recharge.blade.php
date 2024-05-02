@@ -421,12 +421,12 @@
                                         <img src="{{ asset('frontend/images/stone-icon.svg') }}" alt="Stone Icon">
                                     </div>
                                     @if($price['bonus'] > 0)
-                                    <span class="bonus-price" style="font-size: 13px; color: #978A0D">+{{ number_format($price['bonus']) }}</span>
+                                    <span class="bonus-price" style="font-size: 14px; color: #3c688f">+{{ number_format($price['bonus']) }}</span>
                                     @endif
                                 </div>
                                 <div class="price-gold d-flex align-items-center justify-content-between">
                                     <div class="full-price d-flex align-items-center justify-content-between rounded-pill py-1 px-2"
-                                         style="background-color: #FFFBD7">
+                                         style="background-color: #c7dbed">
                                         <span style="font-size: 20px">{{ number_format($price['gold']) }}</span>
                                         <img src="{{ asset('frontend/images/gold-icon.svg') }}" alt="Stone Icon">
                                     </div>
