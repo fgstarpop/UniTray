@@ -571,7 +571,7 @@
                         <span>
                             <form action="">
                                 <input name="page" value="{{ request('page') }}" style="width: 60px; height: 29px; border: 1px solid #ccc; border-radius: 3px; text-align: center"/>
-                                <button style="height: 29px; width: 40px; border: 1px solid #1cb15c; color: #1cb15c; border-radius: 3px; text-align: center">Đến</button>
+                                <button style="height: 29px; width: 40px; border: 1px solid #3c688f; color: #3c688f; border-radius: 3px; text-align: center">Đến</button>
                             </form>
                         </span>
                     </div>

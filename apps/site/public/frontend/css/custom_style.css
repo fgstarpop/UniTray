@@ -12085,12 +12085,12 @@ input.tgl-radio-tab-child {
   }
 
   input.tgl-radio-tab-child+label:hover {
-    background-color: #C9B708;
+    background-color: #3c688f;
     color: white;
   }
 
   #donate [type=radio]:checked+label {
-    background-color: #C9B708;
+    background-color: #3c688f;
     color: white;
     z-index: 1;
   }
@@ -12253,7 +12253,7 @@ header .link a {
     font-size: 20px;
     margin-right: 16px;
     position: relative;
-    color: #1cb15c
+    color: #3c688f
 }
 
 .user-info .dropdown-menu li:hover {
@@ -12294,7 +12294,7 @@ header .header .search input {
     background: #efefef;
     font-size: 16px;
     flex: 1;
-    border: 2px solid #1cb15c
+    border: 2px solid #3c688f
 }
 
 header .navigation {
@@ -12627,7 +12627,7 @@ label.error {
 
 .arrow-location-center-02 .slick-arrow:hover {
     color: #fff;
-    background: #1cb15c;
+    background: #3c688f;
 }
 
 .arrow-location-center-02 .slick-arrow:before {
@@ -12729,7 +12729,7 @@ header .btn-search {
 }
 
 header .navigation {
-    background-color: #1cb15c !important;
+    background-color: #3c688f !important;
     box-shadow: unset;
 }
 
@@ -13303,12 +13303,12 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .pagination .page-item.active a {
-    background: #1cb15c;
+    background: #3c688f;
     color: #fff;
 }
 
 .pagination .page-item a:hover {
-    background: #1cb15c;
+    background: #3c688f;
     color: #fff;
 }
 
@@ -13362,7 +13362,7 @@ button {
 }
 
 .return-customer-btn {
-    background: #1cb15c;
+    background: #3c688f;
     color: #fff;
 }
 
@@ -13471,7 +13471,7 @@ button {
 }
 
 .btn-comment {
-    background: #1cb15c;
+    background: #3c688f;
     color: #fff;
     outline: 0 !important;
     box-shadow: none !important;
@@ -13515,7 +13515,7 @@ button {
 }
 
 .btn-readmore-comment {
-    background: #1cb15c;
+    background: #3c688f;
     color: #fff;
 }
 
@@ -13581,7 +13581,7 @@ button {
     color: #fff;
     font-weight: normal;
     border: none;
-    background: #1cb15c;
+    background: #3c688f;
     padding: 6px 15px;
     font-size: 14px;
 }
@@ -14092,7 +14092,7 @@ button.toolbar {
 }
 
 #user-class {
-    background-color: #D48712;
+    background-color: #4c7da9;
     color: white;
     border-radius: 5px;
     justify-content: center;
@@ -14550,7 +14550,7 @@ button.toolbar {
 }
 
 .popdungnhieu button {
-    background: #C9B708;
+    background: #3c688f;
     border-radius: 20px;
     border: none;
     width: 214px;

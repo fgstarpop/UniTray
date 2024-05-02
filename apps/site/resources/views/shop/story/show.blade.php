@@ -1093,7 +1093,7 @@ class="wallet form-control">
                     @if (currentUser() &&
                             $story->type == 1)
                         <div class="col-6">
-                            <div style="background-color:#f2f2f2; cursor: pointer;"
+                            <div style="background-color:#3c688f; cursor: pointer;"
                                 class="pt-2 pb-2 mt-1 updateEmbedStory">Cập nhật chương mới
                             </div>
                         </div>
