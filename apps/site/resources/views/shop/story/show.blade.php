@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-xl-12 pt-5">
                             <center>
-                                <span id="book_name2" class="cap story-name" style="color:#004c1f">
+                                <span id="book_name2" class="cap story-name" style="color:#3c688f">
                                     {{ ucfirst($story->name) }} </span>
                                 <br>
                                 <span class="cap pt-5"><i class="fa fa-user"></i> {{ $story->author }}</span>
