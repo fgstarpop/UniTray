@@ -1324,11 +1324,11 @@ class="wallet form-control">
                     html: `
                     Bạn muốn mua ${countChuong } chương với giá ${tongTien} vàng ?
                     <br>Lưu ý:
-                    <br>Mỗi lần được mua tối đa 3 chương màu đỏ, màu xanh lá mua không giới hạn.
+                    <br>Mỗi lần được mua tối đa 3 chương màu đỏ, màu xanh mua không giới hạn.
                     <br>Mỗi phút chỉ được mua chương 3 lần.
                     <br>Khi bấm mua chương vui lòng không thoát trang cho đến khi có thông báo.`,
                     showCancelButton: true,
-                    confirmButtonColor: '#C9B708',
+                    confirmButtonColor: '#3c688f',
                     cancelButtonColor: '#d33',
                     cancelButtonText: 'Không',
                     confirmButtonText: 'Mua'
