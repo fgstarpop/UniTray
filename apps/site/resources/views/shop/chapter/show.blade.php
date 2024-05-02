@@ -888,7 +888,7 @@
                     title: 'Thông báo',
                     html: `Bạn chưa mua chương đến trang mua chương`,
                     // showCancelButton: true,
-                    confirmButtonColor: '#C9B708',
+                    confirmButtonColor: '#3c688f',
 
                     confirmButtonText: 'Đến'
 

@@ -10,13 +10,13 @@
                 </div>
                 <div style="margin-left: 13px">
                     <span style="display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 2; font-size: 14.5px; font-weight: 650; height: 40px">
-                        {{ ucfirst( $story->name) }} 
+                        {{ ucfirst( $story->name) }}
                     </span>
                     <div style="margin-top: 14px; font-size: 14px ; font-weight: 500">
                         @foreach($story['categories'] as $cate)
-                            <span style="color: #0C9A00; margin-right: 3px"># {{ $cate->name}}</span>
+                            <span style="color: #3c688f; margin-right: 3px"># {{ $cate->name}}</span>
                         @endforeach
-                            <span style="color: #0C9A00; margin-right: 3px"># {{ $story->from}}</span>
+                            <span style="color: #3c688f; margin-right: 3px"># {{ $story->from}}</span>
                     </div>
                     <div style="margin-top: 10px; display: flex;">
                         <div style="display: flex; align-items: center; color: #878787">
@@ -73,13 +73,13 @@
                 </div>
                 <div style="margin-left: 13px">
                     <span style="display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 2; font-size: 16px; font-weight: 550; height: 50px">
-                        {{ ucfirst( $story->name) }} 
+                        {{ ucfirst( $story->name) }}
                     </span>
                     <div style="margin-top: 10px; font-size: 15px ; font-weight: 550">
                         @foreach($story['categories'] as $cate)
-                            <span style="color: #0C9A00; margin-right: 3px"># {{ $cate->name}}</span>
+                            <span style="color: #3c688f; margin-right: 3px"># {{ $cate->name}}</span>
                         @endforeach
-                            <span style="color: #0C9A00; margin-right: 3px"># {{ $story->from}}</span>
+                            <span style="color: #3c688f; margin-right: 3px"># {{ $story->from}}</span>
                     </div>
                     <div style="margin-top: 10px; display: flex;">
                         <div style="display: flex; align-items: center; color: #878787">
@@ -115,7 +115,7 @@
 @endif
 
 <!-- <div class="book_detail">
-                    <span> <i class="fa fa-eye" aria-hidden="true"></i>  
+                    <span> <i class="fa fa-eye" aria-hidden="true"></i>
                     @if ($story->view > 999 && $story->view <= 999999)
                         {{ intval($story->view / 1000) }}K
                         @elseif ($story->view > 1000000 && $story->view <= 99999999)
