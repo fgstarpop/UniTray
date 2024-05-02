@@ -273,7 +273,7 @@ blockquote {
 
 b,
 strong {
-    font-weight: bolder
+    font-weight: bold;
 }
 
 .small,
@@ -13032,7 +13032,7 @@ table {
 }
 
 .body-section .update-section li .title {
-    color: #004c1f;
+    color: #3c688f;
 }
 
 .body-section .update-section li .title p {
