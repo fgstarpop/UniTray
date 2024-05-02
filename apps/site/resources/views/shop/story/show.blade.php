@@ -712,7 +712,7 @@
 
                                             @if (!$userOders->firstWhere('chapter_id', @$chapter['id']) && (!currentUser()->user_vip == 1 || !@$chapter['buyed']))
                                                 <div class="col-9"
-                                                    style="display: flex; margin-bottom: 10px;@if (@$chapter['buyed']) color:#0bb948 @else color:red @endif">
+                                                    style="display: flex; margin-bottom: 10px;@if (@$chapter['buyed']) color:#3c688f @else color:red @endif">
                                                     @php
                                                         if (isset($chapter['buyed'])) {
                                                             if (@$chapter['buyed']) {
@@ -751,7 +751,7 @@
                                                         {{ $chapter['name'] }}</label>
                                                 </div>
                                                 <div class="col-3"
-                                                    style="margin-bottom: 10px;@if (@$chapter['buyed']) color:#0bb948 @else color:red @endif">
+                                                    style="margin-bottom: 10px;@if (@$chapter['buyed']) color:#3c688f @else color:red @endif">
                                                     @php
                                                         if (isset($chapter['buyed'])) {
                                                             if (@$chapter['buyed']) {
@@ -778,7 +778,7 @@
                             </form>
                         </div>
                         <div class="row"
-                            style="    background: #0bb948;
+                            style="    background: #3c688f;
                        color: white;
                        height: 43px;
                        width: 100%;
