@@ -179,7 +179,7 @@ header .link a{
     font-size: 20px;
     margin-right: 16px;
     position: relative;
-    color: #1CB15C;
+    color: #3c688f;
 }
 .user-info .dropdown-menu li:hover {
     background: #eeeeee;
@@ -215,7 +215,7 @@ header .header .search input{
     background: #efefef;
     font-size: 16px;
     flex: 1;
-    border: 2px solid #1CB15C;
+    border: 2px solid #3c688f;
 }
 /*header .header .search i{*/
 /*    color: #a29f9f;*/
@@ -524,7 +524,7 @@ label.error {
 
 .arrow-location-center-02 .slick-arrow:hover {
     color: #ffffff;
-    background: #1CB15C; }
+    background: #3c688f; }
 
 .arrow-location-center-02 .slick-arrow:before {
     font-size: 20px;

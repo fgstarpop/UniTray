@@ -23,7 +23,7 @@
                     <li class="font-vip-modal">Có huy hiệu VIP, tích xanh</li>
                     <li class="font-vip-modal">Được ưu đãi khi mua gói tu luyện</li>
                 </ul>
-                <a href="{{ route('upgrade.vip') }}" type="button" style="width: 100%; border-color: #F8C23A; padding: 1rem 0.5rem; font-size: 17px; box-shadow: 0 5px 5px 5px rgb(51 51 51 / 10%);"
+                <a href="{{ route('upgrade.vip') }}" type="button" style="width: 100%; border-color: #3c688f; padding: 1rem 0.5rem; font-size: 17px; box-shadow: 0 5px 5px 5px rgb(51 51 51 / 10%);"
                    class="btn btn-success text-white btn-re-color btn-lg btn-block btn-register-vip">
                     Đăng ký VIP ngay với 100K vàng/tháng
                 </a>
