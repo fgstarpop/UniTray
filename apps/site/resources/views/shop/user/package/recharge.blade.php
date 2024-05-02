@@ -201,22 +201,22 @@
         .btn-custom-action,
         .btn-custom {
             background-color: transparent;
-            border-color: #C9B708;
+            border-color: #3c688f;
             border-style: solid;
             border-width: 2px;
             min-width: 140px;
-            color: #C9B708;
+            color: #3c688f;
         }
         .btn-custom-action.active,
         .btn-custom.active {
-            background-color: #C9B708;
+            background-color: #3c688f;
             color: #ffffff;
         }
         .price {
             min-height: 75px;
         }
         .price-items .active {
-            background-color: #C9B708 !important;
+            background-color: #3c688f !important;
         }
         .price-items .active .price-stone .full-price span,
         .price-items .active .price-stone .bonus-price {
@@ -229,7 +229,7 @@
                 <a href="javascript:void(0)" class="text-danger text- d-block font-weight-bold">Ví của tôi</a>
                 <a href="{{ route('user.wallets') }}" class="text-danger d-block">Lịch sử</a>
             </div>
-            <div class="wallet py-4 mb-3 bg-white border-2 text-center" style="border-color: #C9B708; border-style: solid; border-radius: 5px">
+            <div class="wallet py-4 mb-3 bg-white border-2 text-center" style="border-color: #3c688f; border-style: solid; border-radius: 5px">
                 <div class="balance gold d-flex justify-content-between mb-2 mx-auto" style="max-width: 120px">
                     <img src="{{ asset('frontend/images/gold-icon.svg') }}" alt="Gold Icon">
                     <span>{{ number_format(currentUser()->get_gold->gold) }}</span>
@@ -260,7 +260,7 @@
                 <div class="content">
                     <div class="transfer-form mb-4 active" id="gold">
                         <ul class="item py-2 px-4 mb-2 bg-white border-2"
-                            style="border-color: #C9B708; border-style: solid; border-radius: 5px; line-height: 25px">
+                            style="border-color: #3c688f; border-style: solid; border-radius: 5px; line-height: 25px">
                             <li class="mb-1"><strong>Lưu ý khi nạp tiền:</strong></li>
                             <li>
                                 <ol>
@@ -283,7 +283,7 @@
                             </li>
                         </ul>
                         <ul class="item py-2 px-4 mb-2 bg-white border-2"
-                            style="border-color: #C9B708; border-style: solid; border-radius: 5px; line-height: 25px">
+                            style="border-color: #3c688f; border-style: solid; border-radius: 5px; line-height: 25px">
                             <li class="my-3 text-center">
                                 <img src="{{ asset('frontend/images/acb-bank.png') }}" alt="MB Bank" width="200px">
                             </li>
@@ -309,7 +309,7 @@
                             </li>
                         </ul>
 {{--                        <ul class="item py-2 px-4 mb-2 bg-white border-2"--}}
-{{--                            style="border-color: #C9B708; border-style: solid; border-radius: 5px; line-height: 25px">--}}
+{{--                            style="border-color: #3c688f; border-style: solid; border-radius: 5px; line-height: 25px">--}}
 {{--                            <li class="my-3 text-center">--}}
 {{--                                <img src="{{ asset('frontend/images/logo_Momo.png') }}" alt="MB Bank" width="200px">--}}
 {{--                            </li>--}}
@@ -337,7 +337,7 @@
 {{--                            </li>--}}
 {{--                        </ul>--}}
                         <ul class="item py-2 px-4 mb-2 bg-white border-2"
-                            style="border-color: #C9B708; border-style: solid; border-radius: 5px; line-height: 25px">
+                            style="border-color: #3c688f; border-style: solid; border-radius: 5px; line-height: 25px">
                             <li class="my-3 text-center">
                                 <img src="{{ asset('frontend/images/logo_Paypal.png') }}" alt="MB Bank" width="200px">
                             </li>
@@ -365,7 +365,7 @@
                             </li>
                         </ul>
                         <ul class="item py-2 px-4 mb-2 bg-white border-2"
-                            style="border-color: #C9B708; border-style: solid; border-radius: 5px; line-height: 25px">
+                            style="border-color: #3c688f; border-style: solid; border-radius: 5px; line-height: 25px">
                             <li class="my-3 text-center">
                                 <img src="{{ asset('frontend/images/logo_network.png') }}" alt="MB Bank">
                             </li>
@@ -413,7 +413,7 @@
                         <ul class="price-items mb-4">
                             @foreach($price_config as $price)
                             <li class="py-2 px-4 mb-2 price bg-white border-2 d-flex justify-content-between align-items-center"
-                                style="border-color: #C9B708; border-style: solid; border-radius: 20px"
+                                style="border-color: #3c688f; border-style: solid; border-radius: 20px"
                                 data-stone="{{ $price['stone'] }}" data-gold="{{ $price['gold'] }}" data-bonus="{{ $price['bonus'] }}">
                                 <div class="price-stone d-flex justify-content-center align-items-start flex-column">
                                     <div class="full-price d-flex align-items-center justify-content-between p-1">
@@ -439,7 +439,7 @@
                             <input type="hidden" name="linhthach" value="0">
                             <button type="submit" class="btn btn-custom-action active mb-4" style="width: 100%; border-radius: 20px">Đổi</button>
                         </form>
-                        <ul class="item p-4 mb-2 bg-white border-2" style="border-color: #C9B708; border-style: solid; border-radius: 5px">
+                        <ul class="item p-4 mb-2 bg-white border-2" style="border-color: #3c688f; border-style: solid; border-radius: 5px">
                             <li><strong>Linh thạch để làm gì?</strong></li>
                             <li>
                                 <ul>

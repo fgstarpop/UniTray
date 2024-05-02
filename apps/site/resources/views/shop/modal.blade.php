@@ -82,7 +82,7 @@
 #find-sou {
     width: 30%;
     text-align: center;
-    background: #1cb15c;
+    background: #3c688f;
     padding: 5px;
     color: #fff;
     cursor: pointer;
@@ -91,7 +91,7 @@
 #find-all-sou {
     width: 30%;
     text-align: center;
-    background: #1cb15c;
+    background: #3c688f;
     padding: 5px;
     color: #fff;
     cursor: pointer;
