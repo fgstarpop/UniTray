@@ -1099,7 +1099,7 @@ class="wallet form-control">
                         </div>
                     @endif
                     <div class="col-6">
-                        <div id="clicktoexp" style="background-color:#f2f2f2;"
+                        <div id="clicktoexp" style="background-color:#666666;"
                             class="pt-2 pb-2 more-list-chapter more">
                             Xem thêm
                         </div>
