@@ -445,6 +445,11 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="d-flex justify-content-center">
+                        <a  style="color: #3c688f;padding: 7px 15px;font-size: 15px;font-weight: 500;border: 1px solid #3c688f;width: 99%;text-align: center;border-radius: 3px;" href="/tim-kiem-truyen?count_chapter=&sort=8&type=&kieu=&category=&status=&keyword=&description=">
+                            Xem thêm
+                        </a>
+                    </div>
                 </div>
             </div>
         @endif
@@ -469,6 +474,11 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="d-flex justify-content-center">
+                        <a  style="color: #3c688f;padding: 7px 15px;font-size: 15px;font-weight: 500;border: 1px solid #3c688f;width: 99%;text-align: center;border-radius: 3px;" href="/tim-kiem-truyen?count_chapter=&sort=3&type=&kieu=&category=&status=&keyword=&description=&source%5B%5D=faloo">
+                            Xem thêm
+                        </a>
+                    </div>
                 </div>
             </div>
         @endif
@@ -491,6 +501,11 @@
                 </div>
             @endforeach
         </div>
+        <div class="d-flex justify-content-center">
+            <a  style="color: #3c688f;padding: 7px 15px;font-size: 15px;font-weight: 500;border: 1px solid #3c688f;width: 99%;text-align: center;border-radius: 3px;" href="/tim-kiem-truyen?count_chapter=&sort=3&type=&kieu=&category=&status=&keyword=&description=&source%5B%5D=fanqie&source%5B%5D=qimao&source%5B%5D=uukanshu&source%5B%5D=69shu&source%5B%5D=qidian&source%5B%5D=trxs&source%5B%5D=tadu">
+                Xem thêm
+            </a>
+        </div>
     </div>
 </div>
 @endif
@@ -508,6 +523,11 @@
                                 @include('shop.story._card_home', ['story' => $storyUpdate])
                             @endforeach
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a  style="color: #3c688f;padding: 7px 15px;font-size: 15px;font-weight: 500;border: 1px solid #3c688f;width: 99%;text-align: center;border-radius: 3px;" href="/tim-kiem-truyen?count_chapter=&sort=1&type=&kieu=&category=&status=&keyword=&description=">
+                            Xem thêm
+                        </a>
                     </div>
                 </div>
             </div>
