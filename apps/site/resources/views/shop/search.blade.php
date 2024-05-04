@@ -91,7 +91,7 @@
 @section('content')
 
     <div style="display: flex; justify-content: space-between; margin-top: 30px" class="align-items-center">
-        <div class="head-mobie">Kết quả tìm kiếm</div>
+        <div class="head-mobie">Danh sách truyện</div>
         <button style="margin-left: -120px" type="button" class="btn btn-gt btn-mob" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
