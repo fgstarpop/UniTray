@@ -26,7 +26,7 @@
 {{--                            @auth('web')--}}
 {{--                            <li><a style="color: gray;" href="" data-bs-toggle="modal" data-bs-target="#vip" id="up-vip-but">Nâng VIP </a> </li>--}}
 {{--                            @endauth--}}
-                            <li><a style="color: gray;" href="{{ route('user.game') }}">Trò chơi</a> </li>
+                            {{-- <li><a style="color: gray;" href="{{ route('user.game') }}">Trò chơi</a> </li> --}}
                             <li> <a style="color: gray;" href="{{ route('post.index') }}">Hướng dẫn</a></li>
                         </ul>
                     </div>
@@ -49,7 +49,7 @@
                     @auth('web')
                     <a style="color: gray;" class="btn btn-danger text-white px-4" href="{{ route('vip') }}">Nâng VIP </a>
                     @endauth
-                    <a style="color: gray;" href="{{ route('user.game') }}">Trò chơi</a>
+                    {{-- <a style="color: gray;" href="{{ route('user.game') }}">Trò chơi</a> --}}
                     <a style="color: gray;" href="{{ route('post.index') }}">Hướng dẫn</a>
                 </div>
                 <div class="col-lg-4 col-xl-4 col-md-4 col-12 main-nav">
