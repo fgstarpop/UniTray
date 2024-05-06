@@ -89,6 +89,12 @@ class OrderController
                     'message' => __('Truyện không tồn tại!'),
                 ]);
             }
+            if($story->confirm_buy == 0){
+                return response()->json([
+                    'status' => '300',
+                    'message' => __('Truyện chưa được xác nhận mua vui lòng chờ 5-10 phút để mua lại.'),
+                ]);
+            }
             $bookid = $story->idhost;
             $chapterList = json_decode($story->chapters_json, 1);
             $collectChapterList = collect($chapterList);
@@ -380,6 +386,12 @@ class OrderController
                 return response()->json([
                     'status' => '300',
                     'message' => __('Truyện không tồn tại!'),
+                ]);
+            }
+            if($story->confirm_buy == 0){
+                return response()->json([
+                    'status' => '300',
+                    'message' => __('Truyện chưa được xác nhận mua vui lòng chờ 5-10 phút để mua lại.'),
                 ]);
             }
             $vip = currentUser()->user_vip;

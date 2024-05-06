@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 // use Goutte\Client;
 use GuzzleHttp\Client;
+use PhpParser\JsonDecoder;
 use Illuminate\Support\Str;
 use Illuminate\Http\Client\Pool;
 use App\Domain\Story\Models\Story;
@@ -14,9 +15,9 @@ use App\Support\ValuesStore\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 use App\Domain\Chapter\Models\Chapter;
 use App\Domain\Category\Models\Category;
-use PhpParser\JsonDecoder;
 use Symfony\Component\DomCrawler\Crawler;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
@@ -967,7 +968,9 @@ if (!function_exists("BuyFalooChapter")) {
             return $returnData;
         }
 
-
+        $socks = [
+            'proxy' => config("vipfaloo.proxy")
+        ];
         $header = [
             "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
             "Referer" => "https://b.faloo.com/",
@@ -976,7 +979,7 @@ if (!function_exists("BuyFalooChapter")) {
 
         $reobj = '#ObjectKey="(?<key>.*?)";.*?ObjectNode=(?<n>.*?);var.*?NovelClass=(?<nc>.*?);#s';
         $reimg = '#image_do.*?\d+?,(?<o>\d+?),(?<id>\d+?),(?<n>\d+?),(?<en>\d+?),(?<t>\d+?),.*?\'(?<k>\w+?)\'.*?\'(?<u>\w+?)\'#s';
-        $response = Http::timeout(10)->withHeaders($header)->get("https://b.faloo.com/vip/$bookid/$chapid.html")->body();
+        $response = Http::withOptions($socks)->timeout(10)->withHeaders($header)->get("https://b.faloo.com/vip/$bookid/$chapid.html")->body();
         //convert text từ gb2312 sang utf-8
         $response = mb_convert_encoding($response, 'utf-8', 'gb2312');
         if (!preg_match($reobj, $response, $obj)) {
@@ -1004,12 +1007,12 @@ if (!function_exists("BuyFalooChapter")) {
 
         $urlimg = "https://read.faloo.com/Page4VipImage.aspx?num=0&o=$imgo&id=$bookid&n=$chapid&ct=1&en=$imgen&t=$imgt&font_size=16&font_color=000000&FontFamilyType=0&backgroundtype=0&u=$imgu&time=&k=$imgk";
 
-        $dataimg = Http::timeout(10)->withHeaders($header)->get($urlimg)->body();
+        $dataimg = Http::withOptions($socks)->timeout(10)->withHeaders($header)->get($urlimg)->body();
 
-        Http::pool(function (Pool $pool) use ($header, $urlobj, $urlpv) {
+        Http::pool(function (Pool $pool) use ($header, $urlobj, $urlpv,$socks) {
             return [
-                $pool->timeout(10)->withHeaders($header)->get($urlpv),
-                $pool->timeout(10)->withHeaders($header)->get($urlobj),
+                $pool->withOptions($socks)->timeout(10)->withHeaders($header)->get($urlpv),
+                $pool->withOptions($socks)->timeout(10)->withHeaders($header)->get($urlobj),
             ];
         });
 
@@ -1033,9 +1036,12 @@ if (!function_exists("AjaxBuyFaloo")) {
             "Referer" => "https://b.faloo.com/$bookid" . "_$chapid.html",
             "Cookie" => "https%3A//b.faloo.com/buybook.aspx%3Fid%3D$bookid; host4chongzhi=b.faloo.com; " . config('vipfaloo.cookie')
         ];
+        $socks = [
+            'proxy' => config("vipfaloo.proxy")
+        ];
         $postData = [];
         $url = "https://b.faloo.com/ajaxinfo.aspx?t=41&id=$bookid&n=$chapid&ran=" . mt_rand();
-        $response = Http::timeout(10)->withHeaders($header)->get($url)->body();
+        $response = Http::withOptions($socks)->timeout(10)->withHeaders($header)->get($url)->body();
         //convert text từ gb2312 sang utf-8
         $return = mb_convert_encoding($response, 'utf-8', 'gb2312');
         return json_decode($return);
@@ -1271,6 +1277,50 @@ if (!function_exists("FalooUpdateList")) {
         ]);
     }
 }
+if(!function_exists("FalooReadFree")){
+    function FalooReadFree($story,$bookid){
+        $data = Http::get("http://103.75.182.190:8000/getlink?link=https://b.faloo.com/$bookid.html")->json();
+
+        $chapterList = $data['listchap'];
+        $lock = Cache::lock("freeread$bookid", 1200);
+        if ($lock->get()) {
+            // Lock acquired for 10 seconds...
+            foreach ($chapterList as $key => $chapter){
+                if(!$chapter['vip']){
+                    $chapid = $chapter['id'];
+                    $socks = [
+                        'proxy' => config("vipfaloo.proxy")
+                    ];
+                    $header = [
+                        "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
+                        "Referer" => "https://b.faloo.com/",
+                        "Cookie" => "curr_url=https%3A//b.faloo.com/vip/$bookid/$chapid.html; host4chongzhi=b.faloo.com; " . config('vipfaloo.cookie')
+                    ];
+                    $reobj = '#ObjectKey="(?<key>.*?)";.*?ObjectNode=(?<n>.*?);var.*?NovelClass=(?<nc>.*?);#s';
+                    $reimg = '#image_do.*?\d+?,(?<o>\d+?),(?<id>\d+?),(?<n>\d+?),(?<en>\d+?),(?<t>\d+?),.*?\'(?<k>\w+?)\'.*?\'(?<u>\w+?)\'#s';
+                    $response = Http::withOptions($socks)->timeout(10)->withHeaders($header)->get("https://b.faloo.com/$bookid/$chapid.html")->body();
+                    //convert text từ gb2312 sang utf-8
+                    $response = mb_convert_encoding($response, 'utf-8', 'gb2312');
+                    preg_match($reobj, $response, $obj);
+                    $urlobj = "https://dongtai.faloo.com/novel/AppCounter.aspx?id=$bookid&nc=" . $obj['key'] . "&k=" . $obj['key'] . "&n=$chapid";
+
+                    $urlpv = "https://flux.faloo.com/pvdata.aspx?faloo_ch_id=3&faloo_ref=https://b.faloo.com/$bookid/$chapid.html";
+
+                    Http::pool(function (Pool $pool) use ($header, $urlobj, $urlpv,$socks) {
+                        return [
+                            $pool->withOptions($socks)->timeout(10)->withHeaders($header)->get($urlpv),
+                            $pool->withOptions($socks)->timeout(10)->withHeaders($header)->get($urlobj),
+                        ];
+                    });
+                    sleep(random_int(5, 60));
+                }
+            }
+            $lock->release();
+        }
+
+
+    }
+}
 // if (!function_exists("daertytest")) {
 //     function daertytest($url)
 //     {
@@ -1328,3 +1378,19 @@ if (!function_exists("FalooUpdateList")) {
 //         }
 //     }
 // }
+
+if (!function_exists("daertytest")) {
+    function daertytest(){
+        //sử dụng proxy với httpclient laravel
+        $header = [
+            "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
+        ];
+        $http = Http::withOptions([
+            'proxy' => "socks5://oefu0259:FTAbmt6530@157.66.163.80:34921"
+        ])->withHeaders($header)->get("https://www.geolocation.com/vi");
+
+
+
+
+    }
+}
