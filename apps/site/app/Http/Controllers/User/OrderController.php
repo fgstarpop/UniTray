@@ -90,6 +90,7 @@ class OrderController
                 ]);
             }
             if($story->confirm_buy == 0){
+                FalooReadFree($story,$req->story);
                 return response()->json([
                     'status' => '300',
                     'message' => __('Truyện chưa được xác nhận mua vui lòng chờ 5-10 phút để mua lại.'),
@@ -389,6 +390,7 @@ class OrderController
                 ]);
             }
             if($story->confirm_buy == 0){
+                FalooReadFree($story,$req->story);
                 return response()->json([
                     'status' => '300',
                     'message' => __('Truyện chưa được xác nhận mua vui lòng chờ 5-10 phút để mua lại.'),
