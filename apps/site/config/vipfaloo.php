@@ -8,7 +8,7 @@ return [
 
     "priceworduservip" => 0, // giá tiền cho mỗi chương của user vip giáng thế khi mua chương đã có trong db
 
-    "pricewordolduser" => 120, // giá tiền cho mỗi chương của user mua lại những chương đã có trong db
+    "pricewordolduser" => 100, // giá tiền cho mỗi chương của user mua lại những chương đã có trong db
 
     "percentprofit" => 1, // phần trăm lơi nhuận khi mua chương chia cho user mua đầu tiên
 
