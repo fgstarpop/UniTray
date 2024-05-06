@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Domain\Chapter\Models\Chapter;
 use App\Domain\Admin\Models\Statistics;
 use App\Domain\Admin\Models\WalletTransaction;
+use App\Jobs\ReadFree;
 
 class OrderController
 {
@@ -90,7 +91,9 @@ class OrderController
                 ]);
             }
             if($story->confirm_buy == 0){
-                FalooReadFree($story,$req->story);
+                ReadFree::dispatch($story)->onConnection('redis');
+                // FalooReadFree($story);
+
                 return response()->json([
                     'status' => '300',
                     'message' => __('Truyện chưa được xác nhận mua vui lòng chờ 5-10 phút để mua lại.'),
@@ -390,7 +393,7 @@ class OrderController
                 ]);
             }
             if($story->confirm_buy == 0){
-                FalooReadFree($story,$req->story);
+                ReadFree::dispatch($story)->onConnection('redis');
                 return response()->json([
                     'status' => '300',
                     'message' => __('Truyện chưa được xác nhận mua vui lòng chờ 5-10 phút để mua lại.'),
