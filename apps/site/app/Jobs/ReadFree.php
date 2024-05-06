@@ -69,7 +69,7 @@ class ReadFree implements ShouldQueue ,ShouldBeUnique
                             //throw $th;
                         }
 
-                        sleep(random_int(5, 60));
+                        sleep(random_int(5, 40));
                     }
                 }
             }catch (\Throwable $th) {
