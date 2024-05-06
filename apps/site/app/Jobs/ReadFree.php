@@ -17,6 +17,7 @@ class ReadFree implements ShouldQueue ,ShouldBeUnique
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $story;
     public $uniqueFor = 1800;
+    public $failOnTimeout = false;
     public function __construct($story)
     {
         $this->story = $story;
