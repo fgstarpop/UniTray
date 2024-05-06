@@ -1315,6 +1315,7 @@ if(!function_exists("FalooReadFree")){
                     sleep(random_int(5, 60));
                 }
             }
+            $story->update(["confirm_buy"=>1]);
             $lock->release();
         }
 
