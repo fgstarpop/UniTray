@@ -286,6 +286,7 @@
                 <strong> --------- Quảng cáo --------- </strong>
                 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
                   @include('shop.layouts.partials.ads')
+                  @endif
         </div>
         <hr style="height: 2px; background: #fff; margin-top: 0px;">
         <hr style="height: 8px; background: #bdbdbd; margin-top: 0px;">
