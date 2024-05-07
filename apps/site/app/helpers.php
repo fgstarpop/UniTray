@@ -1242,6 +1242,7 @@ if (!function_exists("FalooUpdateList")) {
                     'status' => Chapter::ACTIVE,
                     'order' => $order++,
                     'chapid' => $chapter['id'],
+                    'is_vip' => $chapter['vip']
 
                 ];
 
