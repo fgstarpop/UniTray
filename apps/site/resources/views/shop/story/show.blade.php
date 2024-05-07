@@ -669,7 +669,7 @@
                         <div class="modal-header" style="flex-direction: column-reverse;">
                             <h6 class="modal-title"
                                 style="line-height: 0; font-weight:bold; color:black; font-size:18px;">Mua
-                                nhiều chương</h6>
+                                chương VIP</h6>
                             <button
                                 style="padding: 0rem 1rem; background:none; color:black; font-weight: 600; opacity: 15;"
                                 type="button" class="btn-close" data-bs-dismiss="modal"
