@@ -1113,7 +1113,7 @@ class="wallet form-control">
     </div>
 </div>
 
-<div style="font-size: 15px; color: #545454; text-align: center;">
+<div style="font-size: 14px; color: #545454; text-align: center;">
     <h9 class="title">
         <strong>Nếu mua chương VIP Faloo, hãy dùng chức năng Mua Chương VIP</strong>
 
