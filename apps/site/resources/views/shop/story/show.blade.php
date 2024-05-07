@@ -1106,7 +1106,8 @@ class="wallet form-control">
                 </div>
                 <span>Chương mới
                     :{{ \Carbon\Carbon::parse($story->chapter_updated)->diffForHumans(\Carbon\Carbon::now()) }}</span>
-                <span> Nếu mua chương VIP Faloo, hãy sử dụng chức năng Mua chương VIP </span>
+                <br>
+                    <p> Nếu mua chương VIP Faloo, hãy sử dụng chức năng Mua chương VIP </p>
 
             </div>
         </div>
