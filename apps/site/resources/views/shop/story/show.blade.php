@@ -1106,13 +1106,16 @@ class="wallet form-control">
                 </div>
                 <span>Chương mới
                     :{{ \Carbon\Carbon::parse($story->chapter_updated)->diffForHumans(\Carbon\Carbon::now()) }}</span>
-                <br>
-                    <p> Nếu mua chương VIP Faloo, hãy sử dụng chức năng Mua chương VIP </p>
+
 
             </div>
         </div>
     </div>
 </div>
+
+<div style="font-size: 15px; color: #545454; text-align: center;">
+    <h9 class="title">
+        <strong>Nếu mua chương VIP Faloo, hãy dùng chức năng Mua Chương VIP</strong>
 
 
 <hr style="height: 8px; background: #bdbdbd; margin-top: 0px;">
