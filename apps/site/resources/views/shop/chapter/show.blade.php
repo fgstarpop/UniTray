@@ -433,11 +433,8 @@
                     <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
                     <div style="font-size: 12px; color: #545454; text-align: center;">
                         <h9 class="title">
-                            <strong> --------- Quảng cáo --------- </strong>
-                            @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-<script src="https://www.vipads.live/vn/c-1734-25.js"></script>
-@endif
-                            {{--  @include('shop.layouts.partials.ads')  --}}
+                            <strong> --------- Click quảng cáo ở phút 0-5, 30-35 mỗi giờ để nhận quà--------- </strong>
+                              @include('shop.layouts.partials.ads')
                     </div>
                     <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
                 @endif
@@ -798,9 +795,15 @@
                 {{--       @include('shop.layouts.comment',['type' => "App/Domain/Chapter/Models/Chapter",'id' => $chapter->id ]) --}}
             </div>
 
-            @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-<script src="https://www.vipads.live/vn/c-1734-25.js"></script>
-@endif
+            @if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
+            <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+            <div style="font-size: 12px; color: #545454; text-align: center;">
+                <h9 class="title">
+                    <strong> --------- Click quảng cáo ở phút 0-5, 30-35 mỗi giờ để nhận quà--------- </strong>
+                      @include('shop.layouts.partials.ads')
+            </div>
+            <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+        @endif
 
             <div class="related-stories">
                 <h4 class="title">
