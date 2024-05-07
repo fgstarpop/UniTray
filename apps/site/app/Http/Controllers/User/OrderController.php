@@ -200,7 +200,7 @@ class OrderController
                     ]);
                     $chapterList[$searchList]['id'] = $chapter->id;
                     $chapterList[$searchList]['buyed'] = true;
-
+                    $chapterList[$searchList]['is_vip'] = true;
                     $story->update(['chapters_json' => json_encode($chapterList)]);
                     $first = true;
                 }
@@ -459,7 +459,7 @@ class OrderController
                 ]);
                 $chapterList[$searchList]['id'] = $chapter->id;
                 $chapterList[$searchList]['buyed'] = true;
-
+                $chapterList[$searchList]['is_vip'] = true;
                 $story->update(['chapters_json' => json_encode($chapterList)]);
                 $first = true;
                 $lock->release();
