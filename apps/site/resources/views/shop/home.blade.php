@@ -292,7 +292,7 @@
             </div>
         </div>
 
-        {{-- <div class="container contents mt-3">
+        <div class="container contents mt-3">
             <div class="body-section row mobile-padding">
                 <div class="col-sm-7 col-md-7">
                     <div class="chat-section">
@@ -308,7 +308,7 @@
 
                         </div>
                     </div>
-                </div>--}}
+                </div>
 
 
                 <div class="col-sm-5 col-md-5">
