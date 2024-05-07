@@ -285,9 +285,7 @@
             <h9 class="title">
                 <strong> --------- Quảng cáo --------- </strong>
                 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-<script src="https://www.vipads.live/vn/c-1734-25.js"></script>
-@endif
-                {{--  @include('shop.layouts.partials.ads')  --}}
+                  @include('shop.layouts.partials.ads')
         </div>
         <hr style="height: 2px; background: #fff; margin-top: 0px;">
         <hr style="height: 8px; background: #bdbdbd; margin-top: 0px;">

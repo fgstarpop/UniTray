@@ -1,4 +1,4 @@
-{{-- @if(!empty(currentUser()) && currentUser()->user_vip == 0)
+ @if(!empty(currentUser()) && currentUser()->user_vip == 0)
     @php
         $currentTime = \Carbon\Carbon::now()->format('i');
         $canEarn = 0;
@@ -23,7 +23,14 @@
     @endphp
     <div class="ads-google-section position-relative">
         <div class="position-absolute {{ $canEarn ? '' : 'hidden'}}" id="earn-fade" style="width:100%;height:100%;top:0;left:0;z-index:999"></div>
-<!-- 1.11 -->
+        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
+      </div>
+        @elseif(empty(currentUser()))
+        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
+  @endif
+
+
+{{--<!-- 1.11 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6402569697449690"
