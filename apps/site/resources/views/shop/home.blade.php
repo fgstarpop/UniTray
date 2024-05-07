@@ -8,18 +8,18 @@
     {{ setting('store_slogan') }}
 @endsection
 @section('seo')
-    <link rel="canonical" href="{{ url('/') }}"/>
-    <meta name="title" content="Giáng Thế - Đọc truyện Vip Faloo online"/>
-    <meta name="description" content="Đọc truyện VIP FALOO online miễn phí, sảng văn, hài hước từ Trung Quốc miễn phí. Đủ các thể loại từ huyền huyễn, tiên võ, đô thị,...."/>
-    <meta name="keywords" content="Đọc truyện sảng văn hài hước online"/>
-    <meta property="og:url" content="https://giangthe.online/"/>
-    <meta property="og:title" content="Giáng Thế - Đọc truyện Vip Faloo online"/>
-    <meta property="og:locale" content= "vi"/>
-    <meta property="og:description" content="Đọc truyện VIP FALOO online miễn phí, sảng văn, hài hước từ Trung Quốc miễn phí. Đủ các thể loại từ huyền huyễn, tiên võ, đô thị,...."/>
-    <meta property="og:type" content="website"/>
+    <link rel="canonical" href="{{ url('/') }}" />
+    <meta name="title" content="Giáng Thế - Đọc truyện Vip Faloo miễn phí" />
+    <meta name="description" content="Đọc truyện Vip Faloo miễn phí" />
+    <meta name="keywords" content="Đọc truyện sảng văn hài hước online" />
+    <meta property="og:url" content="https://giangthe.online/" />
+    <meta property="og:title" content="Giáng Thế - Đọc truyện Vip Faloo miễn phí" />
+    <meta property="og:locale" content= "vi" />
+    <meta property="og:description" content="Đọc truyện VIP Faloo miễn phí" />
+    <meta property="og:type" content="website" />
     <meta property="og:image"
-        content="https://giangthe.online/uploads/user/anhbiagt.webp"/>
-    <meta property="og:site_name" content="Giáng Thế"/>
+        content="https://giangthe.online/uploads/user/anhbiagt.webp" />
+    <meta property="og:site_name" content="Giáng Thế" />
 @stop
 @push('styles')
     <style>

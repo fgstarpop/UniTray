@@ -10,18 +10,18 @@
     {{ setting('store_slogan') }}
 @endsection
 @section('seo')
-    <link rel="canonical" href="{{ request()->fullUrl() }}">
-    <meta name="title" content="{{ $chapter->name }}">
-    <meta name="description" content="{{ $chapter->content }}">
-    <meta name="keywords" content="{{ $story->name }}">
-    <meta property="og:url" content="{{ request()->fullUrl() }}">
-    <meta property="og:title" content="{{ $chapter->name }}">
+    <link rel="canonical" href="{{ request()->fullUrl() }}" />
+    <meta name="title" content="{{ $chapter->name }}" />
+    <meta name="description" content="{{ $chapter->content }}" />
+    <meta name="keywords" content="{{ $story->name }}" />
+    <meta property="og:url" content="{{ request()->fullUrl() }}" />
+    <meta property="og:title" content="{{ $chapter->name }}" />
     <meta property="og:locale" content= "vi" />
-    <meta property="og:description" content="{{ $chapter->content }}">
+    <meta property="og:description" content="{{ $chapter->content }}" />
     <meta property="og:keywords" content= "{{ $story->name }}" />
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="article" />
     <meta property="og:image" content="{{ $story->avatar }}" />
-    <meta property="og:site_name" content="giangthe.online">
+    <meta property="og:site_name" content="Giáng Thế" />
 @stop
 @push('styles')
     <style>
