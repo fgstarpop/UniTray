@@ -23,10 +23,10 @@
     @endphp
     <div class="ads-google-section position-relative">
         <div class="position-absolute {{ $canEarn ? '' : 'hidden'}}" id="earn-fade" style="width:100%;height:100%;top:0;left:0;z-index:999"></div>
-        <iframe data-aa='2323873' src='//ad.a-ads.com/2323873?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+        <div id='frame' style='width:320px;'><iframe data-aa='2323874' src='//ad.a-ads.com/2323874?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe><a style='display: block; text-align: right; font-size: 12px' id='preview-link' href='https://a-ads.com/?partner=2323874'>Advertise here</a></div>
     </div>
         @elseif(empty(currentUser()))
-        <iframe data-aa='2323873' src='//ad.a-ads.com/2323873?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+        <div id='frame' style='width:320px;'><iframe data-aa='2323874' src='//ad.a-ads.com/2323874?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe><a style='display: block; text-align: right; font-size: 12px' id='preview-link' href='https://a-ads.com/?partner=2323874'>Advertise here</a></div>
         @endif
 
 
