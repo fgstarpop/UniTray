@@ -43,6 +43,15 @@
         <div class="row">
             <div class="col-12">
                 @if((new \Jenssegers\Agent\Agent())->isDesktop())
+                @if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
+                <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+                <div style="font-size: 14px; color: #545454; text-align: center;">
+                    <h9 class="title">
+                        <strong> --- Click quảng cáo ở phút 0-5, 30-35 mỗi giờ để nhận quà---</strong>
+                          @include('shop.layouts.partials.ads')
+                </div>
+                <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+            @endif
                     <div class="noti-block p-3 mt-3 border-danger border-3" style="border-style: solid; background-color: #FFFDE8;">
                         <h5 class="text-success font-weight-bold">Thông báo</h5>
                         {!! setting('noti_webpc') !!}
@@ -52,6 +61,15 @@
         </div>
     </div>
     @if((new \Jenssegers\Agent\Agent())->isMobile())
+    @if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
+    <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+    <div style="font-size: 14px; color: #545454; text-align: center;">
+        <h9 class="title">
+            <strong> --- Click quảng cáo ở phút 0-5, 30-35 mỗi giờ để nhận quà---</strong>
+              @include('shop.layouts.partials.ads')
+    </div>
+    <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
+@endif
         <section class="content container mt-2 search-section" style="min-height: unset">
             <div class="col-12">
                 <div class="noti-block p-3 mb-3 border-danger border-3" style="border-style: solid; background-color: #F8F4D2;">
