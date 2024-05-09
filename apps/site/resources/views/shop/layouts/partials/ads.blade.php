@@ -23,11 +23,11 @@
     @endphp
     <div class="ads-google-section position-relative">
         <div class="position-absolute {{ $canEarn ? '' : 'hidden'}}" id="earn-fade" style="width:100%;height:100%;top:0;left:0;z-index:999"></div>
-        <iframe data-aa='2323870' src='//ad.a-ads.com/2323870?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-      </div>
+        <iframe data-aa='2323871' src='//ad.a-ads.com/2323871?size=300x250' style='width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+    </div>
         @elseif(empty(currentUser()))
-        <iframe data-aa='2323870' src='//ad.a-ads.com/2323870?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-  @endif
+        <iframe data-aa='2323871' src='//ad.a-ads.com/2323871?size=300x250' style='width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+        @endif
 
 
 {{--<!-- 1.11 -->
