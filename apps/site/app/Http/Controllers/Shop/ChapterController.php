@@ -226,9 +226,9 @@ class ChapterController
                 ]
             ]);
 
-            // $chapter->update([
-                // 'content' => NULL
-            // ]);
+            $chapter->update([
+                'content' => NULL
+            ]);
             $chapter['content'] = $chapterNewContent;
             $create_new = 1;
         }
