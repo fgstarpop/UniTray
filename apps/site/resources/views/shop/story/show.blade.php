@@ -282,9 +282,9 @@
             </div>
         </div>
         <hr style="height: 2px; background: #fff; margin-top: 0px;">
-        <div style="font-size: 14px; color: #545454; text-align: center;">
+        <div style="font-size: 13px; color: #545454; text-align: center;">
             <h9 class="title">
-                <strong>--- Click quảng cáo ở phút 0-5, 30-35 mỗi giờ để nhận quà ---</strong>
+                <strong>--- Click ads ở phút 0-5, 30-35 mỗi giờ để nhận quà ---</strong>
                 @if((currentUser() && currentUser()->user_vip == 0) || !currentUser())
                   @include('shop.layouts.partials.ads')
                   @endif
