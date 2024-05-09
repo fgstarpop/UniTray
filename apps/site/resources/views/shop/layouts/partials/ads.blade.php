@@ -23,10 +23,10 @@
     @endphp
     <div class="ads-google-section position-relative">
         <div class="position-absolute {{ $canEarn ? '' : 'hidden'}}" id="earn-fade" style="width:100%;height:100%;top:0;left:0;z-index:999"></div>
-        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
+        <iframe data-aa='2323870' src='//ad.a-ads.com/2323870?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
       </div>
         @elseif(empty(currentUser()))
-        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>
+        <iframe data-aa='2323870' src='//ad.a-ads.com/2323870?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
   @endif
 
 
