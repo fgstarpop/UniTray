@@ -85,15 +85,7 @@
     <section class=" fs-6 bg-story pb-5">
         <div class="container px-md-4 px-sm-0 px-0 bg-main-story">
             @if ((new \Jenssegers\Agent\Agent())->isDesktop())
-            @if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-            <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-            <div style="font-size: 14px; color: #545454; text-align: center;">
-                <h9 class="title">
-                    <strong> --- Click quảng cáo ở phút 0-5, 30-35 mỗi giờ để nhận quà---</strong>
-                      @include('shop.layouts.partials.ads')
-            </div>
-            <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-        @endif
+
                 <div style="position: relative">
                     <div
                         style="background: url({{ $story->avatar ?? $story->getFirstMediaUrl('default') }});background-size: cover;height: 450px;filter: blur(8px);position: absolute;width: 100%">
