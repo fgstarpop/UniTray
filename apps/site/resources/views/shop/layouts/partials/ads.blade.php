@@ -23,11 +23,9 @@
     @endphp
     <div class="ads-google-section position-relative">
         <div class="position-absolute {{ $canEarn ? '' : 'hidden'}}" id="earn-fade" style="width:100%;height:100%;top:0;left:0;z-index:999"></div>
-        <iframe data-aa='2323874' src='//ad.a-ads.com/2323874?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-    </div>
+        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>    </div>
         @elseif(empty(currentUser()))
-        <iframe data-aa='2323874' src='//ad.a-ads.com/2323874?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-        @endif
+        <script src="https://www.vipads.live/vn/c-1734-25.js"></script>        @endif
 
 
 {{--<!-- 1.11 -->
