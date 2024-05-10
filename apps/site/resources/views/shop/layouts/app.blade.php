@@ -48,13 +48,7 @@
 @if((new \Jenssegers\Agent\Agent())->isMobile())
     @include('shop.layouts.header-mobile')
 @endif
-@if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                <div style="font-size: 13px; color: #545454; text-align: center;">
-                    <h9 class="title">
-                        <strong> --- Click ads ở phút 0-5, 30-35 mỗi giờ để nhận quà---</strong>
-                          @include('shop.layouts.partials.ads')
-                </div>
-            @endif
+
 @yield('content')
 
 @livewireScripts
