@@ -1171,6 +1171,7 @@ if (!function_exists("FalooSave")) {
                     $chapterdb = Chapter::where('host',$datahost['host'])->where('idhost',$data['bookid'])->where('idchap',$chapter['id'])->first();
                     if ($chapterdb) 
                     {
+                        $story->confirm_buy=true;
                         $order = Order::where('chapter_id', $chapterdb->id)->update(["story_id"=>$story->id]);
                         $chapterdb->update(["story_id"=>$story->id]);
                         $tempchap['id'] = $chapterdb->id;
@@ -1193,7 +1194,7 @@ if (!function_exists("FalooSave")) {
         $story->save();
 
         $story->update([
-            'count_chapters' => $countChapters
+            'count_chapters' => $countChapters,
         ]);
 
         return redirect()->route('story.show', $story);
