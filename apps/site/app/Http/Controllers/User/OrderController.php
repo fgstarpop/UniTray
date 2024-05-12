@@ -133,6 +133,10 @@ class OrderController
             }
             //kiểm tra nếu ichapvip lớn hơn 0 thì sẽ lock mua chương không cho các user khác mua.
             if ($ichapvip > 0) {
+                 return response()->json([
+                        'status' => '300',
+                        'message' => __('Tạm khoá chức năng mua chương faloo.!'),
+                    ]);
                 $lock = Cache::lock("lockBuyFaloo", 60);
                 if (!$lock->get()) {
                     return response()->json([
