@@ -125,8 +125,8 @@
                 {{--                                         style="width: fit-content">--}}
                 {{--                                    <span class="name-item mt-2">Cửa hàng</span>--}}
                 {{--                                </a>--}}
-                <a href="https://zalo.me/g/rqfhlz892" target="_blank" class="d-flex flex-column align-items-center text-danger">
-                    <img src="{{ asset('frontend/images/mobile/zalo.svg') }}" alt="Chatbox"
+                <a href="https://zalo.me/g/fmivvr653" target="_blank" class="d-flex flex-column align-items-center text-danger">
+                    <img src="{{ asset('frontend/images/mobile/qrgiangthe.jpg') }}" alt="Chatbox"
                          style="width: fit-content">
                     <span class="name-item mt-2">Chatbox</span>
                     <br>
