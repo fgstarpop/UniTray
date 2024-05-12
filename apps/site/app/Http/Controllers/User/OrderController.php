@@ -406,6 +406,10 @@ class OrderController
             $vip = currentUser()->user_vip;
             $first = false;
             if (!$chapter) {
+                return response()->json([
+                    'status' => '300',
+                    'message' => __('Tạm khoá chức năng mua chương faloo.!'),
+                ]);
                 //khoá mua chương
                 $lock = Cache::lock("lockBuyFaloo", 60);
                 if (!$lock->get()) {
