@@ -49,7 +49,7 @@ class ReadFree implements ShouldQueue ,ShouldBeUnique
                             "Cookie" => "curr_url=https%3A//b.faloo.com/$bookid/$chapid.html; host4chongzhi=b.faloo.com; " . config('vipfaloo.cookie')
                         ];
                         $reobj = '#ObjectKey="(?<key>.*?)";.*?ObjectNode=(?<n>.*?);var.*?NovelClass=(?<nc>.*?);#s';
-                        $response = Http::withOptions($socks)->timeout(10)->withHeaders($header)->get("https://b.faloo.com/$bookid/$chapid.html")->body();
+                        $response = Http::withOptions($socks)->timeout(10)->withHeaders($header)->get("https://b.faloo.com/$bookid"."_$chapid.html")->body();
                         //convert text từ gb2312 sang utf-8
                         $response = mb_convert_encoding($response, 'utf-8', 'gb2312');
                         preg_match($reobj, $response, $obj);
@@ -57,7 +57,7 @@ class ReadFree implements ShouldQueue ,ShouldBeUnique
                         try {
                             $urlobj = "https://dongtai.faloo.com/novel/AppCounter.aspx?id=$bookid&nc=" . $obj['key'] . "&k=" . $obj['key'] . "&n=$chapid";
 
-                            $urlpv = "https://flux.faloo.com/pvdata.aspx?faloo_ch_id=3&faloo_ref=https://b.faloo.com/$bookid/$chapid.html";
+                            $urlpv = "https://flux.faloo.com/pvdata.aspx?faloo_ch_id=3&faloo_ref=https://b.faloo.com/$bookid_$chapid.html";
 
                             Http::pool(function (Pool $pool) use ($header, $urlobj, $urlpv,$socks) {
                                 return [
