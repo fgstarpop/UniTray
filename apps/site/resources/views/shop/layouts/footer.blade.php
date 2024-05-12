@@ -21,9 +21,9 @@
         </div>
         <div class="col-sm-4 re-col-foot ">
             <p class="foot-text">Mọi vấn đề xin liên hệ:</p>
-            <img src="{{ asset('frontend/images/qr.webp') }}" alt="{{ setting('store_name', 'Giangthe.online') }}"
+            <img src="{{ asset('frontend/images/qrgiangthe.jpg') }}" alt="{{ setting('store_name', 'Giangthe.online') }}"
                 style="width: 30%; display:inline-block;">
-            <p class="foot-text" style="display: inline-block;">Group Giáng thế: <br> https://zalo.me/g/rqfhlz892</p>
+            <p class="foot-text" style="display: inline-block;">Group Giáng thế: <br> https://zalo.me/g/fmivvr653</p>
         </div>
     </div>
     <br>
