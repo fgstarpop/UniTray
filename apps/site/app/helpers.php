@@ -1097,7 +1097,7 @@ if (!function_exists("FalooSave")) {
             if (empty($chapter_names)) {
                 $chapter_names .= $chap['namechap'];
             } else {
-                $chapter_names .= '|' . $chap['namechap'];
+                $chapter_names .= '<daerty>' . $chap['namechap'];
             }
         }
 
@@ -1142,11 +1142,12 @@ if (!function_exists("FalooSave")) {
         $story->categories()->sync(array_unique($cat));
 
         $chapters = [];
-        $chapter_names = explode('|', _vp_viet($chapter_names));
-        $order =  1;
+        $chapter_names = explode('<daerty>', _vp_viet($chapter_names));
+        $order =  0;
         $chapterListVip = collect(getListFalooVip($data['bookid']));
 
         // lặp qua danh sách chương
+
         foreach ($chapterList as $key => $chapter) {
             $tempchap = [
                 'story_id' => $story->id,
@@ -1157,7 +1158,7 @@ if (!function_exists("FalooSave")) {
                 'chapid' => $chapter['id'],
                 'is_vip' => $chapter['vip']
             ];
-            //kiểm tra chương có phải chương vip không
+            // kiểm tra chương có phải chương vip không
 
             if ($chapter['vip']) {
                 //nếu là chương vip thì sẽ kiểm tra xem chapid có nằm trong $chapterListVip
@@ -1211,6 +1212,7 @@ if (!function_exists("FalooUpdateList")) {
         $chaptperListOld = collect(json_decode($story->chapters_json, 1));
         $countListNew = count($chapterList);
         $countlistOld = count($chaptperListOld);
+        // dd($countlistOld,$countListNew);
         if ($countListNew <= $countlistOld) {
             $story->chapter_updated = Carbon::now();
             $story->save();
@@ -1225,20 +1227,19 @@ if (!function_exists("FalooUpdateList")) {
             if (empty($chapter_names)) {
                 $chapter_names .= $chap['namechap'];
             } else {
-                $chapter_names .= '|' . $chap['namechap'];
+                $chapter_names .= '<daerty>' . $chap['namechap'];
             }
         }
         $chapterListVip = collect(getListFalooVip($data['bookid']));
         $chapters = [];
-        $chapter_names = explode('|', _vp_viet($chapter_names));
-        $order =  1;
+        $chapter_names = explode('<daerty>', _vp_viet($chapter_names));
+        $order =  0;
         //lặp qua danh sách chương mới và so sánh với chương cũ
         foreach ($chapterList as $key => $chapter) {
 
             $search = $chaptperListOld->search(function ($item, $key) use ($chapter) {
                 return $item['chapid'] == $chapter['id'];
             });
-
             //nếu không tìm thấy chương mới trong danh sách chương cũ thì thêm chương mới vào danh sách chương cũ
             if ($search === false) {
                 $tempchap = [
@@ -1252,11 +1253,12 @@ if (!function_exists("FalooUpdateList")) {
 
                 ];
                 if($chapter['vip']){
+       
                     $searchprice = $chapterListVip->search(function ($item, $key) use ($chapter) {
-
+                        
                         return $item['chapid'] == $chapter['id'];
                     });
-    
+                    
                     $tempchap['buyed'] = false;
     
                     if ($searchprice !== false) {
