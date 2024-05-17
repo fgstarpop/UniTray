@@ -142,7 +142,7 @@
                                     <span class="cap new-chap-label-mobile"> Mới</span>
                                 </div>
                                 <div class="col-9 p-0"> <span class="cap story-title-with-overflow">
-                                        {{ $lastestChapName }}</span> </div>
+                                    {{ $lastestChapName ?? '' }}</span> </div>
                             </div>
                             <br>
                             <span class="cap"
