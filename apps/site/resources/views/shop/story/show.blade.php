@@ -436,10 +436,10 @@
                                         : @$chapter['link_other'] ??
                                             route('chapters.show', [$story->id, 'id' => $chapter['id']]);
                                 @endphp
-                                {{-- <span id="readnowbtn"><a
+                                 <span id="readnowbtn"><a
                                         @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="color: #766767; font-size:16px;" @endif
                                         href="{{ $linkStoryFirst }}"> <i class="fa fa-eye"></i> <br>Đọc
-                                        ngay</a></span> --}}
+                                        ngay</a></span>
                             @break
                         {{-- @endif --}}
                     @endforeach
