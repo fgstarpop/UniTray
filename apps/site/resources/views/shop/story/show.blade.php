@@ -422,13 +422,13 @@
             <div class="row text-center bt pt-2"
                 @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="font-weight: bold; color: #766767;" @endif>
                 <div class="col-3 col-lg-3">
-                    @if ($story->chapters)
+                    {{-- @if ($story->chapters)
                         @foreach ($story->chapters as $chapter)
                             @php
                                 $filteredNumbers = array_filter(preg_split('/\D+/', @$chapter['name']));
                                 $firstOccurence = reset($filteredNumbers);
                             @endphp
-                            @if ($firstOccurence ?? '' == 1 || $firstOccurence ?? '' == 01)
+                            @if ($firstOccurence == 1 || $firstOccurence == 01)
                                 @php
                                     $linkStoryFirst = @$chapter['embed_link']
                                         ? @$chapter['link_other'] ??
@@ -443,7 +443,7 @@
                             @break
                         @endif
                     @endforeach
-                    @if ($firstOccurence ?? '' != 1 && $firstOccurence ?? '' != 01)
+                    @if ($firstOccurence != 1 && $firstOccurence != 01)
                         @php
                             $linkStoryFirst = @$story->chapters[0]['embed_link']
                                 ? @$story->chapters[0]['link_other'] ??
@@ -456,7 +456,7 @@
                                 href="{{ $linkStoryFirst }}"> <i class="fa fa-eye"></i> <br>Đọc
                                 ngay</a></span>
                     @endif
-                @endif
+                @endif--}}
             </div>
             @if ((new \Jenssegers\Agent\Agent())->isMobile())
                 <div class="col-3 col-lg-3" id="audio">
