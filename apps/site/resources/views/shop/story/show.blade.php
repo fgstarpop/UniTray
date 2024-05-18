@@ -426,9 +426,9 @@
                         @foreach ($story->chapters as $chapter)
                             @php
                                 $filteredNumbers = array_filter(preg_split('/\D+/', @$chapter['name']));
-
+                                $firstOccurence = reset($filteredNumbers);
                             @endphp
-
+                            @if ($firstOccurence == 1 || $firstOccurence == 01)
                                 @php
                                     $linkStoryFirst = @$chapter['embed_link']
                                         ? @$chapter['link_other'] ??
@@ -441,9 +441,9 @@
                                         href="{{ $linkStoryFirst }}"> <i class="fa fa-eye"></i> <br>Đọc
                                         ngay</a></span>
                             @break
-
+                        @endif
                     @endforeach
-
+                    @if ($firstOccurence != 1 && $firstOccurence != 01)
                         @php
                             $linkStoryFirst = @$story->chapters[0]['embed_link']
                                 ? @$story->chapters[0]['link_other'] ??
@@ -455,7 +455,7 @@
                                 @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="color: #766767; font-size:16px;" @endif
                                 href="{{ $linkStoryFirst }}"> <i class="fa fa-eye"></i> <br>Đọc
                                 ngay</a></span>
-
+                    @endif
                 @endif
             </div>
             @if ((new \Jenssegers\Agent\Agent())->isMobile())
