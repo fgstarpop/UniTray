@@ -428,7 +428,7 @@
                                 $filteredNumbers = array_filter(preg_split('/\D+/', @$chapter['name']));
                                 $firstOccurence = reset($filteredNumbers);
                             @endphp
-                            @if ($firstOccurence == 1 || $firstOccurence == 01)
+                            @if ($firstOccurence ?? ''rstOccurence == 1 || $firstOccurence ?? '' == 01)
                                 @php
                                     $linkStoryFirst = @$chapter['embed_link']
                                         ? @$chapter['link_other'] ??
