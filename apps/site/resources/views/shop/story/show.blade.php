@@ -443,7 +443,7 @@
                             @break
                         {{-- @endif --}}
                     @endforeach
-                    {{-- @if ($firstOccurence != 1 && $firstOccurence != 01)
+                    {{-- @if ($firstOccurence != 1 && $firstOccurence != 01)--}}
                         @php
                             $linkStoryFirst = @$story->chapters[0]['embed_link']
                                 ? @$story->chapters[0]['link_other'] ??
@@ -455,7 +455,7 @@
                                 @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="color: #766767; font-size:16px;" @endif
                                 href="{{ $linkStoryFirst }}"> <i class="fa fa-eye"></i> <br>Đọc
                                 ngay</a></span>
-                    @endif --}}
+                    {{-- @endif  --}}
                 @endif
             </div>
             @if ((new \Jenssegers\Agent\Agent())->isMobile())
