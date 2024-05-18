@@ -441,7 +441,7 @@
                                         href="{{ $linkStoryFirst }}"> <i class="fa fa-eye"></i> <br>Đọc
                                         ngay</a></span> --}}
                             @break
-                        @endif
+                        {{-- @endif --}}
                     @endforeach
                     {{-- @if ($firstOccurence != 1 && $firstOccurence != 01)
                         @php
@@ -454,8 +454,8 @@
                         <span id="readnowbtn"><a
                                 @if ((new \Jenssegers\Agent\Agent())->isMobile()) style="color: #766767; font-size:16px;" @endif
                                 href="{{ $linkStoryFirst }}"> <i class="fa fa-eye"></i> <br>Đọc
-                                ngay</a></span> --}}
-                    @endif
+                                ngay</a></span>
+                    @endif --}}
                 @endif
             </div>
             @if ((new \Jenssegers\Agent\Agent())->isMobile())
