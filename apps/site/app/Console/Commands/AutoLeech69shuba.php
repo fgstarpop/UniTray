@@ -31,7 +31,7 @@ class AutoLeech69shuba extends Command
     {
         parent::__construct();
     }
-    const URL = 'https://www.69shuba.com/book/{bookid}.htm';
+    const URL = 'https://www.69shuba.pro/book/{bookid}.htm';
     /**
      * Execute the console command.
      *
@@ -39,8 +39,8 @@ class AutoLeech69shuba extends Command
      */
     public function handle()
     {
-        $regex = '#<li>.*?69shuba.com/book/(?<bookid>\d+).htm">#s';
-        $html = Http::timeout(60)->get("https://www.69shuba.com/last")->body();
+        $regex = '#<li>.*?69shuba.pro/book/(?<bookid>\d+).htm">#s';
+        $html = Http::timeout(60)->get("https://www.69shuba.pro/last")->body();
         if (preg_match_all($regex, $html, $matches, PREG_SET_ORDER, 0)) {
             $admin = User::where('id', 16)->first();
             foreach ($matches as $key => $value) {

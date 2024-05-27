@@ -43,7 +43,7 @@ class AutoLeechFaloo extends Command
     public function handle()
     {
         $regex =  '#class="TwoBox02_02".*?b\.faloo\.com/(?<bookid>\d+)\.html#';
-        $html = Http::timeout(60)->get("https://b.faloo.com/y_0_0_0_2_0_0_1.html")->body();
+        $html = Http::timeout(60)->get("https://b.faloo.com/y_0_0_0_0_0_0_1.html")->body();
         if (preg_match_all($regex, $html, $matches, PREG_SET_ORDER, 0)) {
             $admin = User::where('id', 16)->first();
             foreach ($matches as $key => $value) {
