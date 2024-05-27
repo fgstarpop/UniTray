@@ -42,7 +42,7 @@ class AutoLeechQimao extends Command
     public function handle()
     {
         $regex = '#<li>.*?href="/shuku/(?<bookid>\d+)/"><img#s';
-        $html = Http::timeout(60)->get("https://www.qimao.com/shuku/a-a-a-2-a-a-a-update_time-1/")->body();
+        $html = Http::timeout(60)->get("https://www.qimao.com/shuku/a-a-a-a-a-a-a-update_time-1/")->body();
 
         if (preg_match_all($regex, $html, $matches, PREG_SET_ORDER, 0)) {
             $admin = User::where('id', 16)->first();

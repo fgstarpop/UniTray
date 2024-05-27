@@ -45,7 +45,7 @@ class AutoLeechFanqienovel extends Command
     public function handle()
     {
         $admin = User::where('id', 16)->first();
-        $baseList = Http::timeout(60)->get("https://fanqienovel.com/api/author/library/book_list/v0/?page_count=20&page_index=0&gender=-1&category_id=-1&creation_status=-1&word_count=1&book_type=-1&sort=1")
+        $baseList = Http::timeout(60)->get("https://fanqienovel.com/api/author/library/book_list/v0/?page_count=20&page_index=0&gender=-1&category_id=-1&creation_status=-1&word_count=all&book_type=-1&sort=1")
             ->json();
         if ($baseList['code'] == 0) {
             foreach ($baseList['data']['book_list'] as $datum) {
