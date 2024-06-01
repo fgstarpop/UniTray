@@ -276,7 +276,9 @@
                         </div>
                     </div>
                 </div>
-
+                {{--  Audio  --}}
+                <div id="inject-audio"></div>
+                {{--  End Audio  --}}
                 <div id="content-container" class="container" style="min-height: 300px;padding: 0px;">
                     <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
                         <div class="p-2" id="maincontent"
@@ -692,6 +694,7 @@
                     </div>
                 </div>
                 <div class="tm-reader-top-nav" style="font-size: 16px;padding: 6px 0;font-weight: 500">
+
                     <div class="container d-flex" style="justify-content: space-between;">
                         @if ($chapterPre != null)
                             @if (@$chapterPre['is_vip'] == 0)
@@ -732,6 +735,7 @@
                                         class="fa fa-arrow-left"></i></span> Chương trước
                             </a>
                         @endif
+
                         @if ((new \Jenssegers\Agent\Agent())->isDesktop())
                             <a href="javascript:void(0);" class="text-primary" data-bs-toggle="modal"
                                 data-bs-target="#list"> Mục lục </a>
@@ -857,19 +861,15 @@
             @endif
         @endif
     @endif
-    {{--  Audio  --}}
-    <div id="audio_platform">
-        <input type="hidden" value="{{ !empty($story->id) ? $story->id : 0 }}" id="_storyID" />
-        <input type="hidden" value="{{ !empty($chapter->id) ? $chapter->id : 0 }}" id="_chapterID" />
-    </div>
-    {{--  End Audio  --}}
+
 @endsection
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if (config('constants.PLAYER_AUDIO', false))
-        {{--  <script src="http://127.0.0.1:5500/apps/frontend/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>  --}}
-        <script src="https://api.truyenfox.net/plugins/audio.js?t={{ time() }}&s=giangthe" id="js-audio"></script>
+    {{--  Audio  --}}
+    @if (!empty($story->id) && !empty($chapter['id']) && config('constants.PLAYER_AUDIO', false))
+        <script src="https://player.truyenfox.net/index.js?t={{ time() }}&s=giangthe&sid={{ $story->id }}&cid={{ $chapter['id'] }}" id="inject-audio-script"></script>
     @endif
+    {{--  End Audio  --}}
     <script>
         $.fn.extend({
             disableSelection: function() {
