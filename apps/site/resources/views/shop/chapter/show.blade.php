@@ -44,7 +44,9 @@
 
 @section('content')
 
-
+    {{--  Audio  --}}
+    <div id="inject-audio"></div>
+    {{--  End Audio  --}}
     @php
         $check = 0;
         if (currentUser()) {
@@ -276,9 +278,7 @@
                         </div>
                     </div>
                 </div>
-                {{--  Audio  --}}
-                <div id="inject-audio"></div>
-                {{--  End Audio  --}}
+
                 <div id="content-container" class="container" style="min-height: 300px;padding: 0px;">
                     <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
                         <div class="p-2" id="maincontent"
