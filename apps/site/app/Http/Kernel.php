@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ApiRequest;
 use App\Http\Middleware\BannerMiddleware;
 use App\Http\Middleware\User;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -33,7 +34,7 @@ class Kernel extends HttpKernel
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\RateLimitMiddleware::class,
-            'throttle:220,1',
+            'throttle:20,1',
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -46,7 +47,8 @@ class Kernel extends HttpKernel
 
         'api' => [
             \App\Http\Middleware\RateLimitMiddleware::class,
-            'throttle:220,1',
+            'throttle:10,1',
+            ApiRequest::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
