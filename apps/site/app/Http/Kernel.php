@@ -47,7 +47,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             \App\Http\Middleware\RateLimitMiddleware::class,
-            'throttle:10,1',
+            'throttle:30,1',
             ApiRequest::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

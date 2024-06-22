@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\License\LicenseController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Shop\ChapterAPIController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\PackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +14,5 @@ use App\Http\Controllers\User\PackageController;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::get('/truyen/fetch/{last_id}', [ChapterAPIController::class, 'fetch'])->name('api.chapters.fetch');
+

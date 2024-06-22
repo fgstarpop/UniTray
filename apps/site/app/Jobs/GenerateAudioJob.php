@@ -26,6 +26,7 @@ class GenerateAudioJob implements ShouldQueue
             $source = 'giangthe';
             $storyID = $this->chapter->story->id;
             $storyName = $this->chapter->story->name;
+            $avatar = $this->chapter->story->avatar ?? '';
             $storyDescription = $this->chapter->story->description;
             $chapterID = $this->chapter->id;
             $chapterName = $this->chapter->name;
@@ -45,6 +46,7 @@ class GenerateAudioJob implements ShouldQueue
                 "story" => [
                     "id" => $storyID,
                     "name" => $storyName,
+                    "avatar" => $avatar,
                     "original_description" => "",
                     "description" => \Soundasleep\Html2Text::convert($storyDescription, $options)
                 ],
@@ -63,7 +65,6 @@ class GenerateAudioJob implements ShouldQueue
                 $response = $client->post('https://api.truyenfox.net/api/file/generate', [
                     'json' => $data
                 ]);
-                // $response->getBody()->getContents();
             }
         } catch (\Throwable $th) {
         }
