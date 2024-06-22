@@ -104,11 +104,11 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('web', function (Request $request) {
             $by = $request->ip();
-            $limit = 10; // Default limit
+            $limit = 5; // Default limit
 
             // Check if the 'x-from' header exists and has the value 'cas'
             if (!empty($request->header('x-from')) && $request->header('x-from') === 'cas') {
-                $limit = 10; // Set a different limit
+                $limit = 5; // Set a different limit
             }
 
             // If the user is authenticated, use their ID as the limiting key
