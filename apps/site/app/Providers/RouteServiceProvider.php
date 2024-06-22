@@ -108,7 +108,7 @@ class RouteServiceProvider extends ServiceProvider
 
             // Check if the 'x-from' header exists and has the value 'cas'
             if (!empty($request->header('x-from')) && $request->header('x-from') === 'cas') {
-                $limit = 5; // Set a different limit
+                $limit = 20; // Set a different limit
             }
 
             // If the user is authenticated, use their ID as the limiting key
