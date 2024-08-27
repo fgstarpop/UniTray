@@ -429,16 +429,6 @@
                         <u class="text-success" style="font-weight: bold; margin-left: 10px">{{ $story->name }}</u>
                     </a>
                 </div>
-                <br>
-                @if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-                    <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-                    <div style="font-size: 13px; color: #545454; text-align: center;">
-                        <h9 class="title">
-                            <strong> --- Click ads ở phút 0-5, 30-35 mỗi giờ để nhận quà---</strong>
-                              @include('shop.layouts.partials.ads')
-                    </div>
-                    <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-                @endif
 
                 @php
                     if ($chapterNext) {
@@ -796,15 +786,7 @@
                 {{--       @include('shop.layouts.comment',['type' => "App/Domain/Chapter/Models/Chapter",'id' => $chapter->id ]) --}}
             </div>
 
-            @if ((currentUser() && currentUser()->user_vip == 0) || !currentUser())
-            <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-            <div style="font-size: 13px; color: #545454; text-align: center;">
-                <h9 class="title">
-                    <strong> --- Click ads ở phút 0-5, 30-35 mỗi giờ để nhận quà--- </strong>
-                      @include('shop.layouts.partials.ads')
-            </div>
-            <hr style="height: 16px; background: #eae4d3; margin-top: 0px;">
-        @endif
+
 
             <div class="related-stories">
                 <h4 class="title">
