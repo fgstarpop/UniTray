@@ -39,7 +39,7 @@
         list-style-position: inside;
     }
 </style>
-    <div class="container">
+    <div class="fuller">
         <div class="row">
             <div class="col-12">
                 @if((new \Jenssegers\Agent\Agent())->isDesktop())
@@ -164,8 +164,8 @@
             </div>
         </div>
     </section> --}}
-    <section class="content container" style="background: white;">
-        <div class="container contents mt-3">
+    <section class="content fuller" style="background: white;">
+        <div class="fuller contents mt-3">
             <div class="body-section row mobile-padding">
                 @if ($storyNew->isNotEmpty())
                     <div class="col-sm-7">
@@ -294,7 +294,7 @@
             </div>
         </div>
 
-        <div class="container contents mt-3">
+        <div class="fuller contents mt-3">
             <div class="body-section row mobile-padding">
                 <div class="col-sm-7 col-md-7">
                     <div class="chat-section">
