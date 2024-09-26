@@ -477,7 +477,7 @@
                                 {{--                                         style="width: fit-content"> --}}
                                 {{--                                    <span class="name-item">Cửa hàng</span> --}}
                                 {{--                                </a> --}}
-                                <a href="https://zalo.me/g/rqfhlz892" target="_blank"
+                                <a href="https://zalo.me/g/fmivvr653" target="_blank"
                                     class="mb-3 col-3 col-sm-3 d-flex flex-column align-items-center">
                                     <img src="{{ asset('frontend/images/mobile/zalo.svg') }}" alt="Chatbox"
                                         style="width: fit-content">
