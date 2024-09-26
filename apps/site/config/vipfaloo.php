@@ -19,6 +19,6 @@ return [
     "method" => 0, // 0: tính theo 1000 chữ, 1: tính theo giá vip của faloo
     "proxy" => "socks5://oefu0259:FTAbmt6530@157.66.163.80:34921",
     //cookie đã đăng nhập của faloo
-    "cookie" => "KeenFire=UMID=34307370&UserID=fgstarpopp&Pwd=e189a72449d7363bd7e0b78224cb01af&Identity=web45421.2205740676&PhotoID=0&NickName=fgstarpopp; UU12345678=uuc=133591887448422283345958489"
+    "cookie" => "KeenFire=UMID=34307370&UserID=fgstarpopp&Pwd=28a78f79ce2d8b6aec7daa4ec03d0342&Identity=web45562.1012424284&PhotoID=0&NickName=fgstarpopp; UU12345678=uuc=133591887448422283345958489"
     // "cookie" => "KeenFire=UMID=34092005&UserID=hoanganh97&Pwd=74639c9632ac61ab0292f3ee2d30ceeb&Identity=web45394.1252113685&PhotoID=0&NickName=hoanganh97; UU12345678=uuc=133573096409661720189114593"
 ];
