@@ -85,7 +85,7 @@ class ChapterController
                 } else {
                     if ($parse) {
                         $base_url = $parse['scheme'] . '://' . $parse['host'];
-                        $datahosts = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
+                        $datahosts = Http::get("http://103.146.22.150:8000/getlink?link=$url")->json();
                         // dd($datahosts);
                         try {
 
@@ -133,7 +133,7 @@ class ChapterController
                     //         ]);
                     //     }
                     // } else {
-                    $datahosts = Http::get("http://103.75.182.190:8000/gethost?link=$url")->json();
+                    $datahosts = Http::get("http://103.146.22.150:8000/gethost?link=$url")->json();
                     if (isset($datahosts) && isset($datahosts['bookid']) && isset($datahosts['chapid'])) {
                         $chapter = UpdateContentChapter($url, $base_url, $chapter) ?? $chapter;
                     }

@@ -423,7 +423,7 @@ function translated($text = null)
 function embedStoryUukanshu($url, $base_url, $user, $story = false, $returnBool = false)
 {
 
-    $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
+    $data = Http::get("http://103.146.22.150:8000/getlink?link=$url")->json();
     if (!$data) {
         if ($returnBool) {
             return false;
@@ -620,7 +620,7 @@ function checkExistStory($story_name, $url, $user)
 {
 
 
-    $datahost = Http::get("http://103.75.182.190:8000/gethost?link=$url")->json();
+    $datahost = Http::get("http://103.146.22.150:8000/gethost?link=$url")->json();
 
     $story = Story::where('idhost', $datahost['bookid'])->where('host', $datahost['host'])->first();
     // $datahost = Http::get("http://154.26.130.48:8000/gethost?link=$url")->json();
@@ -638,7 +638,7 @@ function checkExistStory($story_name, $url, $user)
         if (empty($story->idhost)) {
 
 
-            $datahosts = Http::get("http://103.75.182.190:8000/gethost?link=$story->origin")->json();
+            $datahosts = Http::get("http://103.146.22.150:8000/gethost?link=$story->origin")->json();
 
 
             if ($story->idhost != $datahosts['bookid']) {
@@ -670,7 +670,7 @@ function checkExistStory($story_name, $url, $user)
 function embedChapter($url, $base_url, $user, $chapter, $is_vip)
 {
     $content = '';
-    $data = Http::get("http://103.75.182.190:8000/gethost?link=$url")->json();
+    $data = Http::get("http://103.146.22.150:8000/gethost?link=$url")->json();
 
     // if (str_contains($url, 'faloo.com')) {
     //     // FALOO VIP
@@ -679,7 +679,7 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
     //         $content = $getFalooData['data'];
     //     }
     // } else {
-    $chapterData = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
+    $chapterData = Http::get("http://103.146.22.150:8000/getlink?link=$url")->json();
     $content = $chapterData['content'];
     $content = strip_tags($content, array('<i>', '<br>', '<p>'));
     // }
@@ -707,7 +707,7 @@ function embedChapter($url, $base_url, $user, $chapter, $is_vip)
 
 function UpdateContentChapter($url, $base_url, $chapter)
 {
-    $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
+    $data = Http::get("http://103.146.22.150:8000/getlink?link=$url")->json();
     $content = $data['content'];
 
     $content = strip_tags($content, array('<i>', '<br>', '<p>'));
@@ -758,7 +758,7 @@ function _api_dich($text)
         )
     );
     $text_trans = stream_context_create($opts);
-    return file_get_contents('http://103.75.182.190:12323/api/trans', false, $text_trans);
+    return file_get_contents('http://103.146.22.150:12323/api/trans', false, $text_trans);
 }
 
 function _utf8($text)
@@ -859,7 +859,7 @@ if (!function_exists('getChapterFaloo')) {
     function getChapterFaloo($bookid, $chapid, $img)
     {
         // Define URL and body for the API request
-        $apiUrl = 'https://api.giangthe.com/ocr';
+        $apiUrl = 'http://103.146.22.150:8080/ocr';
         $body = [
             "bookid" => $bookid,
             "chapid" => $chapid,
@@ -880,7 +880,7 @@ if (!function_exists('getChapterFaloo')) {
 if (!function_exists("getListFalooVip")) {
     function getListFalooVip($bookid)
     {
-        $res = Http::timeout(10)->get("http://103.75.182.190:8000/getfaloolist/$bookid")->json();
+        $res = Http::timeout(10)->get("http://103.146.22.150:8000/getfaloolist/$bookid")->json();
         return $res;
     }
 }
@@ -910,7 +910,7 @@ if (!function_exists("FalooPrice")) {
 if (!function_exists("CheckFalooChapter")) {
     function CheckFalooChapter($bookid, $chapid)
     {
-        $apiUrl = 'https://api.giangthe.com/check';
+        $apiUrl = 'http://103.146.22.150:8080/check';
         $body = [
             "bookid" => $bookid,
             "chapid" => $chapid,
@@ -1053,14 +1053,14 @@ if (!function_exists("AjaxBuyFaloo")) {
 if (!function_exists("FalooSave")) {
     function FalooSave($url, $user = null)
     {
-        $datahost = Http::get("http://103.75.182.190:8000/gethost?link=$url")->json();
+        $datahost = Http::get("http://103.146.22.150:8000/gethost?link=$url")->json();
         $story = Story::where('idhost', $datahost['bookid'])->where('host', $datahost['host'])->first();
         //kiểm tra xem truyện có trong database chưa nếu có sẽ chuyển hướng đến trang truyện
         if ($story) {
             //chuyển hướng dến trang truyện
             return redirect()->route('story.show', $story);
         }
-        $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
+        $data = Http::get("http://103.146.22.150:8000/getlink?link=$url")->json();
 
         $chapterList = $data['listchap'];
 
@@ -1170,7 +1170,7 @@ if (!function_exists("FalooSave")) {
                 if ($search !== false) {
                     // thêm cột buyed= false vào mảng $chapterList
                     $chapterdb = Chapter::where('host',$datahost['host'])->where('idhost',$data['bookid'])->where('idchap',$chapter['id'])->first();
-                    if ($chapterdb) 
+                    if ($chapterdb)
                     {
                         $story->confirm_buy=true;
                         $order = Order::where('chapter_id', $chapterdb->id)->update(["story_id"=>$story->id]);
@@ -1207,7 +1207,7 @@ if (!function_exists("FalooUpdateList")) {
     {
         $url = $story->origin;
         $bookid = $story->idhost;
-        $data = Http::get("http://103.75.182.190:8000/getlink?link=$url")->json();
+        $data = Http::get("http://103.146.22.150:8000/getlink?link=$url")->json();
         $chapterList = $data['listchap'];
         $chaptperListOld = collect(json_decode($story->chapters_json, 1));
         $countListNew = count($chapterList);
@@ -1253,18 +1253,18 @@ if (!function_exists("FalooUpdateList")) {
 
                 ];
                 if($chapter['vip']){
-       
+
                     $searchprice = $chapterListVip->search(function ($item, $key) use ($chapter) {
-                        
+
                         return $item['chapid'] == $chapter['id'];
                     });
-                    
+
                     $tempchap['buyed'] = false;
-    
+
                     if ($searchprice !== false) {
                         // thêm cột buyed= false vào mảng $chapterList
                         $chapterdb = Chapter::where('host',$story->host)->where('idhost',$data['bookid'])->where('idchap',$chapter['id'])->first();
-                        if ($chapterdb) 
+                        if ($chapterdb)
                         {
                             $tempchap['id'] = $chapterdb->id;
                             $tempchap['buyed'] = true;
@@ -1275,7 +1275,7 @@ if (!function_exists("FalooUpdateList")) {
                         continue;
                     }
                 }
-                
+
             } else {
                 //nếu tìm thấy chương trong danh sách chương cũ thì sẽ lấy dữ liệu của chương cũ
                 $tempchap = $chaptperListOld[$search];
