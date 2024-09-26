@@ -288,11 +288,11 @@
                                     </li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div>--}}
                     </div>
                 @endif
             </div>
-        </div>--}}
+        </div>
 
         <div class="fuller contents mt-3">
             <div class="body-section row mobile-padding">
