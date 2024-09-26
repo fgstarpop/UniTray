@@ -261,7 +261,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <br>
+                        {{-- <br>
                         <div class="update-section">
                             <div class="update-header">
                                 <span class="fs-4">Truyện ngẫu nhiên</span>
@@ -292,7 +292,7 @@
                     </div>
                 @endif
             </div>
-        </div>
+        </div>--}}
 
         <div class="fuller contents mt-3">
             <div class="body-section row mobile-padding">
