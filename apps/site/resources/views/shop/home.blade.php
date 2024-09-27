@@ -150,8 +150,7 @@
             </div>
         </section>
     @endif
-    <br>
-    <br>
+
 @if((new \Jenssegers\Agent\Agent())->isDesktop())
 {{--  <section class="content container" style="min-height: 20px">
         <div class="row" style="border-radius: 3px; width: 100%; margin: auto; background-color: #f4f4f4;">
