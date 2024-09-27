@@ -244,7 +244,7 @@
 
                         </div>
                     </div>
-                @endif
+
 
                         <div class="update-section">
                             <div class="update-header">
