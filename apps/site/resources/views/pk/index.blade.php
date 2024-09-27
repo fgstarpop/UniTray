@@ -367,7 +367,7 @@
 
                                     <div class="col-3 than-long-user">
                                         <p class="fix-p" style="font-weight:bold;"> {{ $key + 1 }} </p>
-                                        <img src="{{ $playerTLB->get_users->avatar ? pare_url_file($playerTLB->get_users->avatar, 'user') : 'frontend/images/no-user.webp' }}"
+                                        <img src="{{ $playerTLB->get_users->avatar ? pare_url_file($playerTLB->get_users->avatar, 'user') : 'frontend/images/avauser.webp' }}"
                                             alt="" class="comment-avatar" style="margin-left: 0.8rem;" />
                                     </div>
                                     <div class="col-7">
@@ -396,7 +396,7 @@
 
                             <div class="col-3 than-long-user">
                                 <p class="fix-p" style="font-weight:bold;"> {{ $key + 1 }} </p>
-                                <img src="{{ $playerTLB->get_users->avatar ? pare_url_file($playerTLB->get_users->avatar, 'user') : 'frontend/images/no-user.webp' }}"
+                                <img src="{{ $playerTLB->get_users->avatar ? pare_url_file($playerTLB->get_users->avatar, 'user') : 'frontend/images/avauser.webp' }}"
                                     alt="" class="comment-avatar" style="margin-left: 0.8rem;" />
                             </div>
                             <div class="col-7">

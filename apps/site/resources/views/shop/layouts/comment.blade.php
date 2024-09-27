@@ -24,7 +24,7 @@
                 @if ($list->parent_id == 0)
                     <div class="d-flex comment list{{$list->id}} val{{$list->id}} comment-box-mobile">
                         <div class="img-cmt-block d-flex flex-column avt-box-mobile">
-                            <img src="{{ $list->users->avatar ? pare_url_file($list->users->avatar,'user') : asset('uploads/user/no-user.webp') }}"
+                            <img src="{{ $list->users->avatar ? pare_url_file($list->users->avatar,'user') : asset('uploads/user/avauser.webp') }}"
                                  class="comment-avatar @if($list->users->user_vip == 1) border-vip @endif">
                             @if ($list->users->is_vip == 1)
                                 <img style="width: 50px;" class="mt-1 tag-mod" src="{{ asset('frontend/images/mod.webp') }}" alt="">
@@ -96,7 +96,7 @@
                             @foreach($list->children as $val)
                                 <div class="d-flex val{{$val->id}} childVal{{$list->id}} child-cmt-desktop">
                                     <div class="img-cmt-block d-flex flex-column avt-box-mobile">
-                                        <img src="{{ $val->users->avatar ? pare_url_file($val->users->avatar,'user') : asset('uploads/user/no-user.webp') }}"
+                                        <img src="{{ $val->users->avatar ? pare_url_file($val->users->avatar,'user') : asset('uploads/user/avauser.webp') }}"
                                              class="comment-avatar @if($val->users->user_vip == 1) border-vip @endif">
                                         @if ($val->users->is_vip == 1)
                                             <img style="width: 50px;" class="mt-1" src="{{ asset('frontend/images/mod.webp') }}" alt="">
@@ -155,7 +155,7 @@
                                                 @foreach($list->children as $val)
                                                     <div class="d-flex val{{$val->id}} childVal{{$list->id}} child-cmt-flex">
                                                         <div class="img-cmt-block d-flex flex-column avt-box-mobile">
-                                                            <img src="{{ $val->users->avatar ? pare_url_file($val->users->avatar,'user') : asset('uploads/user/no-user.webp') }}"
+                                                            <img src="{{ $val->users->avatar ? pare_url_file($val->users->avatar,'user') : asset('uploads/user/avauser.webp') }}"
                                                                  class="comment-avatar @if($val->users->user_vip == 1) border-vip @endif">
                                                             @if ($val->users->is_vip == 1)
                                                                 <img style="width: 50px;" class="mt-1 tag-mod" src="{{ asset('frontend/images/mod.webp') }}" alt="">

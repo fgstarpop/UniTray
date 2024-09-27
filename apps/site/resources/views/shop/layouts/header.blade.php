@@ -135,7 +135,7 @@
                                 @endif
                             @endauth
 
-                            <img src="{{ currentUser()->avatar ? pare_url_file(currentUser()->avatar, 'user') : 'frontend/images/no-user.webp' }}"
+                            <img src="{{ currentUser()->avatar ? pare_url_file(currentUser()->avatar, 'user') : 'frontend/images/avauser.webp' }}"
                                 alt="" class="img-user dropdown-toggle" id="user-info" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu user-info">
                                 <span>{{ currentUser()->name }}</span>
