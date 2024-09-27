@@ -239,7 +239,7 @@
                                 @endforeach
                             </ul>--}}
                         </div>
-
+                        <div class="col-sm-12">
                         <div class="update-section">
                             <div class="update-header">
                                 <span class="fs-4">Truyện mới</span>
@@ -270,6 +270,7 @@
                                     </li>
                                 @endforeach
                             </ul>--}}
+                        </div>
                         </div>
                         {{-- <br>
                         <div class="update-section">
