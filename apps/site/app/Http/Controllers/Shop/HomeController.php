@@ -111,6 +111,9 @@ class HomeController extends Controller
 			return Story::where('is_vip', '0')->where('host','!=','qidian')->where('host','!=','faloo')->orderByDesc('chapter_updated')->limit(9)->get();
 		});
 		$story_week = Cache::remember('story_week', 900, function () {
+			return Story::orderBy('view_week', 'DESC')->where('count_chapters', '>=', '50')->with(['user', 'media'])->limit(9)->get();
+		});
+        $story_weekpc = Cache::remember('story_week', 900, function () {
 			return Story::orderBy('view_week', 'DESC')->where('count_chapters', '>=', '50')->with(['user', 'media'])->limit(12)->get();
 		});
         $story_nomination = Cache::remember('story_nomination', 900, function () {
