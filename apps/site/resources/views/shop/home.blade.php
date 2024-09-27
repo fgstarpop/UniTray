@@ -175,7 +175,7 @@
                                 <span class="fs-4">{{ 'Truyện Hot Tuần' }}</span>
                             </div>
                             <div class="row">
-                                @foreach ($story_weekpc as $storyUpdate)
+                                @foreach ($story_week as $storyUpdate)
                                     @include('shop.story._card_home', ['story' => $storyUpdate])
                                 @endforeach
 
