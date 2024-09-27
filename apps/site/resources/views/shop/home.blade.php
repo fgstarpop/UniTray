@@ -335,7 +335,7 @@
                                 <li class="row">
                                     <a href="{{ route('user.index', $list->user_id) }}" class="">
                                         <div class="img col-md-1" style="margin-left:-10px">
-                                            <img data-src="{{ @$list->get_users->avatar ? pare_url_file($list->get_users->avatar, 'user') : 'frontend/images/no-user.webp' }}"
+                                            <img data-src="{{ @$list->get_users->avatar ? pare_url_file($list->get_users->avatar, 'user') : 'frontend/images/avauser.webp' }}"
                                                 alt="{{ @$list->get_users->name }}" class="lazyload">
                                         </div>
                                         <div class="title col-md-9">
@@ -737,7 +737,7 @@
                                         <a href="{{ route('user.index', $user['id']) }}"
                                            class="user d-flex justify-content-between text-white">
                                             <div class="thumb position-relative">
-                                                <img src="{{ $user['avatar'] ? pare_url_file($user['avatar'], 'user') : asset('frontend/images/no-user.webp') }}"
+                                                <img src="{{ $user['avatar'] ? pare_url_file($user['avatar'], 'user') : asset('frontend/images/avauser.webp') }}"
                                                      height="45px" width="45px"
                                                      class="rounded-circle" alt="{{ $user['name'] }}">
                                                 @if($user['is_vip'] == 1)
