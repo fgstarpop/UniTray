@@ -168,7 +168,7 @@
     <section class="content fuller" style="background: white;">
         <div class="fuller contents mt-3">
             <div class="body-section row mobile-padding">
-                @if ($storyNew->isNotEmpty())
+                @if ($story_week->isNotEmpty())
                     <div class="col-sm-12">
                         <div class="home-section">
                             <div class="home-header">
