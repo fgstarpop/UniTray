@@ -87,15 +87,15 @@ class HomeController extends Controller
 		// });
 
 		$storyVip = Cache::remember('storyVip', 900, function () {
-			return Story::where('is_vip', '1')->orderBy('view_day', 'desc')->take(9)->get();
+			return Story::where('is_vip', '1')->orderBy('view_day', 'desc')->take(12)->get();
 		});
 
 		$storyNew = Cache::remember('storyNew', 900, function () {
-            return Story::where('is_vip', '1')->orderBy('chapter_updated', 'desc')->take(9)->get();
+            return Story::where('is_vip', '1')->orderBy('chapter_updated', 'desc')->take(12)->get();
 		});
 
         $storyNewChap = Cache::remember('storyNewChap', 900, function () {
-            return Story::orderBy('chapter_updated', 'desc')->take(9)->get();
+            return Story::orderBy('chapter_updated', 'desc')->take(12)->get();
 		});
 
 		$storyUpdated = Cache::remember('storyUpdated', 900, function () {
@@ -117,7 +117,7 @@ class HomeController extends Controller
 			return Story::orderBy('view_week', 'DESC')->where('count_chapters', '>=', '50')->with(['user', 'media'])->limit(12)->get();
 		});
         $story_nomination = Cache::remember('story_nomination', 900, function () {
-			return Story::where('nomination', '>', '0')->orderBy('nomination', 'DESC')->take(9)->get();
+			return Story::where('nomination', '>', '0')->orderBy('nomination', 'DESC')->take(12)->get();
 		});
 		$storyNews = Cache::remember('storyNews', 900, function () {
 			return Story::orderBy('created_at', 'DESC')->visible()->with(['user', 'media'])->limit(12)->get();
