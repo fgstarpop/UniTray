@@ -122,6 +122,9 @@ class HomeController extends Controller
 		$storyNews = Cache::remember('storyNews', 900, function () {
 			return Story::orderBy('created_at', 'DESC')->visible()->with(['user', 'media'])->limit(24)->get();
 		});
+        $storyNewspc = Cache::remember('storyNews', 900, function () {
+			return Story::orderBy('created_at', 'DESC')->visible()->with(['user', 'media'])->limit(12)->get();
+		});
 
 		$storyFirst = Cache::remember('storyFirst', 900, function () use ($tomorrow, $today) {
 			return Story::latest()->where('created_at', '<', $tomorrow)->where('created_at', '>', $today)->whereColumn('created_at', 'updated_at')->take(9)->get();
