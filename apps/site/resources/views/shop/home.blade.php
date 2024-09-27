@@ -149,6 +149,8 @@
                 </a>
             </div>
         </section>
+        <br>
+        <br>
     @endif
 
 @if((new \Jenssegers\Agent\Agent())->isDesktop())
