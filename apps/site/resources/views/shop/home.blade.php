@@ -244,8 +244,12 @@
                             <div class="update-header">
                                 <span class="fs-4">Truyện mới</span>
                             </div>
+                            <div class="row">
+                                @foreach ($storyNews as $storyUpdate)
+                                    @include('shop.story._card_home', ['story' => $storyUpdate])
+                                @endforeach
 
-                            <ul style="max-height: 435px;overflow: auto" class="home-scroll">
+                            {{-- <ul style="max-height: 435px;overflow: auto" class="home-scroll">
                                 @foreach ($storyNews as $storyUpdate)
                                     <li class="row">
                                         @if ($storyUpdate)
@@ -265,7 +269,7 @@
                                         @endif
                                     </li>
                                 @endforeach
-                            </ul>
+                            </ul>--}}
                         </div>
                         {{-- <br>
                         <div class="update-section">
