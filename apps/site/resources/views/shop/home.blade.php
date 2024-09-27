@@ -206,13 +206,18 @@
 {{--                @endif--}}
 
                 @if ($storyUpdated->isNotEmpty())
-                    <div class="col-sm-5 col-md-5">
+                <div class="col-sm-12">
                         <div class="update-section">
                             <div class="update-header">
                                 <span class="fs-4">Chương mới</span>
                             </div>
 
-                            <ul style="max-height: 435px;overflow: auto" class="home-scroll">
+                            <div class="row">
+                                @foreach ($storyNew as $storyWritten)
+                                    @include('shop.story._card_home', ['story' => $storyWritten])
+                                @endforeach
+
+                            {{-- <ul style="max-height: 435px;overflow: auto" class="home-scroll">
                                 @foreach ($storyNew as $storyWritten)
                                     <li class="row">
                                         @if ($storyWritten)
@@ -232,7 +237,7 @@
                                         @endif
                                     </li>
                                 @endforeach
-                            </ul>
+                            </ul>--}}
                         </div>
 
                         <div class="update-section">
