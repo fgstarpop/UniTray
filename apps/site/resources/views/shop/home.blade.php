@@ -168,14 +168,14 @@
     <section class="content fuller" style="background: white;">
         <div class="fuller contents mt-3">
             <div class="body-section row mobile-padding">
-                @if ($story_weekpc->isNotEmpty())
+                @if ($story_week->isNotEmpty())
                     <div class="col-sm-12">
                         <div class="home-section">
                             <div class="home-header">
                                 <span class="fs-4">{{ 'Truyện Hot Tuần' }}</span>
                             </div>
                             <div class="row">
-                                @foreach ($story_weekpc as $storyUpdate)
+                                @foreach ($story_week as $storyUpdate)
                                     @include('shop.story._card_home', ['story' => $storyUpdate])
                                 @endforeach
 
