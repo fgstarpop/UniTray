@@ -169,7 +169,7 @@
         <div class="fuller contents mt-3">
             <div class="body-section row mobile-padding">
                 @if ($storyNew->isNotEmpty())
-                    <div class="col-sm-7">
+                    <div class="col-sm-12">
                         <div class="home-section">
                             <div class="home-header">
                                 <span class="fs-4">{{ 'Truyện Hot Tuần' }}</span>
