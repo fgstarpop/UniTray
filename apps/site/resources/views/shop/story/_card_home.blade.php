@@ -1,5 +1,5 @@
 @if((new \Jenssegers\Agent\Agent())->isDesktop())
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-6">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-7">
         <div class="cap bookthumb">
             <a href="{{ route('story.show', $story->id) }}" class="box-card-story">
             <span class="position-relative d-inline-block position-relative" style="height: 184px">
