@@ -278,7 +278,7 @@
                 </div>
 
                 <div id="content-fuller" class="fuller" style="min-height: 350px;">
-                    <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
+                    <div class="content-fuller" style="font-family:sans-serif;padding: 15px 15px 15px 15px;font-size:20px;">
                         <div class="p-5" id="maincontent"
                             style="line-height:1.6; background-color: rgb(232 226 213);">
 
@@ -417,7 +417,7 @@
                 color: #191919 !important;
             }
         </style>
-        <section class="fuller content main-list contentbox notSelectable reader-book" id="full"
+        <section class="content-fuller" id="full"
             style="margin-bottom: 50px; background-color: rgb(232 226 213);" oncopy="return false"
             oncut="return false" onpaste="return false">
             <div id="inner">
@@ -662,7 +662,7 @@
                             <p class="text-secondary"> Người mua: {{ $userBuy }}</p>
                         @endif
                     </div>
-                    <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
+                    <div class="content-fuller" style="font-family:sans-serif;padding: 15px 15px 15px 15px;font-size:20px;">
                         <div class="" id="maincontent"
                             style="line-height:1.6; background-color: rgba(232 226 213);">
                             {{-- @dd($chapter) --}}
