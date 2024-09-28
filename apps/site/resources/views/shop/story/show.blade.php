@@ -83,7 +83,7 @@
 @endpush
 @section('content')
     <section class=" fs-6 bg-story pb-5">
-        <div class="container px-md-4 mt-4 px-sm-0 px-0 bg-main-story">
+        <div class="container px-md-4 mt-4 px-sm-0 px-0 bg-main-story" style="max-width: 1300;">
             @if ((new \Jenssegers\Agent\Agent())->isDesktop())
 
                 <div style="position: relative">
