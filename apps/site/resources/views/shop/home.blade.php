@@ -174,7 +174,7 @@
                             <div class="home-header">
                                 <span class="fs-4">{{ 'Truyện Hot Tuần' }}</span>
                             </div>
-                            <div class="row">
+                            <div class="row" style="padding: 15px 15px 15px 15px;">
                                 @foreach ($story_week as $storyUpdate)
                                     @include('shop.story._card_home', ['story' => $storyUpdate])
                                 @endforeach
@@ -212,7 +212,7 @@
                                 <span class="fs-4">Chương mới</span>
                             </div>
 
-                            <div class="row">
+                            <div class="row" style="padding: 15px 15px 15px 15px;">
                                 @foreach ($storyNew as $storyWritten)
                                     @include('shop.story._card_home', ['story' => $storyWritten])
                                 @endforeach
@@ -244,7 +244,7 @@
                             <div class="update-header">
                                 <span class="fs-4">Truyện mới</span>
                             </div>
-                            <div class="row">
+                            <div class="row" style="padding: 15px 15px 15px 15px;">
                                 @foreach ($storyNews as $storyUpdate)
                                     @include('shop.story._card_home', ['story' => $storyUpdate])
                                 @endforeach
