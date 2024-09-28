@@ -207,12 +207,12 @@
 
                 @if ($storyUpdated->isNotEmpty())
                 <div class="col-sm-12">
-                        <div class="update-section">
+                        <div class="update-section" style="padding: 0px 15px 15px 15px;">
                             <div class="update-header" style="padding: 1px 0 10px;">
                                 <span class="fs-4">Chương mới</span>
                             </div>
 
-                            <div class="row" style="padding: 0px 15px 15px 15px;">
+                            <div class="row">
                                 @foreach ($storyNew as $storyWritten)
                                     @include('shop.story._card_home', ['story' => $storyWritten])
                                 @endforeach
@@ -240,11 +240,11 @@
                             </ul>--}}
                         </div>
                         <div class="col-sm-12">
-                        <div class="update-section">
+                        <div class="update-section" style="padding: 0px 15px 15px 15px;">
                             <div class="update-header" style="padding: 1px 0 10px;">
                                 <span class="fs-4">Truyện mới</span>
                             </div>
-                            <div class="row" style="padding: 0px 15px 15px 15px;">
+                            <div class="row">
                                 @foreach ($storyNews as $storyUpdate)
                                     @include('shop.story._card_home', ['story' => $storyUpdate])
                                 @endforeach
