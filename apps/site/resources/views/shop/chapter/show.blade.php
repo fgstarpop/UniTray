@@ -646,7 +646,7 @@
                 </div>
                 <div id="content-fuller " class="fuller"
                     style="border-top: 1px dashed #eee;border-bottom: 1px dashed #eee;min-height: 300px;padding: 0px;">
-                    <div class="chapter-info">
+                    <div class="chapter-info" style="padding: 10px 10px 0px 10px;">
                         <p class="text-secondary">{{ $chapter->name }}</p>
                         @if (currentUser() &&
                                 \App\Domain\Admin\Models\Order::where([
