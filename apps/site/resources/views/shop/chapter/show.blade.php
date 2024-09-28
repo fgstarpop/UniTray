@@ -277,10 +277,10 @@
                     </div>
                 </div>
 
-                <div id="content-fuller" class="fuller" style="min-height: 300px;padding: 0px 35px 15px 35px;">
+                <div id="content-fuller" class="fuller" style="min-height: 350px;">
                     <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
                         <div class="p-2" id="maincontent"
-                            style="line-height:1.6; background-color: rgb(244 239 225 / 70%);">
+                            style="line-height:1.6; background-color: rgb(244 239 225 / 70%); padding: 0px 15px 15px 15px;">
 
                             @if (
                                 (currentUser() &&
