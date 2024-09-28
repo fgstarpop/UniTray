@@ -417,8 +417,8 @@
                 color: #191919 !important;
             }
         </style>
-        <section class="container content main-list contentbox notSelectable reader-book" id="full"
-            style="margin-bottom: 50px; background-color: rgb(223 215 194 / 70%);" oncopy="return false"
+        <section class="fuller content main-list contentbox notSelectable reader-book" id="full"
+            style="margin-bottom: 50px; background-color: rgb(232 226 213);" oncopy="return false"
             oncut="return false" onpaste="return false">
             <div id="inner">
                 <br class="tm-reader-top-br">
@@ -644,7 +644,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="content-container " class="container"
+                <div id="content-fuller " class="fuller"
                     style="border-top: 1px dashed #eee;border-bottom: 1px dashed #eee;min-height: 300px;padding: 0px;">
                     <div class="chapter-info">
                         <p class="text-secondary">{{ $chapter->name }}</p>
@@ -664,7 +664,7 @@
                     </div>
                     <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
                         <div class="" id="maincontent"
-                            style="line-height:1.6; background-color: rgba(234, 228, 211, 0.7);">
+                            style="line-height:1.6; background-color: rgba(232 226 213);">
                             {{-- @dd($chapter) --}}
                             @if (
                                 (currentUser() &&
