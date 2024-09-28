@@ -279,8 +279,8 @@
 
                 <div id="content-fuller" class="fuller" style="min-height: 350px;">
                     <div class="contentbox" style="font-family:sans-serif;padding-top: 24px;font-size:20px;">
-                        <div class="p-2" id="maincontent"
-                            style="line-height:1.6; background-color: rgb(244 239 225 / 70%); padding: 0px 15px 15px 15px;">
+                        <div class="p-5" id="maincontent"
+                            style="line-height:1.6; background-color: rgb(232 226 213);">
 
                             @if (
                                 (currentUser() &&
