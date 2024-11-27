@@ -74,7 +74,7 @@ Route::prefix('truyen')->name('stories.')->middleware('user')->group(function ()
     Route::post('/update/complete/free/{story:id}', [StoryController::class, 'updateCompleteFree'])->name('update.complete.free');
     Route::delete('/delete/{story:id}', [StoryController::class, 'delete'])->name('delete');
 });
-Route::middleware(['filter','throttle:10,1'])->get('/doc-truyen/{story:id}', [\App\Http\Controllers\Shop\ChapterController::class, 'show'])->name('chapters.show');
+Route::middleware(['filter','throttle:5,1'])->get('/doc-truyen/{story:id}', [\App\Http\Controllers\Shop\ChapterController::class, 'show'])->name('chapters.show');
 
 Route::get('/{story:id}/index', [ChapterController::class, 'index'])->name('chapters.index');
 
@@ -93,7 +93,7 @@ Route::prefix('user')->name('user.')->middleware('user')->group(function () {
     Route::post('/game', [GameController::class, 'order'])->name('game.store');
     Route::delete('/game', [GameController::class, 'delete']);
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
-    Route::post('/order/chapter', [OrderController::class, 'chapter'])->middleware(["throttle:10,1"])->name('order.chapter');
+    Route::post('/order/chapter', [OrderController::class, 'chapter'])->middleware(["throttle:5,1"])->name('order.chapter');
     Route::get('/order/statistic', [OrderController::class, 'statistic'])->name('order.statistic');
     Route::get('/gold-gift', [AccountController::class, 'gift'])->name('gold-gift');
     Route::post('/gold-gift/store', [AccountController::class, 'gold_gift'])->name('gift.store');
